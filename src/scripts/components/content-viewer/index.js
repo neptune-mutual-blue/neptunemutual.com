@@ -58,9 +58,11 @@
 }
 
 {
-  // eslint-disable-next-line no-undef
-  mediumZoom([
+  const images = [
     ...document.querySelectorAll('.content.viewer img'),
     ...document.querySelectorAll('[data-zoomable]')
-  ])
+  ]
+
+  // eslint-disable-next-line no-undef
+  mediumZoom(images)
 }
