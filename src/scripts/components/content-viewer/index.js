@@ -56,3 +56,11 @@
     })
   }
 }
+
+{
+  // eslint-disable-next-line no-undef
+  mediumZoom([
+    ...document.querySelectorAll('.content.viewer img'),
+    ...document.querySelectorAll('[data-zoomable]')
+  ])
+}
