@@ -24,9 +24,7 @@ const features: FeatureItem[] = [
   {
     features.map((feature, i) => (
       <div
-        class={`item no blur animate slide ${
-          i === 0 ? "right" : i === 1 ? "up" : "left"
-        } initial delay-${i}`}
+        class={`item no blur animate slide up initial delay-${i}`}
       >
         <FeaturedIcon variant={feature.icon} size="lg" />
         <h3>{feature.title}</h3>
