@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "highlight.js": "^11.7.0",
-    "idb-keyval": "^6.2.0"
+    "idb-keyval": "^6.2.0",
+    "prismjs": "^1.29.0"
   }
 }

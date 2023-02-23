@@ -29,10 +29,12 @@ const t = (x: string): string => x;
       <Slider gap={16}>
         <Fragment>
           {
-            posts.map((post) => {
+            posts.map((post, index) => {
               return (
                 <ArticleCard
-                  className="with slider"
+                  className={`with slider animate slide up no blur delay-${
+                    (index + 1) * 2
+                  } initial`}
                   type={Api.Blog}
                   post={post}
                 />

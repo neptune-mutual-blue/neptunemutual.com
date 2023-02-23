@@ -9,10 +9,14 @@ const t = (x: string): string => x;
     <div class="text and cta">
       <div class="text container">
         <h2>
-          <div class="sub heading">{t("Coming Soon")}</div>
-          <div class="heading">{t("NFT Series Collection")}</div>
+          <div class="sub heading animate slide up initial">
+            {t("Coming Soon")}
+          </div>
+          <div class="heading animate slide up initial delay-1">
+            {t("NFT Series Collection")}
+          </div>
         </h2>
-        <p>
+        <p class="animate slide up initial delay-2">
           {
             t(
               "We are developing an amazing collection of NFTs for our community. You can expect both tradeable and soulbound versions, some of which may have an economic benefit and utility within the marketplace. Be sure to join our Discord community to keep up to date with our NFT news."
@@ -20,18 +24,20 @@ const t = (x: string): string => x;
           }
         </p>
       </div>
-      <Button
-        href="https://discord.com/invite/2qMGTtJtnW"
-        type={"anchor"}
-        variant={"primary"}
-        size={"xl"}
-        iconTrailing="discord"
-      >
-        {t("Join Our Discord")}
-      </Button>
+      <div class="button animate fade in initial delay-3">
+        <Button
+          href="https://discord.com/invite/2qMGTtJtnW"
+          type={"anchor"}
+          variant={"primary"}
+          size={"xl"}
+          iconTrailing="discord"
+        >
+          {t("Join Our Discord")}
+        </Button>
+      </div>
     </div>
 
-    <div class="image container">
+    <div class="image container animate fade in initial delay-4">
       <img
         src="/assets/images/nft/promo.webp"
         alt="A banner of NFT cards with unique Neptune Mutual NFT character images, names, and descriptions."

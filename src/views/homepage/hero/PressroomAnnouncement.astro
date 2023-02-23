@@ -9,7 +9,7 @@ const [{ title, slug }] = await api.getEnumerable<Article>(Api.Pressroom, 1, 0);
 const t = (x: string): string => x;
 ---
 
-<div class="pressroom announcement">
+<div class="pressroom announcement animate slide left initial delay-1">
   <a class="styled link" href={`/pressroom/${slug}/`}>
     <span class="category">{t("Press Room")}</span>
     <div class="text">

@@ -1,0 +1,17 @@
+@use "./slide/slide-down";
+@use "./slide/slide-left";
+@use "./slide/slide-up";
+@use "./slide/slide-right";
+@use "./fade-in/fade-in";
+@use "./delays";
+
+.animate {
+  &:not(.initial) {
+    transition-property: all;
+    transition-duration: 1s;
+  }
+
+  &.no.blur {
+    filter: blur(0px) !important;
+  }
+}
