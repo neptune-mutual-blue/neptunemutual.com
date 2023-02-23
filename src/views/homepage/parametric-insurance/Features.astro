@@ -16,7 +16,7 @@ const t = (x: string): string => x;
         features.map((feature, index) => {
           return (
             <div
-              class={`item animate slide up initial delay-${index * 2}`}
+              class={`item animate slide up initial delay-${index}`}
               data-tab-id={feature.id}
               data-active={index == 0 ? "true" : "false"}
             >
@@ -35,7 +35,7 @@ const t = (x: string): string => x;
         features.map((feature: any, index) => {
           return (
             <div
-              class={`item animate slide left initial delay-${index * 2}`}
+              class={`item animate slide left initial delay-${index}`}
               data-tabpanel-id={feature.id}
               data-active={index == 0 ? "true" : "false"}
             >
