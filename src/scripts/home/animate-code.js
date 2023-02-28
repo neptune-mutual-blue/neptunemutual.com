@@ -26,7 +26,7 @@ async function typeWriter (text, index = 0) {
 
 const animateCode = () => {
   textNode.parentElement.style.height = offsetHeight + 'px'
-  textNode.parentElement.style.overflow = 'hidden'
+  textNode.parentElement.style.overflowY = 'hidden'
 
   typeWriter(textContent)
 }
