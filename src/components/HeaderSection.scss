@@ -23,7 +23,7 @@
     .content {
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 48px;
 
       .heading.and.supporting.text {
         display: flex;
@@ -74,7 +74,7 @@
 
       .actions {
         display: flex;
-        gap: 12px;
+        gap: 16px;
 
         @media (max-width: 424px) {
           flex-direction: column;

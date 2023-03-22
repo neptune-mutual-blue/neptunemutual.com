@@ -1,0 +1,15 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+.nft.marketplace.cards{
+  .full.width.container{
+    padding: 96px 32px;
+    @media (max-width: 767px) {
+      padding: 64px 16px;
+    }
+  }
+}

@@ -6,39 +6,30 @@ const t = (x: string): string => x;
 ---
 
 <div class="nft marketplace hero container">
-  <HeaderSection
-    color={"basic"}
-    alignment={"left"}
-    heading="NFT Marketplace"
-    secondary={{
-      text: "View Contract Source Code",
-      href: "https://github.com/neptune-mutual-blue/neptune-mutual-nft",
-      target: "_blank",
-      rel: "noopener",
-      size: "xl",
-    }}
-    primary={{
-      text: "View Minting Levels",
-      href: "/",
-      size: "xl",
-    }}
-  >
-    <Fragment slot="subheading">
-      <div class="sub heading">
-        <Button
-          inline
-          type={"anchor"}
-          variant={"link-color"}
-          iconLeading={"arrow-left"}
-          href={"/"}
-        >
-          Back to Home
-        </Button>
-      </div>
-    </Fragment>
-    <Fragment slot="supporting-text">
-      Participate in our cover ecosystem and mint NFTs for free. Select your
-      persona and keep unlocking new levels.
-    </Fragment>
-  </HeaderSection>
+    <HeaderSection
+        color={"basic"}
+        alignment={"left"}
+        heading="NFT Marketplace"
+        secondary={{
+            text: "View Contract Source Code",
+            href: "https://github.com/neptune-mutual-blue/neptune-mutual-nft",
+            target: "_blank",
+            rel: "noopener",
+            size: "2xl",
+        }}
+        primary={{
+            text: "View Minting Levels",
+            href: "/",
+            size: "2xl",
+        }}
+    >
+        <Fragment slot="subheading">
+            <div class="sub heading">
+                <Button inline type={"anchor"} variant={"link-color"} iconLeading={"arrow-left"} href={"/"}>Back to Home</Button>
+            </div>
+        </Fragment>
+        <Fragment slot="supporting-text">
+            <p class="sub title">Participate in our cover ecosystem and mint NFTs for free. Select your persona and keep unlocking new levels.</p>
+        </Fragment>
+    </HeaderSection>
 </div>
