@@ -24,7 +24,8 @@ const config = defineConfig({
   },
   vite: {
     build: {
-      minify: 'esbuild'
+      minify: 'esbuild',
+      chunkSizeWarningLimit: 2000
     }
   }
 })

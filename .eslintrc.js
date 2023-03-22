@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 0,
     '@typescript-eslint/consistent-type-exports': 0,
     '@typescript-eslint/no-confusing-void-expression': 0,
-    '@typescript-eslint/ban-types': 0
+    '@typescript-eslint/ban-types': 0,
+    '@typescript-eslint/triple-slash-reference': 0
   }
 }
