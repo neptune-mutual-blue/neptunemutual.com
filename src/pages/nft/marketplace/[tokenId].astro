@@ -6,7 +6,23 @@ import NftDetails from "../../../views/NftDetails.astro";
 import styles from "./nft-details.scss?inline";
 
 export async function getStaticPaths() {
-  const ids = ["121401"];
+  const ids = [
+    "121401",
+    "100863",
+    "180282",
+    "100302",
+    "100062",
+    "130213",
+    "140169",
+    "141046",
+    "100108",
+    "183790",
+    "150065",
+    "141165",
+    "183890",
+    "100580",
+    "181989",
+  ];
 
   return ids.map((id) => {
     return {

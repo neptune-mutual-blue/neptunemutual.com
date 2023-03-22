@@ -8,6 +8,7 @@
 
   section {
     padding: 96px 0;
+    padding-top: 56px;
   }
 
   .content.grid {
@@ -164,6 +165,34 @@
       }
     }
   }
+
+  .properties {
+    margin-top: 24px;
+    
+    .table {
+      border: 1px solid colors.$gray-300;
+      border-radius: 12px;
+      margin-top: 16px;
+
+      .row {
+        display: grid;
+        grid-template-columns: 142px 1fr;
+        padding: 24px;
+        padding-right: 0;
+        border-bottom: 1px solid colors.$gray-200;
+        @include styles.text-md;
+        @include weights.semibold;
+
+        &:first-of-type {
+          padding: 10px 24px;
+        }
+
+        .value {
+          @include weights.regular;
+        }
+      }
+    }
+  }
 }
 
 .dark .nft.details.page {
@@ -189,6 +218,15 @@
       .like.and.share {
         border-color: colors.$gray-800;
         color: colors.$gray-200;
+      }
+    }
+  }
+  .properties {
+    .table {
+      border-color: colors.$gray-800;
+      
+      .row {
+        border-bottom-color: colors.$gray-800;
       }
     }
   }

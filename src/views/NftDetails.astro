@@ -93,6 +93,24 @@ const crumbs: BreadcrumbItem[] = [
           <h3>Description</h3>
           <div class="text">{nftDetails.description}</div>
         </div>
+
+        <div class="properties">
+          <h3>Properties</h3>
+          <div class="table">
+            <div class="row">
+              <div>Property</div>
+              <div>Value</div>
+            </div>
+            {
+              nftDetails.attributes.map((attr) => (
+                <div class="row">
+                  <div>{attr.traitType}</div>
+                  <div class="value">{attr.value}</div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   </section>
