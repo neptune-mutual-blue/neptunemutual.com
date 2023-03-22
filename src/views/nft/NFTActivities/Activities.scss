@@ -1,0 +1,160 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
+
+.nft.activities.container {
+  h2 {
+    @include styles.display-xs;
+    @include weights.bold;
+    color: colors.$gray-900;
+  }
+
+  .activities.list {
+    margin-top: 24px;
+
+    .activity.container {
+      border-radius: 16px;
+      border: 1px solid colors.$gray-200;
+      background-color: colors.$base-white;
+      padding: 24px;
+      box-shadow: shadows.$card;
+  
+      .avatar.and.name {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: colors.$gray-700;
+
+        img {
+          width: 70px;
+          height: 70px;
+          border-radius: 8px;
+        }
+
+        .name {
+          @include styles.text-lg;
+          @include weights.bold;
+        }
+
+        .time {
+          @include styles.text-sm;
+          @include weights.regular;
+        }
+      }
+      
+      hr {
+        background-color: colors.$gray-200;
+        height: 1px;
+        margin: 16px 0;
+      }
+      
+      .content {
+        .text {
+          @include styles.text-md;
+          @include weights.regular;
+          color: colors.$gray-600;
+        }
+
+        .images {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          row-gap: 8px;
+          column-gap: 8px;
+          
+          &[data-images="1"] {
+            grid-template-columns: 1fr;
+          }
+          
+          img {
+            width: 100%;
+            border-radius: 8px;
+          }
+        }
+        
+        .image.description {
+          margin-top: 10px;
+          @include styles.text-md;
+          @include weights.bold;
+          text-align: center;
+        }
+
+        & > *:not(:first-child) {
+          margin-top: 16px;
+        }
+      }
+
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        a, button {
+          cursor: pointer;
+          display: flex;
+          gap: 4px;
+          align-items: center;
+          color: colors.$gray-600;
+          @include styles.text-sm;
+          @include weights.regular;
+
+          svg {
+            width: 20px;
+            height: 20px; 
+          }
+        }
+      }
+
+      &:not(:first-of-type) {
+        margin-top: 24px;
+      }
+    }
+  }
+}
+
+.dark .nft.activities.container {
+  h2 {
+    color: colors.$base-white
+  }
+
+  .activities.list {
+    .activity.container {
+      border: 1px solid transparent;
+      background-color: colors.$gray-800;
+
+      .avatar.and.name {
+        .name {
+          color: colors.$base-white;
+        }
+
+        .time {
+          color: colors.$gray-200;
+        }
+      }
+
+      hr {
+        background-color: colors.$gray-iron-700;
+      }
+
+      .content {
+        .text {
+          color: colors.$gray-100;
+        }
+
+        .images {
+          .image.description {
+            color: colors.$base-white;
+          }
+        }
+      }
+
+      .actions {
+        a, button {
+          color: colors.$gray-200;
+        }
+      }
+    }
+  }
+}

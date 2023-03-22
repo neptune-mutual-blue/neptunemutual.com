@@ -1,0 +1,112 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
+
+.nft.achievements.container {
+  h2 {
+    @include styles.text-xl;
+    @include weights.bold;
+    color: colors.$gray-900;
+  }
+
+  .achievements.list {
+    margin-top: 24px;
+    
+    .item {     
+      border-radius: 16px;
+      border: 1px solid colors.$gray-200;
+      background-color: colors.$base-white;
+      padding: 24px;
+      box-shadow: shadows.$card;
+
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      &:not(:first-of-type) {
+        margin-top: 24px;
+      }
+
+      img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .name.and.achievement {
+        color: colors.$gray-700;
+
+        .name {
+          @include styles.text-md;
+          @include weights.bold;
+        }
+  
+        .achievement {
+          @include styles.text-sm;
+          @include weights.regular;
+        }
+      }
+
+      .level {
+        margin-left: auto;
+        padding: 2px 10px;
+        border-radius: 12px;
+        @include styles.text-sm;
+        @include weights.bold;
+        color: colors.$base-white;
+        background-color: colors.$teal-500;
+      }
+    }
+  }
+}
+
+.dark .nft.achievements.container {
+  h2 {
+    color: colors.$base-white
+  }
+
+  .achievements.list {
+    .item {
+      background-color: colors.$gray-800;
+      border: 1px solid colors.$gray-800;
+
+      .name.and.achievement {
+        color: colors.$base-white;
+      }
+    }
+  }
+}
+
+
+.set.your.persona {
+  margin-top: 16px !important;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: colors.$primary-600;
+  color: colors.$base-white;
+  display: block;
+  
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+
+  .text {
+    span {
+      @include styles.text-xs;
+      @include weights.regular;
+    }
+
+    p {
+      margin-top: 4px;
+      @include styles.text-xl;
+      @include weights.bold;
+    }
+  } 
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}

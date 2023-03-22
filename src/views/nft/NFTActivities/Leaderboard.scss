@@ -1,0 +1,78 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
+
+.nft.leaderboard.container {
+  h2 {
+    @include styles.text-xl;
+    @include weights.bold;
+    color: colors.$gray-900;
+  }
+
+  .leaderboard.list {
+    margin-top: 24px;
+    border-radius: 16px;
+    border: 1px solid colors.$gray-200;
+    background-color: colors.$base-white;
+    padding: 24px;
+    box-shadow: shadows.$card;
+
+    .item {     
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      &:not(:first-of-type) {
+        margin-top: 24px;
+      }
+
+      img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .name.and.address {
+        color: colors.$gray-700;
+
+        .name {
+          @include styles.text-md;
+          @include weights.bold;
+        }
+  
+        .address {
+          @include styles.text-sm;
+          @include weights.regular;
+        }
+      }
+
+      .level {
+        margin-left: auto;
+        padding: 2px 10px;
+        border-radius: 12px;
+        @include styles.text-sm;
+        @include weights.bold;
+        color: colors.$base-white;
+        background-color: colors.$teal-500;
+      }
+    }
+  }
+}
+
+.dark .nft.leaderboard.container {
+  h2 {
+    color: colors.$base-white
+  }
+
+  .leaderboard.list {
+    background-color: colors.$gray-800;
+    border: 1px solid colors.$gray-800;
+
+    .item {
+      .name.and.address {
+        color: colors.$base-white;
+      }
+    }
+  }
+}

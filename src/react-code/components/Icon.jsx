@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 import { paths } from '../../elements/icons/paths'
 
-export const Icon = ({ variant, size }) => {
+const Icon = ({ variant, size }) => {
   const [innerHTML, setInnerHTML] = useState(variant)
 
   useEffect(() => {
@@ -32,3 +32,5 @@ const IconWrapper = styled.i`
     height: ${props => props.size}px;
   }
 `
+
+export { Icon }
