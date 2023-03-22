@@ -1,0 +1,99 @@
+---
+import Breadcrumb from "../elements/Breadcrumb.astro";
+import Button from "../elements/buttons/Button.astro";
+import Icon from "../elements/Icon.astro";
+import Tags from "../elements/Tags.astro";
+
+interface Props {
+  nftDetails: NftDetails;
+}
+
+const { nftDetails } = Astro.props;
+
+const crumbs: BreadcrumbItem[] = [
+  {
+    link: "/nft",
+    name: "NFT Home",
+  },
+  {
+    link: "/nft/marketplace/",
+    name: "NFT Marketplace",
+  },
+  {
+    link: "#",
+    name: nftDetails.family,
+  },
+];
+---
+
+<div class="nft details page">
+  <section class="hero">
+    <Breadcrumb items={crumbs} />
+
+    <div class="content grid">
+      <div class="image">
+        <img src={nftDetails.image} />
+
+        <div class="fullscreen icon">
+          <Icon variant="expand-01" size="lg" />
+        </div>
+      </div>
+      <div>
+        <div class="mint">
+          <Tags
+            tags={[
+              {
+                id: "1",
+                slug: "1",
+                text: `Level ${nftDetails.level}`,
+                color: "level" + nftDetails.level,
+              },
+            ]}
+          />
+          <div class="nickname" data-color={"level" + nftDetails.level}>
+            {nftDetails.nickname}
+          </div>
+          <div class="character name">{nftDetails.name}</div>
+          <div class="siblings and stage">
+            <div>{nftDetails.siblings} siblings</div>
+            <div>
+              <Tags
+                tags={[
+                  {
+                    id: "1",
+                    slug: "1",
+                    text: nftDetails.stage,
+                    color: "nft-stage",
+                  },
+                ]}
+              />
+            </div>
+          </div>
+          <div class="minting btn">
+            <Button type="button" size="2xl">Mint This NFT for Free</Button>
+            <div class="supporting text">
+              {nftDetails.wantToMint} people want to mint this.
+            </div>
+          </div>
+
+          <div class="like and share">
+            <div class="like btn">
+              <Icon variant="heart" size="lg" />
+              1,024
+            </div>
+            <div class="share btn">
+              <Icon variant="share-01" size="lg" />
+              Share
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="more details">
+        <div class="description">
+          <h3>Description</h3>
+          <div class="text">{nftDetails.description}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

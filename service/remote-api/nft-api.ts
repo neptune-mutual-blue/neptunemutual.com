@@ -34,11 +34,20 @@ const regularNfts = async (): Promise<ApiResponse<NftCharacter[]>> => {
   return data
 }
 
+const getNftDetails = async (tokenId: string): Promise<ApiResponse<NftDetails[]>> => {
+  const response = await fetch(origin + '/marketplace/' + tokenId)
+
+  const data = await response.json()
+
+  return data
+}
+
 const NftApi = {
   knowYourCharacters,
   mostViewedNfts,
   premiumNfts,
-  regularNfts
+  regularNfts,
+  getNftDetails
 }
 
 export { NftApi }

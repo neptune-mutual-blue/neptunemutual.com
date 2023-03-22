@@ -23,8 +23,50 @@
     gap: 6px;
   }
 
-  
-  .tag[data-color=gray], .tag[data-color] {
+  // NFT Levels
+  .tag[data-color=level1] {
+    background-color: colors.$orange-dark-400 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level2] {
+    background-color: colors.$orange-dark-600 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level3] {
+    background-color: colors.$blue-dark-400 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level4] {
+    background-color: colors.$blue-dark-700 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level5] {
+    background-color: colors.$pink-500 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level6] {
+    background-color: colors.$pink-600 !important;
+    color: colors.$white !important;
+  }
+
+  .tag[data-color=level7] {
+    background-color: colors.$teal-500 !important;
+    color: colors.$white !important;
+  }
+
+  //NFT Stage
+  .tag[data-color=nft-stage] {
+    background-color: colors.$blue-100 !important;
+    color: colors.$blue-900 !important;
+  }
+
+  // Rest of the site
+  .tag[data-color=gray] {
     background-color: colors.$gray-200;
     color: colors.$gray-700;
   }
@@ -176,6 +218,7 @@
     color: colors.$white;
 
   }
+
     .tag[data-color=gray], .tag[data-color] {
       background-color:colors.$gray-700;
     }

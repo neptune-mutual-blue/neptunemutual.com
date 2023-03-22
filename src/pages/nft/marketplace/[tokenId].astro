@@ -1,0 +1,40 @@
+---
+import { NftApi } from "../../../../service/remote-api/nft-api";
+import Seo from "../../../components/Seo.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import NftDetails from "../../../views/NftDetails.astro";
+import styles from "./nft-details.scss?inline";
+
+export async function getStaticPaths() {
+  const ids = ["121401"];
+
+  return ids.map((id) => {
+    return {
+      params: { tokenId: id },
+    };
+  });
+}
+
+const { tokenId } = Astro.params;
+
+const response = await NftApi.getNftDetails(tokenId!);
+---
+
+<BaseLayout>
+  <Seo
+    slot="seo"
+    title="NFT / Neptune Mutual"
+    description="Participate in our cover ecosystem and mint NFTs for free. Select your persona and keep unlocking new levels of NFTs."
+    og={{
+      image: "/assets/images/meta/og/home.png",
+      imageAlt: "Neptune Mutual NFT",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <NftDetails nftDetails={response.data[0]} />
+
+  <Fragment slot="footer">
+    <script src="../../../scripts/nft/nft-details.js"></script>
+  </Fragment>
+</BaseLayout>
