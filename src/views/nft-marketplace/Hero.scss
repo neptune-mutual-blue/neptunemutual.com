@@ -8,10 +8,6 @@
 
 .nft.marketplace.hero.container {
   .full.width.container{
-    padding: 56px 32px 96px;
-    @media (max-width: 767px) {
-      padding: 46px 16px 64px;
-    }
     > .content {
       @media (max-width: 767px) {
         gap: 32px
