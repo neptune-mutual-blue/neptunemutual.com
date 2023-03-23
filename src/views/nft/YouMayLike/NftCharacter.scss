@@ -1,0 +1,59 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.nfts.youmaylike{
+  .character.wrapper{
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+    gap: 12px;
+    .character.figure {
+      position: relative;
+      overflow: hidden;
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+      }
+  
+      .overlay {
+        opacity: 1;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        backdrop-filter: blur(42px);
+        border-radius: 16px;
+        opacity: 0;
+        color: colors.$white;
+        transition: all 0.2s;
+        padding: 16px;
+        @include styles.text-md;
+        @include weights.semibold;
+        
+        .supporting.text {
+          color: colors.$gray-25;
+          @include styles.text-sm;
+          @include weights.regular;
+        }
+      }
+  
+      &:hover .overlay {
+        opacity: 1;
+        background-color: colors.$black-500;
+      }
+    }
+  }
+}

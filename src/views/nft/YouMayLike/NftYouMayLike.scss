@@ -1,0 +1,25 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.nfts.youmaylike{
+  padding: 96px 0 0;
+  @media (max-width: 767px) {
+    padding: 56px 0 0;
+  }
+  .heading{
+    margin-bottom: 24px;
+    color: light.$color;
+    @include styles.display-sm;
+    @include weights.semibold;
+  }
+}
+
+.dark .nfts.youmaylike{
+  .heading{
+    color: dark.$color;
+  }
+}

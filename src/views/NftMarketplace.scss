@@ -6,79 +6,8 @@
 @use "../design-system/theme/dark";
 
 .nft.marketplace.cards{
-  .full.width.container{
-    padding: 96px 32px;
+    padding: 96px 0;
     @media (max-width: 767px) {
-      padding: 64px 16px;
+      padding: 64px 0;
     }
-  }
-}
-
-.nfts.youmaylike{
-  padding: 96px 0 0;
-  @media (max-width: 767px) {
-    padding: 56px 0 0;
-  }
-  .heading{
-    color: light.$color;
-    @include styles.display-sm;
-    @include weights.semibold;
-  }
-  .character.wrapper{
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
-    gap: 12px;
-    .character.figure {
-      // width: 198px;
-      position: relative;
-      overflow: hidden;
-  
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 16px;
-        display: block;
-      }
-  
-      .overlay {
-        opacity: 1;
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: grid;
-        place-items: center;
-        text-align: center;
-        backdrop-filter: blur(42px);
-        border-radius: 16px;
-        opacity: 0;
-        color: colors.$white;
-        transition: all 0.2s;
-        padding: 16px;
-        @include styles.text-md;
-        @include weights.semibold;
-        
-        .supporting.text {
-          color: colors.$gray-25;
-          @include styles.text-sm;
-          @include weights.regular;
-        }
-      }
-  
-      &:hover .overlay {
-        opacity: 1;
-        background-color: colors.$black-500;
-      }
-    }
-  }
-}
-
-.dark .nfts.youmaylike{
-  .heading{
-    color: dark.$color;
-  }
 }

@@ -1,73 +1,12 @@
 ---
 import NftCard from "../components/NftCard.astro";
 import Hero from "./nft-marketplace/Hero.astro";
-
-interface NFTCharacterDetail {
-    image: string;
-    name: string;
-    siblings: number;
-}
-
-const nftsYouMayLike: NFTCharacterDetail[] = [
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Epic Salacia",
-        siblings: 50,
-    },
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Salacia",
-        siblings: 100,
-    },
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Neptune",
-        siblings: 25,
-    },
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Diabolic Grim Wyvern",
-        siblings: 50,
-    },
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Merman Serpent",
-        siblings: 100,
-    },
-    {
-        image: "/assets/images/hero/home-cover.webp",
-        name: "Diabolic Merman Serpent",
-        siblings: 50,
-    },
-];
+import NftYouMayLike from "./nft/YouMayLike/NftYouMayLike.astro";
 ---
 
 <>
     <Hero />
-    <div class="nfts youmaylike">
-        <div class="full width container">
-            <h1 class="heading">NFTs You May Like</h1>
-            <div class="character wrapper">
-                {
-                    nftsYouMayLike.map((character) => {
-                        return (
-                            <div class="character figure">
-                                <div>
-                                    <img src={character.image} alt={character.name} />
-                                </div>
-                                <div class="overlay">
-                                    <div>
-                                        <div>{character.name}</div>
-                                        <div class="supporting text">{character.siblings} siblings</div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        </div>
-    </div>
+    <NftYouMayLike />
     <div class="nft marketplace cards">
         <div class="full width container">
             <NftCard />

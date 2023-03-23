@@ -1,0 +1,23 @@
+---
+import { NftApi } from "../../../../service/remote-api/nft-api";
+
+const response = await NftApi.regularNfts();
+---
+
+{
+    response.data.slice(0, 6).map((character) => {
+        return (
+            <div class="character figure">
+                <div>
+                    <img src={character.image} alt={character.name} />
+                </div>
+                <div class="overlay">
+                    <div>
+                        <div>{character.name}</div>
+                        <div class="supporting text">{character.siblings} siblings</div>
+                    </div>
+                </div>
+            </div>
+        );
+    })
+}
