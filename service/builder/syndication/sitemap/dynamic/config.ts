@@ -8,7 +8,8 @@ const entries: Entries = [
   [Api.Audit, 'security'],
   [Api.Policy, 'policies'],
   [Api.Program, 'grants-and-bounties'],
-  [Api.Vacancy, 'careers']
+  [Api.Vacancy, 'careers'],
+  [Api.Doc]
 ]
 
 export { entries }

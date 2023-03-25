@@ -51,5 +51,41 @@
   },
   {
     "loc": "/policies/"
+  },
+  {
+    "loc": "/hack-database/"
+  },
+  {
+    "loc": "/marketplace/"
+  },
+  {
+    "loc": "/docs/"
+  },
+  {
+    "loc": "/protocol/ethereum/contracts/"
+  },
+  {
+    "loc": "/protocol/arbitrum/contracts/"
+  },
+  {
+    "loc": "/protocol/fuji/contracts/"
+  },
+  {
+    "loc": "/protocol/ethereum/cx-tokens/"
+  },
+  {
+    "loc": "/protocol/ethereum/pods/"
+  },
+  {
+    "loc": "/protocol/arbitrum/cx-tokens/"
+  },
+  {
+    "loc": "/protocol/arbitrum/pods/"
+  },
+  {
+    "loc": "/protocol/fuji/cx-tokens/"
+  },
+  {
+    "loc": "/protocol/fuji/pods/"
   }
 ]
