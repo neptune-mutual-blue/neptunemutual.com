@@ -414,6 +414,13 @@ $sidebar-width: 300px;
             border-right: 1px solid colors.$gray-200;
           }
 
+          /* For some reason, adding an arbitrarily large width to the last cell seems
+             to fix the table not-stretching issue without affecting horizontal scrollability. */
+          th:last-child,
+          td:last-child {
+            width: 100vw;
+          }
+
           tr:not(:last-child)>th,
           tr:not(:last-child)>td,
           tr:not(:last-child)>th,
