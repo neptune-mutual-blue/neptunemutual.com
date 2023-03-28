@@ -22,25 +22,27 @@ const { publishedAt, timeToRead, title, intro, featuredImage, alt, tags, type } 
 ---
 
 <div class="blog post hero full width container">
-  <div class="header">
-    <h1 itemprop="headline" id={slugify(title)}>
-      {title}
-    </h1>
-    <div class="blog info">
-      <div class="time info">
-        <span itemprop="datePublished" content={publishedAt.toISOString()}>
-          <time itemprop="published" datetime={publishedAt.toISOString()}>{getFormattedDate(new Date(publishedAt).toUTCString())}</time>
-        </span>
+  <div class="blog title wrapper">
+    <div class="header">
+      <h1 itemprop="headline" id={slugify(title)}>
+        {title}
+      </h1>
+      <div class="blog info">
+        <div class="time info">
+          <span itemprop="datePublished" content={publishedAt.toISOString()}>
+            <time itemprop="published" datetime={publishedAt.toISOString()}>{getFormattedDate(new Date(publishedAt).toUTCString())}</time>
+          </span>
 
-        <Icon size={"sm"} variant="dot" />
-        <span class="time to read">{timeToRead} min read</span>
+          <Icon size={"sm"} variant="dot" />
+          <span class="time to read">{timeToRead} min read</span>
+        </div>
+        <Tags tags={toTagsWithHref(type, tags)} />
       </div>
-      <Tags tags={toTagsWithHref(type, tags)} />
     </div>
-  </div>
-  <div class="image container">
-    <meta itemprop="image" content={`${featuredImage}`} />
-    <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" />
+    <div class="image container">
+      <meta itemprop="image" content={`${featuredImage}`} />
+      <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" />
+    </div>
   </div>
   <p class="intro">
     {intro}

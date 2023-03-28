@@ -202,6 +202,10 @@
     :not(:first-child) {
       margin-top: 20px;
     }
+    @media screen and (max-width: 767px) {
+      @include styles.display-xs;
+      margin-bottom: 16px;
+    }
   }
 
   h3 {
