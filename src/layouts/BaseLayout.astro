@@ -42,6 +42,20 @@ const clarityTrackingCode = env("CLARITY_TRACKING_CODE");
       };
 
       const getTheme = () => {
+        // Look for URL search param `theme` for first source of truth
+        const urlSearch = window.location.search;
+
+        if (urlSearch) {
+          const params = new URLSearchParams(urlSearch.slice(1));
+
+          if (
+            params.has("theme") &&
+            ["dark", "light"].includes(params.get("theme"))
+          ) {
+            return params.get("theme");
+          }
+        }
+
         const theme = window.localStorage.getItem("theme");
 
         if (theme) {
