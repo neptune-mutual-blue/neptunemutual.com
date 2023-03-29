@@ -22,9 +22,11 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+
     @media (max-width: 767px) {
       flex-direction: column-reverse;
     }
+
     >.header {
       flex: 1;
       display: flex;
@@ -48,7 +50,6 @@
     @media (max-width: 767px) {
       margin: 0;
       padding: 0 16px;
-      // @include styles.display-sm;
     }
   }
 
@@ -78,15 +79,16 @@
       align-items:center; 
       gap: 6px; 
       justify-content: center;
+
       i {
         color: colors.$gray-500;
         width: 6px;
         height: 6px;
       }
+
       span {
         @include styles.text-md;
         @include weights.semibold;
-  
         color: colors.$gray-500;
       }
     }
@@ -107,27 +109,28 @@
     max-width: 1216px;
     width: 100%;
     margin: 0 auto 64px;
+    flex: 1 0 684px;
+    overflow: hidden;
 
-      flex: 1 0 684px;
-      overflow: hidden;
-      @media (max-width: 1200px) {
-        padding: 0 16px;
-        flex: 1 0 584px;
-      }
-      @media (max-width: 767px) {
-        flex: 1 0 240px;
-        height: 240px;
-        max-width: none;
-        padding: 0;
-        margin-bottom: 0;
-      }
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      } 
-    
+    @media (max-width: 1200px) {
+      padding: 0 16px;
+      flex: 1 0 584px;
+    }
+
+    @media (max-width: 767px) {
+      flex: 1 0 240px;
+      height: 240px;
+      max-width: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    } 
   }
 
   time {
