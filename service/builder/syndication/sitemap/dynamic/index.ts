@@ -1,3 +1,4 @@
+import { Api } from '../../../../../types/enum'
 import * as enumerable from './enumerable'
 
 const get = async (): Promise<SitemapItem[]> => {
@@ -9,7 +10,17 @@ const get = async (): Promise<SitemapItem[]> => {
     const { enumerable, prefix } = item
 
     for (const entry of enumerable) {
-      const { slug } = entry
+      let { slug } = entry
+
+      // Account for documentation nesting
+      if (prefix === Api.Doc) {
+        const parent = (entry as Documentation & WithSlug).parent
+
+        if (parent !== undefined) {
+          slug = `${parent.slug}/${slug}`
+        }
+      }
+
       result.push({ loc: `/${prefix}/${slug}/` })
     }
   }
