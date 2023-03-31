@@ -8,3 +8,9 @@ import '../global/index'
 import '../components/content-viewer/index'
 import '../components/subscription/index'
 import '../components/blog-pressroom-viewer/index'
+
+import hljs from 'highlight.js'
+
+;(function () {
+  hljs.highlightAll()
+})()
