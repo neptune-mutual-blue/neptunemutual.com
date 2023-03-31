@@ -182,7 +182,6 @@
   p:not(table p),
   ol,
   ul,
-  table,
   .ui.success,
   .ui.error,
   .ui.info,
@@ -282,13 +281,14 @@
     border: 1px solid colors.$gray-200;
     border-radius: 10px;
     overflow-x: auto;
+    margin-bottom: 1.5em;
   }
 
   table {
     border-spacing: 0;
     border-collapse: separate !important;
     overflow: auto;
-
+    border-color: transparent;
     th,
     td {
       padding: 12px 24px;
@@ -686,6 +686,7 @@
     }
   }
 
+          
   h1,
   h2,
   h3,
