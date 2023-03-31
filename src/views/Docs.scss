@@ -307,8 +307,8 @@ $sidebar-width: 300px;
           border: 1px solid colors.$gray-800;
 
           &:hover {
-            background-color: dark.$primary-background-color;
-            border-color: colors.$gray-800;
+            background-color: colors.$gray-800;
+            border-color: colors.$gray-700;
           }
 
           .content {

@@ -278,18 +278,36 @@
     border-radius: 12px;
   }
 
+  .table.container {
+    border: 1px solid colors.$gray-200;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
   table {
     border-spacing: 0;
     border-collapse: separate !important;
-    border: 1px solid transparent;
-    display: block;
     overflow: auto;
 
     th,
     td {
       padding: 12px 24px;
+      white-space: nowrap;
     }
   }
+
+  :not(.table.container) {
+    & > table {
+      th:first-of-type, td:first-of-type {
+        padding-left: 0;
+        padding-right: 12px;
+      }
+      th:last-of-type, td:last-of-type {
+        padding-left: 12px;
+        padding-right: 0;
+      }
+    }
+  } 
 
   table.definition,
   table.striped,
@@ -297,8 +315,6 @@
   table.collapsing,
   table.compact,
   table.padded {
-    border-radius: 10px;
-    border-color: colors.$gray-200;
 
     tr:first-child {
       background-color: colors.$gray-50;
@@ -317,13 +333,6 @@
     th:not(:last-child),
     td:not(:last-child) {
       border-right: 1px solid colors.$gray-200;
-    }
-
-    /* For some reason, adding an arbitrarily large width to the last cell seems
-       to fix the table not-stretching issue without affecting horizontal scrollability. */
-    th:last-child,
-    td:last-child {
-      width: 100vw;
     }
 
     tr:not(:last-child)>th,
@@ -362,7 +371,6 @@
     th,
     td,
     tr {
-      display: block;
       border: unset !important;
     }
 
@@ -384,7 +392,12 @@
 
         td:first-child,
         th:first-child {
-          border-radius: 10px 10px 0 0 !important;
+          border-radius: 10px 0 0 0 !important;
+        }
+
+        td:last-child,
+        th:last-child {
+          border-radius: 0 10px 0 0 !important;
         }
       }
     }
@@ -544,8 +557,8 @@
       border: 1px solid colors.$gray-800;
 
       &:hover {
-        background-color: dark.$primary-background-color;
-        border-color: colors.$gray-800;
+        background-color: colors.$gray-800;
+        border-color: colors.$gray-700;
       }
     }
   }
@@ -685,14 +698,17 @@
     }
   }
 
+  .table.container {
+    border-radius: 10px;
+    border-color: colors.$gray-800;
+  }
+
   table.definition,
   table.striped,
   table.basic,
   table.collapsing,
   table.compact,
   table.padded {
-    border-radius: 10px;
-    border-color: colors.$gray-800;
 
     tr:first-child {
       background-color: dark.$primary-background-color;
