@@ -557,8 +557,8 @@
       border: 1px solid colors.$gray-800;
 
       &:hover {
-        background-color: colors.$gray-800;
-        border-color: colors.$gray-700;
+        background-color: colors.$gray-iron-900;
+        border-color: colors.$gray-iron-800;
       }
     }
   }
@@ -629,7 +629,7 @@
 
   .anchor.block {
     a {
-      color: colors.$gray-200 !important;
+      color: colors.$gray-200!important;
       justify-content: flex-start;
       align-items: center;
     }
@@ -640,7 +640,7 @@
     color: colors.$white;
 
     &:hover {
-      background-color: colors.$gray-800;
+      background-color: colors.$gray-iron-900;
     }
 
     a {
