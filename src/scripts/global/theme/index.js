@@ -6,6 +6,8 @@ const switchTheme = async () => {
 
   window.localStorage.setItem('theme', switchTo)
 
+  updateThemeLinks()
+
   darkModeInputCheckboxes.forEach(async (darkModeInputCheckbox) => {
     await window.loadTheme(darkModeInputCheckbox)
   })
@@ -30,3 +32,17 @@ window.location.pathname + (search.length <= 1 ? '' : search)
 window.history.pushState({}, undefined, newURL)
 
 window.localStorage.setItem('theme', theme)
+
+const updateThemeLinks = () => {
+  const linksWithThemes = document.querySelectorAll('a[data-include-theme]')
+
+  linksWithThemes.forEach(link => {
+    if (link.href.includes('?theme=')) {
+      link.href = link.href.replace(/\?theme=[dark|light]+/g, '') + '?theme=' + window.getTheme()
+    } else {
+      link.href = link.href + '?theme=' + window.getTheme()
+    }
+  })
+}
+
+updateThemeLinks()

@@ -94,7 +94,8 @@ const paths: Record<string, any> = {
   'help-cirlce': import('./variants/General/help-circle.svg?raw'),
   table: import('./variants/Layout/table.svg?raw'),
   minus: import('./variants/General/minus.svg?raw'),
-  'base-goerli': import('./custom/Brands/default/SvgBaseGoerli.svg?raw')
+  'base-goerli': import('./custom/Brands/default/SvgBaseGoerli.svg?raw'),
+  clapperboard: import('./variants/General/clapperboard.svg?raw')
 }
 
 export { paths }

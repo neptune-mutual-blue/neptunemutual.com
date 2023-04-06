@@ -34,6 +34,14 @@ const tools: Web3ToolItem[] = [
     category: 'Protocol Contracts',
     icon: 'code-square-01',
     badges: []
+  },
+  {
+    path: '/hack-database',
+    title: 'DeFi and Cryptocurrency Hacks',
+    intro: 'The DeFi hack database provides a summary of major cryptocurrency hacks, exploits, smart contract vulnerabilities, and much more.',
+    category: 'Blockchain Hack Database',
+    icon: 'code-square-01',
+    badges: []
   }
 ]
 

@@ -24,6 +24,7 @@ const t = (x: any) => x;
             href={normalizeUrl(link.href)}
             target={link.isExternal ? "_blank" : ""}
             target={link.isExternal ? "_blank" : null}
+            data-include-theme={link.includeTheme ? true : null}
           >
             {link.icon && <Icon size={"md"} variant={link.icon} />}
             <div>

@@ -21,6 +21,7 @@ interface NavLinkList {
     href: string
     text: string
     isExternal: boolean
+    includeTheme?: boolean
     badge?: string
     badgeColor?: 'success' | 'info'
   }>
@@ -149,6 +150,7 @@ interface FeatureItem {
   icon: string
   title: string
   text: string
+  includeTheme?: boolean
   href?: string
   badge?: string
   isExternal?: boolean

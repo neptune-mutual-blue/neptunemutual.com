@@ -37,7 +37,12 @@ const { lists, socials } = await getFooterData();
                             {link.text}
                           </a>
                         ) : (
-                          <a href={normalizeUrl(link.href)}>{link.text}</a>
+                          <a
+                            href={normalizeUrl(link.href)}
+                            data-include-theme={link.includeTheme ? true : null}
+                          >
+                            {link.text}
+                          </a>
                         )}
 
                         {link.badge && (

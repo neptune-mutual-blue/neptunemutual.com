@@ -107,11 +107,12 @@
   }
 
   .image.container {
-    max-width: 1216px;
+    max-width: 720px;
     width: 100%;
-    margin: 0 auto 64px;
-    flex: 1 0 684px;
+    margin: 0 auto 0;
+    flex: 1 0 405px;
     overflow: hidden;
+    
 
     @media (max-width: 1023px) {
       padding: 0 16px;
@@ -131,6 +132,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      border-radius: 12px;
     } 
   }
 
