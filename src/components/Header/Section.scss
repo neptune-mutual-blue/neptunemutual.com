@@ -47,6 +47,7 @@
     }
   
     svg {
+      transform: translateY(2px);
       flex-shrink: 0;
       color: colors.$primary-600;
     }

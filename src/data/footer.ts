@@ -60,8 +60,6 @@ const getFooterData = async (): Promise<FooterData> => {
           badge: 'New!',
           badgeColor: 'success'
         },
-        { href: '/blog/', text: 'Blog', isExternal: false },
-        { href: '/pressroom/', text: 'Press Room', isExternal: false },
         { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
         { href: '/docs/', text: 'Documentation', isExternal: false },
         { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
@@ -73,6 +71,8 @@ const getFooterData = async (): Promise<FooterData> => {
       title: 'Company',
       links: [
         { href: '/about/', text: 'About us', isExternal: false },
+        { href: '/blog/', text: 'Blog', isExternal: false },
+        { href: '/pressroom/', text: 'Press Room', isExternal: false },
         {
           href: '/grants-and-bounties/',
           text: 'Grants and Bounties',
