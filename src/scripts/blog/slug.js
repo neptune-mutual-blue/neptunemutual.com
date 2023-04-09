@@ -11,6 +11,13 @@ import '../components/blog-pressroom-viewer/index'
 
 import hljs from 'highlight.js'
 
-;(function () {
+const highlightLineNumbersLoad = async () => {
+  return await import('highlightjs-line-numbers.js')
+}
+
+;(async function () {
   hljs.highlightAll()
+  window.hljs = hljs
+  await highlightLineNumbersLoad()
+  hljs.initLineNumbersOnLoad()
 })()
