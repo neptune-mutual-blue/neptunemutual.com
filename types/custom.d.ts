@@ -94,6 +94,7 @@ interface DetailedListViewItem {
   href: string
   icon: string
   category: string
+  target?: string
 }
 
 interface NamedIcon {
@@ -228,6 +229,7 @@ interface Web3ToolItem {
     icon: string
     text: string
   }>
+  target?: '_blank' | '_self' | '_parent' | '_top'
 }
 
 interface TableRenderConfig<T> {

@@ -9,6 +9,7 @@ interface Props {
   subtitle: string;
   items: DetailedListViewItem[];
   showArrow?: boolean;
+  target?: string;
 }
 
 const { props } = Astro;
@@ -28,7 +29,7 @@ const { props } = Astro;
     {
       props.items.map((item) => {
         return (
-          <a class="list item" href={normalizeUrl(item.href)}>
+          <a class="list item" href={normalizeUrl(item.href)} target={item.target} rel={item.target ? "noreferrer" : undefined}>
             <div class="title and intro">
               <div class="title with badge">
                 <h3 class="title">{item.title}</h3>
