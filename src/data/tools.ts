@@ -50,7 +50,7 @@ const tools: Web3ToolItem[] = [
     category: 'IPFS Gateway',
     icon: 'code-square-01',
     badges: [],
-    target: '_blank'
+    isExternal: true
   }
 ]
 
