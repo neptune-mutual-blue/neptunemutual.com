@@ -28,7 +28,12 @@ const { props } = Astro;
     {
       props.items.map((item) => {
         return (
-          <a class="list item" href={normalizeUrl(item.href)} target={item.isExternal ? "_blank" : undefined} rel={item.isExternal ? "noreferrer" : undefined}>
+          <a
+            class="list item"
+            href={normalizeUrl(item.href)}
+            target={item.isExternal ? "_blank" : undefined}
+            rel={item.isExternal ? "noreferrer" : undefined}
+          >
             <div class="title and intro">
               <div class="title with badge">
                 <h3 class="title">{item.title}</h3>
