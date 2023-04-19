@@ -67,7 +67,10 @@
       display: inline-flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 32px;
+
+      @media (max-width: 767px) {
+        gap: 32px;
+      }
     }  
   }
 
