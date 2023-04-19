@@ -15,7 +15,7 @@
   flex-direction: column;
   gap: 64px;
 
-  background-color: colors.$white;
+  background-color: colors.$base-white;
 
   @media screen and (max-width: 767px) {
     margin-top: 64px;
@@ -75,6 +75,7 @@
   .team.members.center {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   
   .slider.container {

@@ -428,6 +428,31 @@
       word-break: break-all;
     }
 
+    .hljs {
+      table th,
+      table td {
+        border: none !important;
+      }
+   
+      table {
+        width: 100% !important;
+
+        tr:first-child {
+          background-color: transparent !important;
+          
+          td {
+            background-color: transparent !important;
+            
+          }
+        }
+      }
+
+      td.hljs-ln-line.hljs-ln-numbers {
+        width: 20px;
+        border-right: 1px solid colors.$gray-800 !important;
+      }
+    }
+
     table {
       tr:first-child {
         background-color: colors.$white;

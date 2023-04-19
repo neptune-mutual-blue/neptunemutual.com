@@ -60,6 +60,7 @@ const getFooterData = async (): Promise<FooterData> => {
           badge: 'New!',
           badgeColor: 'success'
         },
+        { href: 'https://community.neptunemutual.com/', includeTheme: false, text: 'Community Forum', isExternal: false },
         { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
         { href: '/docs/', text: 'Documentation', isExternal: false },
         { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
