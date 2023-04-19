@@ -24,6 +24,10 @@
     margin-top: 96px;
     padding-top: 56px;
 
+    @media (max-width: 767px) {
+      margin-top: 0px;
+    }
+
     @include utils.full-width-container;
   }
 
