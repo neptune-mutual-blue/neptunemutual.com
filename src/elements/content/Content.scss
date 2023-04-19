@@ -793,6 +793,13 @@
       word-break: break-word;
     }
 
+    .hljs {
+      table th,
+      table td {
+        border: none !important;
+      }
+    }
+
     table {
       tr:first-child {
         background-color: colors.$gray-900;

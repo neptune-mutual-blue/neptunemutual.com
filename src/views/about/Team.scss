@@ -15,8 +15,6 @@
   flex-direction: column;
   gap: 64px;
 
-  background-color: colors.$base-white;
-
   @media screen and (max-width: 767px) {
     margin-top: 64px;
     margin-bottom: 64px;
@@ -81,7 +79,6 @@
 }
 
 .dark .about.us.section .team.full.width.container {
-  background-color: colors.$black;
 
   > .content {
     
