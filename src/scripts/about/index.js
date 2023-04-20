@@ -6,4 +6,3 @@ import '../global/video'
 import '../global/index'
 // Global End
 import './roadmap'
-import '../components/temp/slider'
