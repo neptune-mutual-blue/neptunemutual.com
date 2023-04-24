@@ -9,7 +9,7 @@ export const Disclaimer = () => {
       By connecting a wallet, you agree to Neptune Mutual
       {' '}
       <StyledLink
-        href='https://docs.neptunemutual.com/usage/terms-of-use'
+        href='/policies/terms-of-use/'
         target='_blank'
       >
         Terms &amp; Conditions
@@ -18,7 +18,7 @@ export const Disclaimer = () => {
       and acknowledge that you have read and understand the Neptune Mutual
       {' '}
       <StyledLink
-        href='https://docs.neptunemutual.com/usage/disclaimer'
+        href='/docs/usage/disclaimer/'
         target='_blank'
       >
         Protocol Disclaimer

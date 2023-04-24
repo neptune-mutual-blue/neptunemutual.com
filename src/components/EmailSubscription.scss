@@ -1,5 +1,6 @@
 @use "../design-system/utils";
 @use "../design-system/colors";
+@use "../design-system/shadows";
 @use "../design-system/typography/styles";
 @use "../design-system/typography/weights";
 @use "../design-system/theme/light";
@@ -57,7 +58,7 @@
       @include weights.semibold;
 
       cursor: pointer;
-      box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);    
+      box-shadow: shadows.$xl;
     }
 
     .atom {

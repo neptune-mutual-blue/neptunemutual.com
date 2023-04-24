@@ -6,7 +6,6 @@
 @use "../design-system/shadows";
 @use "../design-system/spacing";
 
-
 i {
   color:currentColor;
 
@@ -21,7 +20,7 @@ i[data-size=xs] svg {
 }
 
 i[data-size=sm] svg {
-height:14px;
+  height:14px;
 }
 
 i[data-size=md] svg {
@@ -39,5 +38,3 @@ i[data-size=xl] svg {
 i[data-size='2xl'] svg {
   height:28px;
 }
-
-
