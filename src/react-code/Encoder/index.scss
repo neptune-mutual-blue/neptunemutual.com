@@ -58,6 +58,10 @@
       border: 0px solid colors.$gray-300;
       margin: 0;
       border-radius: 0;
+
+      &:disabled {
+        opacity: 0.5;
+      }
   
       @media (max-width: 767px) {
         border-radius: 0;

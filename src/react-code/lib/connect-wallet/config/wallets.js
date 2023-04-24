@@ -29,11 +29,11 @@ export const wallets = [
     iconVariant: 'gnosis-wallet',
     iconVariantDark: 'gnosis-wallet-dark'
   },
-  {
-    id: '5',
-    name: 'Wallet Connect',
-    connectorName: ConnectorNames.WalletConnect,
-    iconVariant: 'wallet-connect',
-    iconVariantDark: 'wallet-connect-dark'
-  }
+  // {
+  //   id: '5',
+  //   name: 'Wallet Connect',
+  //   connectorName: ConnectorNames.WalletConnect,
+  //   iconVariant: 'wallet-connect',
+  //   iconVariantDark: 'wallet-connect-dark'
+  // }
 ]
