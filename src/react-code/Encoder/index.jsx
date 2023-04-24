@@ -1,21 +1,18 @@
+import './index.scss'
+
 import {
   useEffect,
   useRef,
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
 import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
-import { Button } from '../components/Button'
+import { Button } from '../components/Button/Button'
 import { InputWithLabel } from '../components/InputWithLabel'
 import { TextArea } from '../components/TextArea'
 import { getLibrary } from '../lib/connect-wallet/utils/web3'
-import { colors } from '../styles/colors'
-import { typography } from '../styles/typography/'
-import { utils } from '../styles/utils'
 import {
   isArray,
   isJSON,
@@ -176,8 +173,8 @@ const Encoder = () => {
   }
 
   return (
-    <Container>
-      <FormContainer>
+    <div className='encoder container'>
+      <div className='form container'>
         <div>
           <Breadcrumbs
             crumbs={[
@@ -187,7 +184,7 @@ const Encoder = () => {
             ]}
           />
 
-          <FormContent ref={formRef}>
+          <form className='form content' ref={formRef}>
             <TextArea
               required
               label='What is your contract ABI?'
@@ -206,9 +203,7 @@ const Encoder = () => {
               onChange={(e) => { return setContractName(e.target.value) }}
               error={contractNameExist ? 'Contract name already exist!' : ''}
             >
-              <InputHint>
                 Enter the contract name or an easy way to remember name for this contract
-              </InputHint>
             </InputWithLabel>
 
             <InputWithLabel
@@ -218,13 +213,12 @@ const Encoder = () => {
               id='address'
               onChange={(e) => { return setAddress(e.target.value) }}
             >
-              <InputHint>
                 If you’d like to perform read and write operations on this contract, paste its address.
-              </InputHint>
             </InputWithLabel>
 
-            <FormAction>
+            <div className='form action'>
               <Button
+                variant="secondary-gray"
                 hierarchy='secondary'
                 disabled={!isSaveable}
                 size='sm'
@@ -235,7 +229,7 @@ const Encoder = () => {
                 Save to Local Storage
               </Button>
               <Button
-                hierarchy='secondary'
+                variant="secondary-gray"
                 disabled={contracts.length === 0}
                 size='sm'
                 iconLeading
@@ -245,7 +239,7 @@ const Encoder = () => {
                 Save All to Your Computer
               </Button>
               <Button
-                hierarchy='secondary'
+               variant="secondary-gray"
                 size='sm'
                 type='file'
                 iconLeading
@@ -254,8 +248,8 @@ const Encoder = () => {
               >
                 Restore from Your Computer
               </Button>
-            </FormAction>
-          </FormContent>
+            </div>
+          </form>
         </div>
 
         <History
@@ -266,7 +260,7 @@ const Encoder = () => {
           restorationFailed={restorationFailed}
           restoreSpecificCallback={restoreSpecificCallback}
         />
-      </FormContainer>
+      </div>
 
       <Web3ReactProvider getLibrary={getLibrary}>
         <Result
@@ -276,130 +270,8 @@ const Encoder = () => {
         />
       </Web3ReactProvider>
 
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  ${utils.fullWidthContainer}
-  padding-bottom: 96px;
-  
-  @media (max-width: 767px) {
-    padding-bottom: 64px;
-  }
-`
-
-const FormContainer = styled.div`
-  display: flex;
-  margin-top: 24px;
-  gap: 40px;
-  flex-direction: column-reverse;
-
-  @media (min-width: 1024px) { 
-    flex-direction: row;
-    gap: 64px;
-    margin-top: 56px;
-  }
-`
-
-const FormContent = styled.form`
-  display: flex;
-  gap: 32px;
-  flex-direction: column;
-  width: 100%;
-
-  @media (min-width: 1024px) { 
-    width: 754px;  
-  }
-`
-
-const FormAction = styled.div`
-  display: flex;
-  border: 1px solid ${colors.gray[300]};
-  border-radius: 8px;
-  padding:0;
-  gap: 0;
-  width: max-content;
-  
-  @media (max-width: 767px) {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  button {
-    display: flex;
-    padding: 10px 16px;
-    background-color: ${colors.white};
-    color: ${colors.gray[700]};
-    border: 0px solid ${colors.gray[300]};
-    margin: 0;
-    border-radius: 0;
-
-    @media (max-width: 767px) {
-      border-radius: 0;
-      border-width: 0;
-    }
-
-    &:first-of-type {
-      border-radius: 8px 0 0 8px;
-      border-width: 0 1px 0 0;
-      
-      @media (max-width: 767px) {
-        border-radius: 8px 8px 0 0;
-        border-width: 0 0 1px 0;
-      }
-    }
-
-    &:last-of-type {
-      border-radius: 0 8px 8px 0;
-      border-width: 0 0 0 1px;
-
-      @media (max-width: 767px) {
-        border-radius: 0 0 8px 8px;
-        border-width: 1px 0 0 0;
-      }
-    }
-
-    &:hover:not(:disabled) {
-      background-color: ${colors.gray[100]};
-      color: ${colors.gray[800]};
-    }
-  }
-
-  .dark & {
-    border-color: ${colors.gray[700]};
-
-    button {
-      border-color: ${colors.gray[700]};
-      background-color: ${colors.gray[900]};
-      color: ${colors.gray[300]};
-
-      &:hover:not(:disabled) {
-        background-color: ${colors.gray[800]};
-        color: ${colors.white};
-      }
-    }
-  }
-`
-
-const InputHint = styled.p`
-  margin-top: 6px;
-  color: ${colors.gray['600']};
-  ${typography.styles.textSm};
-  ${typography.weights.regular};
-
-  a {
-    text-decoration: underline;
-
-
-    &:hover, &:active{
-      color: ${colors.rose[600]};
-    }
-  }
-
-  .dark & {
-    color: ${colors.gray['50']};
-  }
-`
 
 export { Encoder }

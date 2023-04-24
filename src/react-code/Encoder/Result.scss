@@ -1,0 +1,108 @@
+@use "../../design-system/colors";
+@use "../../design-system/shadows";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.result.container {
+  margin-top: 40px;
+
+  @media (min-width: 1024px) { 
+    margin-top: 98px;
+  }
+
+  .result.title {
+    color: colors.$gray-900;
+    @include styles.display-xs;
+    @include weights.semibold;
+    margin-bottom: 12px;
+  
+    .dark & {
+      color: colors.$base-white;
+    }
+  }
+
+  .result.address {
+    color: colors.$gray-800;
+    @include styles.text-md;
+    @include weights.regular;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .dark & {
+      color: colors.$gray-25;
+    }
+  }
+
+  .result.cta {
+    display: flex;
+    margin: 24px 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 16px;
+    column-gap: 8px;
+  }
+
+  .left.group {
+    display: flex;
+    gap: 8px;
+
+    button {
+      border-color: transparent;
+
+      .dark & {
+        background-color: colors.$black-800;
+        color: colors.$gray-300;
+      }
+      
+      &[data-active="true"]{
+        border-color: colors.$primary-25;
+        background-color: colors.$primary-25;
+        color: colors.$primary-700;
+     
+        .dark & {
+            border-color: colors.$gray-600;
+            background-color: colors.$gray-600;
+            color: colors.$base-white;
+        }
+      }
+
+    }
+  }
+
+  .right.group {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  .result.list.container {
+    margin-top: 24px;
+    overflow: hidden;
+
+    .item {
+      border-top: none;
+
+      &:nth-of-type(1) {
+        border-top: 1px solid colors.$gray-300;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      &:nth-last-of-type(1) {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        overflow: hidden;
+      }
+    }
+
+    .dark & {
+      .item {
+        &:nth-of-type(1) {
+          border-top: 1px solid colors.$gray-700;
+        }
+      }
+    }
+  } 
+}

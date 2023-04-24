@@ -1,0 +1,20 @@
+div[role="dialog"] {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.5);
+
+  .overlay.wrapper {
+    min-height: 100vh;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+  }
+
+  .fix.span {
+    display: inline-block;
+    height: 100vh;
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,30 @@
+@use "../../design-system/colors";
+@use "../../design-system/typography/weights";
+
+.func.container {
+  border: 1px solid colors.$gray-300;
+
+  .dark & {
+    border: 1px solid colors.$gray-700;
+  }
+
+  .list.header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: -1;
+    cursor: pointer;
+  }
+
+  .name {
+    @include weights.semibold;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    color: colors.$black;
+  }
+}

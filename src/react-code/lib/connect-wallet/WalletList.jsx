@@ -1,12 +1,14 @@
+import './WalletList.scss'
+
 import { useState } from 'react'
-import styled from 'styled-components'
+
 import { Option } from './Option'
 
 export const WalletList = ({ wallets, onConnect, isConnecting }) => {
   const [connectingId, setConnectingId] = useState('')
 
   return (
-    <Container>
+    <div className='wallet list container'>
       {wallets.map((wallet) => (
         <Option
           key={wallet.id}
@@ -18,13 +20,6 @@ export const WalletList = ({ wallets, onConnect, isConnecting }) => {
           {...wallet}
         />
       ))}
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`

@@ -1,0 +1,109 @@
+@use "../../design-system/colors";
+@use "../../design-system/shadows";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.connect.wallet.popover {
+  display: flex;
+
+  .panel {
+    position: relative;
+  }
+
+  .connected.btn.contents {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .details.container {
+    border-radius: 8px;
+    box-shadow: shadows.$lg;
+    @include styles.text-sm;
+    background-color: colors.$base-white;
+    z-index: 99;
+
+    position: absolute;
+    right: 0px;
+    min-width: 248px;
+    top: 44px;
+
+    .dark & {
+      background-color: colors.$gray-600;
+    }
+
+    .details {
+      padding: 12px 16px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid colors.$gray-200;
+
+      .dark & {
+        border-bottom: 1px solid colors.$gray-500;
+      }
+
+      .title.text {
+        @include weights.semibold;
+        color: colors.$gray-700;
+
+        .dark & {
+          color: colors.$base-white;
+        }
+      }
+
+      .info.text {
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+          @include weights.regular;
+          color: colors.$gray-600;
+        }
+        
+        svg {
+          color: colors.$gray-500;
+        }
+
+        .dark & {
+          span {
+            color: colors.$gray-300;
+          }
+          
+          svg {
+            color: colors.$gray-25;
+          }
+        }
+      }
+    }
+
+    .copy.btn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .title.text2 {
+      @include weights.medium;
+    }
+
+    .disconnect.btn {
+      @include weights.medium;
+      cursor: pointer;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      color: colors.$gray-700;
+
+      .dark & {
+        color: colors.$gray-25;
+      }
+    }
+  }
+}

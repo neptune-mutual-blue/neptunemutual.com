@@ -1,0 +1,109 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.read.container {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$primary-25;
+  padding: 32px 24px;
+  gap: 24px;
+
+  input[data-error="true"] {
+    border-color: colors.$error-300;
+  }
+
+  p, svg {
+    color: colors.$error-500;
+  }
+
+  .dark & {
+    background-color: colors.$gray-900;
+  }
+
+  button {
+    width: fit-content;
+
+    &:disabled {
+      opacity: 1;
+    }
+
+    .dark & {
+      opacity: 0.75;
+      background-color: colors.$black-800 !important;
+      color: colors.$base-white !important;
+    }
+  }
+
+  .output {
+    display: flex;
+    gap: 8px;
+    color: colors.$gray-900;
+    font-style: italic;
+    @include weights.regular;
+    @include styles.text-sm;
+
+    .dark & {
+      color: colors.$base-white;
+    }
+  }
+
+  .bold {
+    @include weights.semibold;
+  }
+
+  .output.container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  
+    .result {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-style: italic;
+      @include styles.text-sm;
+
+      &.title {
+        font-style: normal;
+      }
+
+      span {
+        color: colors.$black;
+      }
+    
+      svg {
+        color: colors.$success-700 !important;
+      }
+    
+      .dark & {
+        span {
+          color: colors.$base-white
+        }
+    
+        svg {
+          color: colors.$success-500 !important;
+        }
+      }
+    }
+  }
+
+  .btn.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    @media screen and (max-width: 767px) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    span.error {
+      @include styles.text-sm;
+      color: colors.$error-700;
+    }
+  }
+}

@@ -1,0 +1,108 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/dark";
+@use "../../design-system/theme/light";
+
+.encoder.container {
+  @include utils.full-width-container;
+  padding-bottom: 96px;
+
+  @media (max-width: 767px) {
+    padding-bottom: 64px;
+  }
+
+  .form.container {
+    display: flex;
+    margin-top: 24px;
+    gap: 40px;
+    flex-direction: column-reverse;
+
+    @media (min-width: 1024px) { 
+      flex-direction: row;
+      gap: 64px;
+      margin-top: 56px;
+    }
+  }
+
+  .form.content {
+    display: flex;
+    gap: 32px;
+    flex-direction: column;
+    width: 100%;
+
+    @media (min-width: 1024px) { 
+      width: 754px;  
+    }
+  }
+
+  .form.action {
+    display: flex;
+    border: 1px solid colors.$gray-300;
+    border-radius: 8px;
+    padding:0;
+    gap: 0;
+    width: max-content;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    button {
+      display: flex;
+      padding: 10px 16px;
+      background-color: colors.$base-white;
+      color: colors.$gray-700;
+      border: 0px solid colors.$gray-300;
+      margin: 0;
+      border-radius: 0;
+  
+      @media (max-width: 767px) {
+        border-radius: 0;
+        border-width: 0;
+      }
+  
+      &:first-of-type {
+        border-radius: 8px 0 0 8px;
+        border-width: 0 1px 0 0;
+        
+        @media (max-width: 767px) {
+          border-radius: 8px 8px 0 0;
+          border-width: 0 0 1px 0;
+        }
+      }
+  
+      &:last-of-type {
+        border-radius: 0 8px 8px 0;
+        border-width: 0 0 0 1px;
+  
+        @media (max-width: 767px) {
+          border-radius: 0 0 8px 8px;
+          border-width: 1px 0 0 0;
+        }
+      }
+  
+      &:hover:not(:disabled) {
+        background-color: colors.$gray-100;
+        color: colors.$gray-800;
+      }
+    }
+  
+    .dark & {
+      border-color: colors.$gray-700;
+  
+      button {
+        border-color: colors.$gray-700;
+        background-color: colors.$gray-900;
+        color: colors.$gray-300;
+  
+        &:hover:not(:disabled) {
+          background-color: colors.$gray-800;
+          color: colors.$base-white;
+        }
+      }
+    }
+  }
+}

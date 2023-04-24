@@ -1,0 +1,53 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.write.container {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$primary-25;
+  padding: 32px 24px;
+  gap: 24px;
+
+  input[data-error="true"] {
+    border-color: colors.$error-300;
+  }
+
+  p, svg {
+    color: colors.$error-500;
+  }
+
+  .dark & {
+    background-color: colors.$gray-900;
+  }
+
+  button {
+    width: fit-content;
+    @include styles.text-sm;
+    @include weights.semibold;
+  
+    &:disabled {
+      opacity: 0.8;
+      color: colors.$gray-400;
+    }
+  }
+
+  .btn.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    @media screen and (max-width: 767px) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    span.error {
+      @include styles.text-sm;
+      color: colors.$error-700;
+    }
+  }
+}

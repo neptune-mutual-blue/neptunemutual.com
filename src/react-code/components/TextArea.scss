@@ -1,0 +1,118 @@
+@use "../../design-system/colors";
+@use "../../design-system/shadows";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.textarea.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label {
+    flex: 1;
+    margin-bottom: 6px;
+    @include styles.text-sm;
+    @include weights.medium;
+    color: colors.$gray-700;
+    
+    .dark & {
+      color: colors.$gray-300;
+    }
+  }
+
+  textarea {
+    display: flex;
+    width: 100%;
+    background-color:  light.$primary-background-color;
+    border: 1px solid colors.$gray-300;
+    box-shadow: shadows.$xs;
+    border-radius: 8px;  
+    padding: 12px 14px;
+    gap: 8px;
+    @include styles.text-md;
+    @include weights.regular;
+    min-height: 100px;
+    height: auto;
+    resize: vertical;
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: colors.$gray-500;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: colors.$gray-500;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: colors.$gray-500;
+    }
+
+    &:not(&:disabled) {
+      &[data-state="focussed"],
+      &:focus,
+      &:active,
+      &:hover,
+      &:focus-visible {
+
+        outline: none;
+        box-shadow: shadows.$xs, 0px 0px 0px 4px colors.$primary-100;
+      }
+    }
+
+    &[data-error="true"] {
+      border: 1px solid colors.$error-700;
+    }
+
+    @media screen and (max-width: 767px) {
+      height: 214px;
+    }
+
+    .dark & {
+      color: colors.$gray-300;
+      background-color: colors.$black-800;
+      border: 1px solid colors.$gray-800;
+      
+      ::placeholder {
+        color: colors.$gray-500;
+      }
+
+      :-ms-input-placeholder {
+        color: colors.$gray-500;
+      }
+
+      ::-ms-input-placeholder {
+        color: colors.$gray-500;
+      }
+
+      &:not(&:disabled) {
+        &[data-state="focussed"],
+        &:focus,
+        &:active,
+        &:hover,
+        &:focus-visible {
+          box-shadow: shadows.$xs, 0px 0px 0px 4px colors.$primary-800;
+        }
+      }
+    }
+  }
+
+  p.error.text {
+    margin-top:6px;
+    @include styles.text-sm;
+    @include weights.regular;
+
+    color: colors.$error-800;
+
+    &:empty {
+      display: none;
+    }
+
+    .dark & {
+      color: colors.$error-600;
+    }
+  }
+}

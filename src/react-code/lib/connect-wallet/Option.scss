@@ -1,0 +1,63 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.connect.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background-color: transparent;
+  border: 1px solid colors.$gray-300;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+
+  p {
+    @include styles.text-md;
+    @include weights.semibold;
+    color: colors.$gray-700;
+  }
+
+  i.icon.dark {
+    display: none;
+  }
+
+  i.icon.light {
+    display: block;
+  }
+
+  .dark & {
+    i.icon.light {
+      display: none;
+    }
+
+    i.icon.dark {
+      display: block;
+    }
+
+    background-color: colors.$gray-600;
+    border: 1px solid colors.$gray-500;
+
+    p {
+      color: colors.$gray-25;
+    }
+  }
+}
+
+button.connect.option {
+  svg:last-child {
+    width: 24px;
+    height: 24px;
+    margin-left: 12px;
+  }
+}

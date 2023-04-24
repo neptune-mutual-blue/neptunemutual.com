@@ -1,48 +1,26 @@
-import styled from 'styled-components'
-
-import { colors } from '../../styles/colors'
-import { typography } from '../../styles/typography'
+import './Disclaimer.scss'
 
 export const Disclaimer = () => {
   return (
-    <P>
+    <p className='disclaimer'>
       By connecting a wallet, you agree to Neptune Mutual
       {' '}
-      <StyledLink
+      <a
         href='https://docs.neptunemutual.com/usage/terms-of-use'
         target='_blank'
       >
         Terms &amp; Conditions
-      </StyledLink>
+      </a>
       {' '}
       and acknowledge that you have read and understand the Neptune Mutual
       {' '}
-      <StyledLink
+      <a
         href='https://docs.neptunemutual.com/usage/disclaimer'
         target='_blank'
       >
         Protocol Disclaimer
-      </StyledLink>
+      </a>
       .
-    </P>
+    </p>
   )
 }
-
-const P = styled.p`
-  ${typography.styles.textSm};
-  color: ${colors.gray[600]};
-  margin-top: 4px;
-
-  .dark & {
-    color: ${colors.white};
-  }
-`
-
-const StyledLink = styled.a`
-  text-decoration: underline;
-  color: inherit;
-  
-  &:hover {
-    color: ${colors.blue[700]};
-  }
-`

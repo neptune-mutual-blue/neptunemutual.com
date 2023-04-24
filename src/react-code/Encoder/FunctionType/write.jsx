@@ -1,17 +1,12 @@
+import './write.scss'
+
 import {
   useId,
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
-import { Button } from '../../components/Button'
+import { Button } from '../../components/Button/Button'
 import { InputWithLabel } from '../../components/InputWithLabel'
-import {
-  colors,
-  primaryColorKey
-} from '../../styles/colors'
-import { typography } from '../../styles/typography'
 import {
   checkInputErrors,
   getPlaceholder,
@@ -58,7 +53,7 @@ const WriteContract = (props) => {
   }
 
   return (
-    <Container>
+    <div className='write container'>
       {inputs.map((input, i) => {
         return (
           <InputWithLabel
@@ -77,67 +72,20 @@ const WriteContract = (props) => {
         )
       })}
 
-      <BtnWrapper>
-        <Btn
-          hierarchy='primary'
+      <div className='btn wrapper'>
+        <Button
+          variant='primary'
           size='sm'
           onClick={handleWrite}
           disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
         >
           Write
-        </Btn>
+        </Button>
         <span className='error'>{error}</span>
-      </BtnWrapper>
+      </div>
 
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors[primaryColorKey][25]};
-  padding: 32px 24px;
-  gap: 24px;
-
-  input[data-error="true"] {
-    border-color: ${colors.error[300]};
-  }
-
-  p, svg {
-    color: ${colors.error[500]};
-  }
-
-  .dark & {
-    background-color: ${colors.gray[900]};
-  }
-`
-
-const Btn = styled(Button)`
-  width: fit-content;
-  ${typography.weights.semibold}
-  ${typography.styles.textSm}
-
-  &:disabled {
-    opacity: 0.8;
-    color: ${colors.gray[400]};
-  }
-`
-
-const BtnWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  
-  @media screen and (max-width: 767px) {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  span.error {
-    ${typography.styles.textSm}
-    color: ${colors.error[700]};
-  }
-`
 
 export { WriteContract }

@@ -1,18 +1,13 @@
+import './encode.scss'
+
 import {
   useEffect,
   useId,
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
 import { InputWithLabel } from '../../components/InputWithLabel'
 import { TextArea } from '../../components/TextArea'
-import {
-  colors,
-  primaryColorKey
-} from '../../styles/colors'
-import { typography } from '../../styles/typography'
 import {
   encodeData,
   getFunctionSignature
@@ -78,7 +73,7 @@ const EncodeData = (props) => {
   }
 
   return (
-    <Container>
+    <div className='encode container'>
       {inputs.map((input, i) => {
         return (
           <InputWithLabel
@@ -97,8 +92,8 @@ const EncodeData = (props) => {
         )
       })}
 
-      <ResultContainer>
-        <StyledTextArea
+      <div className='output container'>
+        <TextArea
           label='Result'
           placeholder='0x'
           id={`${id}-result`}
@@ -108,45 +103,10 @@ const EncodeData = (props) => {
           disabled
         />
         <span>{outputError}</span>
-      </ResultContainer>
+      </div>
 
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors[primaryColorKey][25]};
-  padding: 32px 24px;
-  gap: 24px;
-
-  input[data-error="true"] {
-    border-color: ${colors.error[300]};
-  }
-
-  p, svg {
-    color: ${colors.error[500]};
-  }
-
-  .dark & {
-    background-color: ${colors.gray[900]};
-  }
-`
-
-const StyledTextArea = styled(TextArea)`
-  &:disabled {
-    color: initial;
-  }
-`
-
-const ResultContainer = styled.div`
-  span {
-    display: block;
-    margin-top: 4px;
-    ${typography.styles.textSm};
-    color: ${colors.error[700]};
-  }
-`
 
 export { EncodeData }

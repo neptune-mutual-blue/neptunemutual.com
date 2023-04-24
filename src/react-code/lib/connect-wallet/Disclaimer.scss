@@ -1,0 +1,25 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+p.disclaimer {
+  @include styles.text-sm;
+  color: colors.$gray-600;
+  margin-top: 4px;
+
+  .dark & {
+    color: colors.$base-white;
+  }
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+    
+    &:hover {
+      color: colors.$blue-700;
+    }
+  }
+}

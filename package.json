@@ -44,7 +44,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.57.1",
-    "styled-components": "5.3.3",
     "transliteration": "^2.3.5",
     "typescript": "^4.9.5"
   },

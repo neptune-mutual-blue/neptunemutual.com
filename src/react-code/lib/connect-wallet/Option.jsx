@@ -1,8 +1,6 @@
-import styled, { css } from 'styled-components'
+import './Option.scss'
 
 import { Icon } from '../../components/Icon'
-import { colors } from '../../styles/colors'
-import { typography } from '../../styles/typography'
 import { Loader } from './Loader'
 
 export const Option = (props) => {
@@ -13,7 +11,8 @@ export const Option = (props) => {
   if (name.toLowerCase() === 'metamask wallet') {
     if (!(window.web3 || window.ethereum)) {
       return (
-        <StyledLink
+        <a
+          className='connect option'
           href='https://metamask.io/'
           target='_blank'
           rel='noreferrer noopener'
@@ -25,7 +24,7 @@ export const Option = (props) => {
             {WalletIconDark}
           </i>
           <p>Install Metamask</p>
-        </StyledLink>
+        </a>
       )
     }
   }
@@ -33,7 +32,7 @@ export const Option = (props) => {
   if (name.toLowerCase() === 'okx wallet') {
     if (!(window.okxwallet)) {
       return (
-        <StyledLink
+        <a className='connect option'
           href='https://chrome.google.com/webstore/detail/okex-wallet/mcohilncbfahbmgdjkbpemcciiolgcge'
           target='_blank'
           rel='noreferrer noopener nofollow'
@@ -45,7 +44,7 @@ export const Option = (props) => {
             {WalletIconDark}
           </i>
           <p>Install OKX Wallet</p>
-        </StyledLink>
+        </a>
       )
     }
   }
@@ -53,7 +52,8 @@ export const Option = (props) => {
   if (name.toLowerCase() === 'binance wallet') {
     if (!window.BinanceChain) {
       return (
-        <StyledLink
+        <a
+        className='connect option'
           href='https://docs.binance.org/smart-chain/wallet/binance.html'
           target='_blank'
           rel='noreferrer noopener'
@@ -65,13 +65,14 @@ export const Option = (props) => {
             {WalletIconDark}
           </i>
           <p>Install Binance Wallet</p>
-        </StyledLink>
+        </a>
       )
     }
   }
 
   return (
-    <StyledButton
+    <button
+      className='connect option'
       key={id}
       onClick={onClick}
       type='button'
@@ -86,69 +87,7 @@ export const Option = (props) => {
       <p>{name}</p>
 
       {connectingId === id && <Loader />}
-    </StyledButton>
+    </button>
   )
 }
 
-const LinkStyle = css`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background-color: transparent;
-  border: 1px solid ${colors.gray[300]};
-  border-radius: 8px;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.75;
-  }
-
-  p {
-    ${typography.styles.textMd};
-    ${typography.weights.semibold};
-    color: ${colors.gray[700]};
-  }
-
-  i.icon.dark {
-    display: none;
-  }
-
-  i.icon.light {
-    display: block;
-  }
-
-  .dark & {
-    i.icon.light {
-      display: none;
-    }
-
-    i.icon.dark {
-      display: block;
-    }
-
-    background-color: ${colors.gray[600]};
-    border: 1px solid ${colors.gray[500]};
-
-    p {
-      color: ${colors.gray[25]};
-    }
-  }
-`
-
-const StyledButton = styled.button`
-  ${LinkStyle};
-
-  svg:last-child {
-    width: 24px;
-    height: 24px;
-    margin-left: 12px;
-  }
-`
-
-const StyledLink = styled.a`
-  ${LinkStyle}
-`

@@ -1,13 +1,11 @@
+import './Func.scss'
+
 import {
   useEffect,
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
 import { Icon } from '../components/Icon'
-import { colors } from '../styles/colors'
-import { typography } from '../styles/typography'
 import { EncodeData } from './FunctionType/encode'
 import { ReadContract } from './FunctionType/read'
 import { WriteContract } from './FunctionType/write'
@@ -87,16 +85,16 @@ const Func = (props) => {
   }
 
   return (
-    <Container className='item' id={`func-${count}`}>
-      <ListHeader onClick={toggle}>
-        <Name>{count}. {func.name} {type === 'write_contract' && `(${encodedFn})`}</Name>
+    <div className='func item container' id={`func-${count}`}>
+      <div className='list header' onClick={toggle}>
+        <div className='name'>{count}. {func.name} {type === 'write_contract' && `(${encodedFn})`}</div>
 
-        <CallToAction>
-          <Button title='Toggle'>
-            <Icon size={16} variant={isOpen ? 'chevron-up' : 'chevron-down'} />
-          </Button>
-        </CallToAction>
-      </ListHeader>
+        <div className='cta'>
+          <button title='Toggle'>
+            <Icon size={'md'} variant={isOpen ? 'chevron-up' : 'chevron-down'} />
+          </button>
+        </div>
+      </div>
       {isOpen &&
         <Component
           type={type}
@@ -108,43 +106,8 @@ const Func = (props) => {
           encodeInterface={encodeInterface}
           joiSchema={createJoiSchema(inputs)}
         />}
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  border: 1px solid ${colors.gray[300]};
-
-  .dark & {
-    border: 1px solid ${colors.gray[700]};
-  }
-`
-
-const ListHeader = styled.div`
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: -1;
-  cursor: pointer;
-`
-
-const Button = styled.button`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`
-
-const Name = styled.div`
-  ${typography.weights.semibold}
-`
-
-const CallToAction = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  color: ${colors.black};
-  /* z-index: 9; */
-`
 
 export { Func }

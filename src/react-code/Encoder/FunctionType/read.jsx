@@ -1,19 +1,14 @@
+import './read.scss'
+
 import {
   Fragment,
   useId,
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
-import { Button } from '../../components/Button'
+import { Button } from '../../components/Button/Button'
 import { Icon } from '../../components/Icon'
 import { InputWithLabel } from '../../components/InputWithLabel'
-import {
-  colors,
-  primaryColorKey
-} from '../../styles/colors'
-import { typography } from '../../styles/typography'
 import {
   checkInputErrors,
   getPlaceholder,
@@ -68,7 +63,7 @@ const ReadContract = (props) => {
   }
 
   return (
-    <Container>
+    <div className='read container'>
       {inputs.map((input, i) => {
         return (
           <InputWithLabel
@@ -87,144 +82,43 @@ const ReadContract = (props) => {
         )
       })}
 
-      <BtnWrapper>
-        <Btn
-          hierarchy='secondary'
+      <div className='btn wrapper'>
+        <Button
+          variant='secondary-gray'
           onClick={handleQuery}
           disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
         >
           Query
-        </Btn>
+        </Button>
         <span className='error'>{error}</span>
-      </BtnWrapper>
+      </div>
 
-      <Output>
+      <div className='output'>
         <Icon variant='L' size={10} />
         {getOutputsSignature()}
-      </Output>
+      </div>
       {outputData.map((output, i) => {
         return (
           <Fragment key={`output-${i}`}>
             {
               output.value && (
-                <ResultContainer>
-                  <ResultTitle>
-                    [<Bold>{getFunctionSignature()}</Bold> method Response]
-                  </ResultTitle>
-                  <Result>
+                <div className='output container'>
+                  <div className='result title'>
+                    [<span className='bold'>{getFunctionSignature()}</span> method Response]
+                  </div>
+                  <div className='result'>
                     <Icon variant='chevron-right-double' size={18} />
                     <span>{(output.type)}: {output.value}</span>
-                  </Result>
-                </ResultContainer>
+                  </div>
+                </div>
               )
             }
           </Fragment>
         )
       })}
 
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors[primaryColorKey][25]};
-  padding: 32px 24px;
-  gap: 24px;
-
-  input[data-error="true"] {
-    border-color: ${colors.error[300]};
-  }
-
-  p, svg {
-    color: ${colors.error[500]};
-  }
-
-  .dark & {
-    background-color: ${colors.gray[900]};
-  }
-`
-
-const Btn = styled(Button)`
-  width: fit-content;
-
-  &:disabled {
-    opacity: 1;
-  }
-
-  .dark & {
-    opacity: 0.75;
-  }
-`
-const Output = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: ${colors.gray[900]};
-  font-style: italic;
-  ${typography.weights.regular}
-  ${typography.styles.textSm}
-
-  .dark & {
-    color: ${colors.white};
-  }
-`
-
-const ResultContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`
-
-const ResultTitle = styled.span`
-  ${typography.styles.textSm}
-`
-
-const Bold = styled.span`
-  ${typography.weights.semibold}
-`
-
-const Result = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-style: italic;
-  ${typography.styles.textSm}
-
-  span {
-    color: ${colors.black}
-  }
-
-  svg {
-    color: ${colors.success[700]} !important;
-  }
-
-  .dark & {
-    span {
-      color: ${colors.white}
-    }
-
-    svg {
-      color: ${colors.success[500]} !important;
-    }
-  }
-`
-
-const BtnWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  @media screen and (max-width: 767px) {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  span.error {
-    ${typography.styles.textSm}
-    color: ${colors.error[700]};
-  }
-`
 
 export { ReadContract }

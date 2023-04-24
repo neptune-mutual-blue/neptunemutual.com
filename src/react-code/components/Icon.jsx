@@ -3,8 +3,6 @@ import {
   useState
 } from 'react'
 
-import styled from 'styled-components'
-
 import { paths } from '../../elements/icons/paths'
 
 export const Icon = ({ variant, size }) => {
@@ -22,13 +20,6 @@ export const Icon = ({ variant, size }) => {
   }, [variant])
 
   return innerHTML
-    ? <IconWrapper size={size} dangerouslySetInnerHTML={{ __html: innerHTML }} />
+    ? <i data-size={size} dangerouslySetInnerHTML={{ __html: innerHTML }} />
     : <></>
 }
-
-const IconWrapper = styled.i`
-  svg {
-    width: ${props => props.size}px;
-    height: ${props => props.size}px;
-  }
-`

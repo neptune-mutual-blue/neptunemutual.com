@@ -1,0 +1,39 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.encode.container {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$primary-25;
+  padding: 32px 24px;
+  gap: 24px;
+
+  input[data-error="true"] {
+    border-color: colors.$error-300;
+  }
+
+  p, svg {
+    color: colors.$error-500;
+  }
+
+  .dark & {
+    background-color: colors.$gray-900;
+  }
+
+  textarea:disabled {
+    color: initial;
+  }
+
+  .output.container {
+    span {
+      display: block;
+      margin-top: 4px;
+      @include styles.text-sm;
+      color: colors.$error-700;
+    }
+  }
+}
