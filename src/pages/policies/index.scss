@@ -1,6 +1,11 @@
 @import "../../styles/global.scss";
 
+@import "../../elements/buttons/Button.scss";
+@import "../../elements/buttons/PrimaryButton.scss";
 @import "../../elements/buttons/_base/index.scss";
+@import "../../elements/buttons/LinkGrayButton.scss";
+@import "../../elements/buttons/SecondaryGrayButton.scss";
+
 @import "../../elements/SocialShare.scss";
 
 @import "../../components/Footer.scss";
