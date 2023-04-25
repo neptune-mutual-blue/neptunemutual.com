@@ -10,6 +10,7 @@ const BaseButton = (props) => {
     onClick,
     children,
     iconVariant,
+    iconLeading,
     ...rest
   } = props
 

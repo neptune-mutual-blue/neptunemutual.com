@@ -3,6 +3,8 @@ import {
   useEffect
 } from 'react'
 
+import { Icon } from './Icon'
+
 const InputWithLabel = forwardRef(({ children, placeholder, label, error, errorIcon, inputChildren, ...props }, ref) => {
   useEffect(() => {
     return () => {
@@ -13,7 +15,7 @@ const InputWithLabel = forwardRef(({ children, placeholder, label, error, errorI
   }, [])
 
   return (
-    <div class='input container'>
+    <div className='input container'>
       {
         label && (
           <label

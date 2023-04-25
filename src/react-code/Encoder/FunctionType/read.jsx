@@ -94,7 +94,7 @@ const ReadContract = (props) => {
       </div>
 
       <div className='output'>
-        <Icon variant='L' size={10} />
+        <div>L</div>
         {getOutputsSignature()}
       </div>
       {outputData.map((output, i) => {

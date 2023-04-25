@@ -66,7 +66,7 @@ const config: Record<number, NetworkConfig> = {
     id: Network.BaseGoerli,
     title: 'Neptune Mutual on Base Goerli (Testnet)',
     app: 'https://test.neptunemutual.net',
-    explorer: 'https://goerli.basescan.org/'
+    explorer: 'https://goerli.basescan.org/address/'
   }
 }
 

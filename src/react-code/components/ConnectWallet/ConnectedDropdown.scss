@@ -1,0 +1,156 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
+
+.wallet.connected.dropdown {
+  position: relative;
+
+  .trigger {
+    padding: 6px 16px;
+    border: 1px solid colors.$gray-300;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .account {
+      @include weights.bold;
+      @include styles.text-md;
+      color: colors.$gray-700;
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  .dropdown.content {
+    border-radius: 8px;
+    box-shadow: shadows.$lg;
+    display: none;
+    background-color: colors.$white;
+    border: 1px solid colors.$gray-200;
+
+    &.visible {
+      position: absolute;
+      display: block;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 240px;
+      z-index: 1;
+    }
+
+    .avatar.and.nickname {
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      align-items: center;
+      gap: 12px;
+
+      .avatar {
+        img {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+        }
+      }
+
+      .nickname {
+        @include weights.semibold;
+        @include styles.text-sm;
+      }
+    }
+
+    .level.and.account {
+      border-top: 1px solid colors.$gray-200;
+      padding: 17px 20px;
+      .level {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+    }
+
+    .logout {
+      border-top: 1px solid colors.$gray-200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 16px;
+      cursor: pointer;
+      width: 100%;
+
+      .text {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      &:hover {
+        background-color: colors.$gray-100;
+      }
+
+      .text {
+        @include weights.medium;
+        @include styles.text-sm;
+      }
+
+      .shortcut {
+        @include styles.text-xs;
+        color: colors.$gray-500;
+      }
+    }
+
+    .info {
+      padding: 9px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      @include styles.text-sm;
+
+      .key {
+        @include weights.semibold;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.dark .wallet.connected.dropdown {
+  .trigger {
+    border: 1px solid colors.$gray-800;
+    background-color: colors.$black-800;
+
+    .account {
+      color: colors.$base-white;
+    }
+  }
+
+  .dropdown.content {
+    border-color: colors.$gray-800;
+    background-color: colors.$black-900;
+
+    .level.and.account {
+      border-color: colors.$gray-800;
+    }
+
+    .logout {
+      border-color: colors.$gray-800;
+
+      &:hover {
+        background-color: colors.$gray-900;
+      }
+
+      .shortcut {
+        color: colors.$gray-50;
+      }
+    }
+  }
+}

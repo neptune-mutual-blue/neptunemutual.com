@@ -31,8 +31,8 @@ export const getConnectorByName = async (name) => {
       return c.getConnector()
     }
 
-    case ConnectorNames.WalletConnect: {
-      const c = await import('./walletconnect/connector')
+    case ConnectorNames.CoinbaseWallet: {
+      const c = await import('./coinbase-wallet/connector')
 
       return c.getConnector()
     }

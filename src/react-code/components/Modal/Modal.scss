@@ -1,0 +1,66 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+
+.DialogOverlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10000;
+}
+
+.DialogContent {
+  background-color: colors.$white;
+  border-radius: 16px;
+  border: 1px solid colors.$gray-300;
+  padding: 32px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 85vh;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10001;
+  overflow-y: auto;
+
+  .titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .title {
+      @include styles.text-lg;
+      @include weights.semibold;
+    }
+  }
+}
+
+.dark .DialogContent {
+  background-color: colors.$black-800;
+  border-color: colors.$gray-800;
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

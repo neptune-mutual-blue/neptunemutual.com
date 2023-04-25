@@ -1,9 +1,10 @@
-export const POLLING_INTERVAL = 12000
+const POLLING_INTERVAL = 12000
 
-export const ConnectorNames = {
+const ConnectorNames = {
   Injected: 'injected',
   OKXWallet: 'okx-wallet',
   Gnosis: 'gnosis',
-  // BSC: 'bsc',
-  WalletConnect: 'walletconnect'
+  CoinbaseWallet: 'coinbase-wallet'
 }
+
+export { ConnectorNames, POLLING_INTERVAL }

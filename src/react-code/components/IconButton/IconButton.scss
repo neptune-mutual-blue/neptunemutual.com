@@ -1,0 +1,26 @@
+@use "../../../design-system/colors";
+
+.icon.button {
+  border: 1px solid colors.$gray-200;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: colors.$white;
+  cursor: pointer;
+
+  &.no.wrapper {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .dark & {
+    border: 1px solid colors.$gray-800;
+    background-color: colors.$black-800;
+    color: inherit;
+  }
+
+  svg {
+    display: block;
+  }
+}

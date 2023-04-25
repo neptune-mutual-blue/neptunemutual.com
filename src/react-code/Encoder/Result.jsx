@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { ethers } from 'ethers'
 
 import { Button } from '../components/Button/Button'
-import { ConnectWallet } from './ConnectWallet'
+import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
 import { Func } from './Func'
 import { useContractCall } from './hooks/useContractCall'
 

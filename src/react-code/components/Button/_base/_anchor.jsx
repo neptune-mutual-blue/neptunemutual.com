@@ -13,6 +13,7 @@ const AnchorButton = (props) => {
     iconOnlyMobile,
     onClick,
     iconVariant,
+    iconLeading,
     ...rest
   } = props
 
