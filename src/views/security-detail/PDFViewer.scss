@@ -22,7 +22,6 @@
     max-width: 768px;
     margin-left: auto;
     margin-right: auto;
-
     height: 90vh;
     min-height: 600px;
   }
@@ -31,6 +30,7 @@
     max-width: 768px;
     margin-left: auto;
     margin-right: auto;
+    color: colors.$base-white;
 
     h2 {
       @include styles.display-md;

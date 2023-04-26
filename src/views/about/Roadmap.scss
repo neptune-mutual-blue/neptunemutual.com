@@ -270,8 +270,8 @@
       backdrop-filter: blurs.$sm;
       border-radius: 50%;
 
-      background-color: colors.$white;
-      color: colors.$gray-500;
+      background-color: colors.$base-white;
+      color: colors.$base-black;
       border: 1px solid colors.$gray-200;
 
 
@@ -383,7 +383,7 @@
   .arrows {
     button {
       background-color: colors.$gray-700;
-      color: colors.$gray-50;
+      color: colors.$base-white;
       border: 1px solid colors.$gray-800;
 
       &:not(:disabled):not([data-disabled]):hover {
