@@ -70,7 +70,7 @@ const ConnectWallet = () => {
             <Button key={wallet.id} variant='secondary-gray' size='lg' onClick={() => onConnect(wallet.id)} disabled={isConnecting}>
               <span className='light only'><Icon variant={wallet.iconVariant} size='sm' /></span>
               <span className='dark only'><Icon variant={wallet.iconVariantDark} size='sm' /></span>
-              Open {wallet.name}
+              {wallet.name}
             </Button>
             )
           : (

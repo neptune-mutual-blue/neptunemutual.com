@@ -24,6 +24,18 @@
   z-index: 10001;
   overflow-y: auto;
 
+  .DialogDescription {
+    @include styles.text-sm;
+  }
+
+  .IconButton {
+    svg {
+      height: 24px;
+      width: 24px;
+      color: colors.$gray-500 !important;
+    }
+  }
+
   .titlebar {
     display: flex;
     justify-content: space-between;
@@ -39,6 +51,12 @@
 .dark .DialogContent {
   background-color: colors.$black-800;
   border-color: colors.$gray-800;
+
+  .IconButton {
+    svg {
+      color: colors.$base-white !important;
+    }
+  }
 }
 
 .DialogContent:focus {

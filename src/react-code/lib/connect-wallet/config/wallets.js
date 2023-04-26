@@ -8,10 +8,10 @@ const isNotFrame = () => {
 export const wallets = [
   {
     id: '1',
-    name: 'MetaMask',
+    name: 'Metamask Wallet',
     connectorName: ConnectorNames.Injected,
     iconVariant: 'metamask',
-    iconVariantDark: 'metamask',
+    iconVariantDark: 'metamask-dark',
     isAvailable: () => typeof window !== 'undefined' && !!(window.web3 || window.ethereum),
     downloadURL: () => `https://metamask.app.link/dapp/${typeof window === 'undefined' ? 'ethereum.neptunemutual.net' : window.location.host}`
   },
@@ -20,7 +20,7 @@ export const wallets = [
     name: 'Coinbase Wallet',
     connectorName: ConnectorNames.CoinbaseWallet,
     iconVariant: 'coinbase',
-    iconVariantDark: 'coinbase',
+    iconVariantDark: 'coinbase-dark',
     isAvailable: () => !!getCoinbaseWalletProvider(),
     downloadURL: () => 'https://www.coinbase.com/wallet/downloads'
   },

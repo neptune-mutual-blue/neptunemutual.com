@@ -6,6 +6,7 @@ import { ChevronRightDouble } from './icons/ChevronRightDouble'
 import { ChevronUp } from './icons/ChevronUp'
 import { CloseIcon } from './icons/CloseIcon'
 import { CloudDownloadIcon } from './icons/CloudDownloadIcon'
+import { CoinbaseDarkIcon } from './icons/CoinbaseDarkIcon'
 import { CoinbaseIcon } from './icons/CoinbaseIcon'
 import { CopyIcon } from './icons/CopyIcon'
 import { FolderIcon } from './icons/FolderIcon'
@@ -41,7 +42,8 @@ const icons = {
   'download-cloud-01': <CloudDownloadIcon />,
   folder: <FolderIcon />,
   'chevron-right-double': <ChevronRightDouble />,
-  coinbase: <CoinbaseIcon />
+  coinbase: <CoinbaseIcon />,
+  'coinbase-dark': <CoinbaseDarkIcon />
 }
 
 export const Icon = ({ variant, size }) => {
