@@ -203,6 +203,8 @@ const Encoder = () => {
               abiTextField.value = abi
 
               validateABI({ target: abiTextField })
+              setContractName(name)
+              setAddress(address)
             }
           } catch (err) {
             console.error(err)
