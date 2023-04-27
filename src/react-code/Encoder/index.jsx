@@ -24,6 +24,44 @@ import { Result } from './Result'
 
 const STORAGE_KEY = 'abis'
 
+const POSSIBLE_ABIS = [
+  'IAaveV2LendingPoolLike',
+  'IBondPool',
+  'IClaimsProcessor',
+  'ICompoundERC20DelegatorLike',
+  'ICover',
+  'ICoverReassurance',
+  'ICoverStake',
+  'ICxToken',
+  'ICxTokenFactory',
+  'IERC20',
+  'IERC20Detailed',
+  'IFinalization',
+  'IGovernance',
+  'ILendingStrategy',
+  'ILiquidityEngine',
+  'IMember',
+  'IPausable',
+  'IPolicy',
+  'IPolicyAdmin',
+  'IPriceOracle',
+  'IProtocol',
+  'IRecoverable',
+  'IReporter',
+  'IResolution',
+  'IResolvable',
+  'IStakingPools',
+  'IStore',
+  'IUniswapV2FactoryLike',
+  'IUniswapV2PairLike',
+  'IUniswapV2RouterLike',
+  'IUnstakable',
+  'IVault',
+  'IVaultDelegate',
+  'IVaultFactory',
+  'IWitness'
+]
+
 const Encoder = () => {
   const formRef = useRef()
 
@@ -184,35 +222,46 @@ const Encoder = () => {
     if (search) {
       const params = new URLSearchParams(search.slice(1))
 
-      if (params.has('name') && params.has('address') && params.has('type')) {
+      if (params.has('name') && params.has('address') && params.has('abi')) {
         const name = params.get('name')
         const address = params.get('address')
-        const type = params.get('type')
+        const abi = params.get('abi')
 
-        if (isAddress(address) && name && type) {
-          try {
-            document.querySelector('#address').value = address
-            document.querySelector('#contract_name').value = name
-
-            const fileName = type === 'cxTokens' ? 'ICxToken.json' : type === 'pods' ? 'IVault.json' : `I${name}.json`
-            const abi = await fetch(`/abis/${fileName}`).then(res => res.text())
-
-            if (isJSON(abi) && isArray(abi) && isValidAbi(abi)) {
-              const abiTextField = document.querySelector('#abi')
-
-              abiTextField.value = abi
-
-              validateABI({ target: abiTextField })
-              setContractName(name)
-              setAddress(address)
-            }
-          } catch (err) {
-            console.error(err)
-          }
+        if (!isAddress(address)) {
+          return console.error('Address is invalid')
         }
-      }
 
-      window.history.replaceState({}, undefined, window.location.pathname)
+        if (!name) {
+          return console.error('Name was not provided.')
+        }
+
+        if (!POSSIBLE_ABIS.includes(abi)) {
+          return console.error('Provided ABI was invalid')
+        }
+
+        try {
+          document.querySelector('#address').value = address
+          document.querySelector('#contract_name').value = name
+
+          const response = await fetch(`/abis/${abi}.json`).then(res => res.text())
+
+          if (isJSON(response) && isArray(response) && isValidAbi(response)) {
+            const abiTextField = document.querySelector('#abi')
+
+            abiTextField.value = response
+
+            validateABI({ target: abiTextField })
+            setContractName(name)
+            setAddress(address)
+          } else {
+            console.error('Unable to load ABI from file')
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      } else {
+        console.error('Query params not provided in valid format')
+      }
     }
   }
 

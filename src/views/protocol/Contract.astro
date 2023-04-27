@@ -11,6 +11,15 @@ interface Props {
 
 const { contract, network, convertBytes32, type } = Astro.props;
 const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
+
+const abi =
+  type === "cxTokens"
+    ? "ICxToken"
+    : type === "pods"
+    ? "IVault"
+    : name === "Processor"
+    ? "IClaimsProcessor"
+    : `I${name}`;
 ---
 
 <div class="contract card item">
@@ -27,7 +36,7 @@ const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
       <Icon variant={"link-03"} />
     </a>
     <a
-      href={`/web3-tools/solidity-abi-encoder-online/?name=${name}&address=${contract.value}&type=${type}`}
+      href={`/web3-tools/solidity-abi-encoder-online/?name=${name}&address=${contract.value}&abi=${abi}`}
     >
       <Icon variant={"arrow-circle-right"} />
     </a>
