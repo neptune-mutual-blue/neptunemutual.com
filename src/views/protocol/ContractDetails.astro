@@ -79,6 +79,7 @@ const items = [
     {
       iterable.map((item) => (
         <Contract
+          type={type}
           contract={item}
           network={network}
           convertBytes32={convertBytes32}
@@ -96,6 +97,7 @@ const items = [
         >
           {expired.map((item) => (
             <Contract
+              type={type}
               contract={item}
               network={network}
               convertBytes32={convertBytes32}

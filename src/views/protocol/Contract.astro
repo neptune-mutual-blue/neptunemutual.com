@@ -5,10 +5,11 @@ import Icon from "../../elements/Icon.astro";
 interface Props {
   contract: KeyValuePair<string>;
   network: NetworkConfig;
+  type: ProtocolContractType;
   convertBytes32?: boolean;
 }
 
-const { contract, network, convertBytes32 } = Astro.props;
+const { contract, network, convertBytes32, type } = Astro.props;
 const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
 ---
 
@@ -25,9 +26,10 @@ const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
     >
       <Icon variant={"link-03"} />
     </a>
-
-    <!-- <a href={"#"}>
+    <a
+      href={`/web3-tools/solidity-abi-encoder-online/?name=${name}&address=${contract.value}&type=${type}`}
+    >
       <Icon variant={"arrow-circle-right"} />
-    </a> -->
+    </a>
   </div>
 </div>

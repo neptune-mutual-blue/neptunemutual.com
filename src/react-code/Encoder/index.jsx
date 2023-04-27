@@ -6,6 +6,7 @@ import {
   useState
 } from 'react'
 
+import { isAddress } from '@ethersproject/address'
 import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
@@ -170,6 +171,47 @@ const Encoder = () => {
     }
     setIsSaveable(isValidAbiString)
     setAbiInvalidFormat(!isValidAbiString)
+  }
+
+  // Consume and auto-fill values when available in URL
+  useEffect(() => {
+    consumeAndFill()
+  }, [])
+
+  const consumeAndFill = async () => {
+    const search = window.location.search
+
+    if (search) {
+      const params = new URLSearchParams(search.slice(1))
+
+      if (params.has('name') && params.has('address') && params.has('type')) {
+        const name = params.get('name')
+        const address = params.get('address')
+        const type = params.get('type')
+
+        if (isAddress(address) && name && type) {
+          try {
+            document.querySelector('#address').value = address
+            document.querySelector('#contract_name').value = name
+
+            const fileName = type === 'cxTokens' ? 'ICxToken.json' : type === 'pods' ? 'IVault.json' : `I${name}.json`
+            const abi = await fetch(`/abis/${fileName}`).then(res => res.text())
+
+            if (isJSON(abi) && isArray(abi) && isValidAbi(abi)) {
+              const abiTextField = document.querySelector('#abi')
+
+              abiTextField.value = abi
+
+              validateABI({ target: abiTextField })
+            }
+          } catch (err) {
+            console.error(err)
+          }
+        }
+      }
+
+      window.history.replaceState({}, undefined, window.location.pathname)
+    }
   }
 
   return (

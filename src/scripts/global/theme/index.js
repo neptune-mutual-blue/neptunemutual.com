@@ -29,7 +29,7 @@ const search = window.location.search
 const newURL =
 window.location.pathname + (search.length <= 1 ? '' : search)
 
-window.history.pushState({}, undefined, newURL)
+window.history.replaceState({}, undefined, newURL)
 
 window.localStorage.setItem('theme', theme)
 
