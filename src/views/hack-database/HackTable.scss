@@ -44,6 +44,12 @@
     display: block;
   }
 
+  .chain-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+  }
+
   .description {
     background-color: colors.$primary-25;
   }

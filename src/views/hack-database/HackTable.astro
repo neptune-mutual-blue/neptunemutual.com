@@ -138,7 +138,10 @@ const sortableColumns = Object.keys(sortKeys);
 
                   return (
                     <td>
-                      <span set:html={renderers[column](hack)} />
+                      <span
+                        set:html={renderers[column](hack)}
+                        class="chain-icons"
+                      />
                     </td>
                   );
                 })}

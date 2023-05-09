@@ -75,7 +75,7 @@
   
     div {
       position: relative;
-      background-color:colors.$white;
+      background-color:colors.$base-white;
       padding: 0 24px;
       @include styles.text-xl;
       @include weights.semibold;
