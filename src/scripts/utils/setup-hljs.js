@@ -10,7 +10,7 @@ const addCopyButtons = () => {
   const snippets = document.getElementsByTagName('pre')
   const numberOfSnippets = snippets.length
   for (let i = 0; i < numberOfSnippets; i++) {
-    const code = snippets[i].getElementsByTagName('code')[0].innerHTML
+    const code = snippets[i].getElementsByTagName('code')[0].innerText
 
     snippets[i].classList.add('hljs') // append copy button to pre tag
 
