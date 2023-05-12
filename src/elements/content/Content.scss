@@ -63,16 +63,12 @@
     max-width: 100%;
     overflow: auto;
     @include styles.text-sm;
-    background-color: colors.$gray-iron-900;
+    background-color: light.$hljs-background-color;
     margin-bottom: 2em;
-    border: 1px solid colors.$gray-iron-800;
+    border: 1px solid light.$hljs-border-color;
     padding: 1em 0;
     border-radius: 18px;
-
-    &:hover {
-      border-color: colors.$gray-iron-800;
-      background-color: colors.$gray-iron-800;
-    }
+    position: relative;
 
     code {
       animation: 500ms ease-out 0s 1 fadeIn;
@@ -94,12 +90,38 @@
       }
 
       td:first-child {
-        border-right: 1px solid colors.$gray-iron-800;
+        border-right: 1px solid light.$hljs-border-color;
       }
     }
 
     .hljs {
       @include weights.regular;
+    }
+
+    .hljs-copy {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      top: 16px;
+      border: 1px solid colors.$gray-300;
+      padding: 0.3rem;
+      padding-bottom: 0;
+      border-radius: 0.25rem;
+      right: 16px;
+      color: colors.$gray-800 !important;
+
+      &:hover {
+        background-color: colors.$gray-200;      
+      }
+    }
+
+    &:hover {
+      background-color: light.$hljs-background-color-hover;
+
+      .hljs-copy {
+        opacity: 1;
+        pointer-events: all;
+      }
     }
 
     td.hljs-ln-line {
@@ -112,23 +134,38 @@
     .function_,
     .class_,
     .hljs-attr {
-      color: colors.$gray-300;
+      color: light.$hljs-text-color;
       @include weights.regular;
     }
 
     .hljs-string {
-      color: colors.$yellow-200;
+      color: light.$hljs-string-color;
+    }
+
+    .hljs-title {
+      color: light.$hljs-title-color;
+    }
+
+    .hljs-meta {
+      color: light.$hljs-meta-color;
     }
 
     .hljs-keyword,
     .hljs-built_in {
-      color: colors.$blue-light-300;
+      color: light.$hljs-keyword-color;
       @include weights.bold;
     }
 
+    .hljs-function .hljs-title {
+      color: light.$hljs-function-title-color;
+    }
+
+    .hljs-params {
+      color: light.$hljs-text-color;
+    }
 
     .hljs-comment {
-      color: colors.$gray-500;
+      color: light.$hljs-comment-color;
       @include weights.regular;
     }
   }
@@ -639,6 +676,72 @@
         background-color: colors.$gray-iron-900;
         border-color: colors.$gray-iron-800;
       }
+    }
+  }
+
+  pre {
+    background-color: dark.$hljs-background-color;
+    border-color: dark.$hljs-border-color;
+
+    table {
+      td:first-child {
+        border-right-color: dark.$hljs-border-color;
+    }
+    }
+
+
+    .hljs-copy {
+      border-color: colors.$gray-600;
+      color: colors.$gray-300 !important;
+      
+      &:hover {
+        background-color: colors.$black-800 !important;
+      }
+    }
+
+    &:hover {
+      border-color: dark.$hljs-border-color;
+      background-color: dark.$hljs-background-color-hover;
+
+    }
+
+    .hljs,
+    .hljs-variable,
+    .hljs-title,
+    .function_,
+    .class_,
+    .hljs-attr {
+      color: dark.$hljs-text-color;
+    }
+
+    .hljs-string {
+      color: dark.$hljs-string-color;
+    }
+
+    .hljs-title {
+      color: dark.$hljs-title-color;
+    }
+
+    .hljs-meta {
+      color: dark.$hljs-meta-color;
+    }
+
+    .hljs-keyword,
+    .hljs-built_in {
+      color: dark.$hljs-keyword-color;
+    }
+
+    .hljs-function .hljs-title {
+      color: dark.$hljs-function-title-color;
+    }
+
+    .hljs-params {
+      color: dark.$hljs-text-color;
+    }
+
+
+    .hljs-comment {
+      color: dark.$hljs-comment-color;
     }
   }
 
