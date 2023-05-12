@@ -102,13 +102,14 @@
       position: absolute;
       opacity: 0;
       pointer-events: none;
-      top: 16px;
+      top: 0.7em;
       border: 1px solid colors.$gray-300;
       padding: 0.3rem;
       padding-bottom: 0;
-      border-radius: 0.25rem;
-      right: 16px;
+      border-radius: 0.2rem;
+      right: 10px;
       color: colors.$gray-800 !important;
+      transition: all 0.1s;
 
       &:hover {
         background-color: colors.$gray-200;      

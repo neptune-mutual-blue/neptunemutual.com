@@ -69,11 +69,6 @@
 .dark .blog.pressroom.viewer.container {
   .content.wrapper .article {
     color: dark.$secondary-color;
-
-    pre {
-      background-color: colors.$gray-900;
-      border: 1px solid colors.$gray-700;
-    }
   
     a {
       color: colors.$primary-400;
