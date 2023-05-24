@@ -83,19 +83,23 @@ const items = [
       </Fragment>
 
       <Fragment slot="post">
-        <div class="button container">
-          <Button
-            variant={"primary"}
-            type={"anchor"}
-            target="_blank"
-            href={normalizeUrl(vacancy.form)}
-            rel="noreferrer noopener nofllow"
-            size="lg"
-            iconTrailing="arrow-square-up-right"
-          >
-            {t("Submit My Job Application")}
-          </Button>
-        </div>
+        {
+          !vacancy.expired && (
+            <div class="button container">
+              <Button
+                variant={"primary"}
+                type={"anchor"}
+                target="_blank"
+                href={normalizeUrl(vacancy.form)}
+                rel="noreferrer noopener nofllow"
+                size="lg"
+                iconTrailing="arrow-square-up-right"
+              >
+                {t("Submit My Job Application")}
+              </Button>
+            </div>
+          )
+        }
       </Fragment>
     </ContentViewer>
   </div>

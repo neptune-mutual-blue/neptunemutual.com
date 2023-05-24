@@ -11,6 +11,10 @@ interface Props {
 const { vacancies } = Astro.props;
 const t = (x: string): string => x;
 
+const openVacancies = vacancies.filter(
+  (vacancy) => vacancy.expired === false || !vacancy.hasOwnProperty("expired")
+);
+
 const previousVacancies = vacancies.filter(
   (vacancy) => vacancy.expired === true
 );
@@ -20,7 +24,7 @@ const previousVacancies = vacancies.filter(
 
 <Benefits />
 
-<Vacancies vacancies={vacancies} />
+<Vacancies vacancies={openVacancies} />
 
 {
   previousVacancies.length >= 1 && (
