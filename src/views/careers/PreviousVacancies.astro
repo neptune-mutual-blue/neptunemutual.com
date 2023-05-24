@@ -1,0 +1,34 @@
+---
+import Slider from "../../components/Slider.astro";
+import PreviousVacancyCard from "./vacancies/PreviousVacancyCard.astro";
+
+interface Props {
+  vacancies: Vacancy[];
+}
+
+const { vacancies } = Astro.props;
+
+const t = (x: string): string => x;
+---
+
+<div class="previous vacancies section">
+  <div class="inner container">
+    <h2>
+      <div class="heading">
+        {t("Previous Job Vacancies")}
+      </div>
+    </h2>
+
+    <Slider gap={16}>
+      <Fragment>
+        {
+          vacancies.map((vacancy) => {
+            return (
+              <PreviousVacancyCard className="with slider" vacancy={vacancy} />
+            );
+          })
+        }
+      </Fragment>
+    </Slider>
+  </div>
+</div>

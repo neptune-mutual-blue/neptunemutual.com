@@ -1,0 +1,60 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.previous.vacancies.section {
+  padding-bottom: 96px;
+
+
+  @media (max-width: 767px) {
+    padding-bottom: 64px;
+  }
+
+  .inner.container {
+    @include utils.full-width-container;
+
+    .heading {
+      margin-bottom: 24px;
+      color: light.$color;
+      @include styles.display-md;
+      @include weights.semibold;
+      
+      @media (max-width: 767px) {
+        @include styles.display-sm;
+      }
+    }
+  }
+
+  .job.vacancy.card {
+    width: calc(100vw - 36px);
+  
+    @media (min-width: 576px) {
+      width: calc(50vw - 36px);
+    }
+  
+    @media (min-width: 1024px) {
+      width: calc(33vw - 36px);
+    }
+  
+    @media (min-width: 1280px) {
+      width: 393px !important;
+    }
+  }
+
+  .arrows {
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+  }
+}
+
+.dark .previous.vacancies.section {
+  .inner.container {
+    .heading {
+      color: dark.$color;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 import Hero from "./careers/Hero.astro";
 import Benefits from "./careers/Benefits.astro";
 import Vacancies from "./careers/Vacancies.astro";
+import PreviousVacancies from "./careers/PreviousVacancies.astro";
 
 interface Props {
   vacancies: Vacancy[];
@@ -9,6 +10,10 @@ interface Props {
 
 const { vacancies } = Astro.props;
 const t = (x: string): string => x;
+
+const previousVacancies = vacancies.filter(
+  (vacancy) => vacancy.expired === true
+);
 ---
 
 <Hero />
@@ -16,3 +21,9 @@ const t = (x: string): string => x;
 <Benefits />
 
 <Vacancies vacancies={vacancies} />
+
+{
+  previousVacancies.length >= 1 && (
+    <PreviousVacancies vacancies={previousVacancies} />
+  )
+}

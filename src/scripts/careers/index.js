@@ -6,3 +6,4 @@ import '../global/video'
 import '../global/index'
 // Global End
 import './filter'
+import '../components/temp/slider'

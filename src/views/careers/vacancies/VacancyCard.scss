@@ -29,7 +29,7 @@
   }
 
 
-  &:hover {
+  &:not(.with.slider):hover {
     transform: scale(1.025);
   }
 

@@ -221,6 +221,7 @@ interface Vacancy extends Content {
   html: string
   meta: Meta
   _status: DocumentStatus
+  expired?: boolean
   createdAt?: Date
   updatedAt?: Date
   publishedAt?: Date
