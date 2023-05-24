@@ -117,6 +117,8 @@
             scrollSlider(positions.offset)
           }
         }, { passive: true })
+
+        disableButtonsIfOverflown({ positions, elements, gap })
       }
     }
   }

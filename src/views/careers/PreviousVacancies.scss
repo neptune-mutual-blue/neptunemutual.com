@@ -48,6 +48,11 @@
     justify-content: center;
     gap: 24px;
     margin-top: 24px;
+
+    button {
+      background: colors.$base-white;
+      color: colors.$base-black;
+    }
   }
 }
 
@@ -55,6 +60,13 @@
   .inner.container {
     .heading {
       color: dark.$color;
+    }
+  }
+
+  .arrows {
+    button {
+      background: colors.$gray-700;
+      color: colors.$base-white;
     }
   }
 }
