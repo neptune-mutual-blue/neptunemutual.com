@@ -46,7 +46,6 @@
     }
 
     .heading {
-      margin-top: 12px;
       color: light.$color;
       @include styles.display-md;
       @include weights.semibold;

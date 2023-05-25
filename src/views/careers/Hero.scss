@@ -38,7 +38,7 @@
       display: inline-flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 16px;
 
       .subheading {
         color: colors.$primary-700;
@@ -51,8 +51,8 @@
         display: inline-flex;
         @include styles.text-sm;
         @include weights.medium;
-        color: colors.$blue-dark-700;
-        background: colors.$blue-dark-100;
+        color: colors.$success-700;
+        background: colors.$success-50;
         padding: 2px 10px;
         border-radius: 16px;
       }
