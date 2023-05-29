@@ -22,24 +22,6 @@ export const InputFields = ({ func, schema, inputData, handleChange }) => (
 
     {
       func.inputs.map((input, i) => {
-        if (input.components) {
-          return input.components.map((component, idx) => (
-            <InputWithLabel
-              key={`input-${i}-${idx}`}
-              label={`${component.name || '<input>'} (${component.type})`}
-              placeholder={getPlaceholder(component.type)}
-              id={`${i}-${idx}`}
-              onChange={e => handleChange(`${input.name || i}-${component.name || idx}`, e.target.value)}
-              error={
-                isInputError(schema, inputData, `${input.name || i}-${component.name || idx}`)
-                  ? `Invalid value for type: ${component.type}`
-                  : ''
-              }
-              errorIcon='alert-circle'
-            />
-          ))
-        }
-
         return (
           <InputWithLabel
             key={`input-${i}`}

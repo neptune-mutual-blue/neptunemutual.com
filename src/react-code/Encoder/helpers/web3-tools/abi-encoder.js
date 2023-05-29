@@ -45,6 +45,10 @@ const getPlaceholder = (type) => {
         _val = 'true'
         break
 
+      case 'tuple':
+        _val = '[ ... ]'
+        break
+
       default:
         _val = 'hello'
     }
@@ -53,6 +57,10 @@ const getPlaceholder = (type) => {
   }
 
   const { actualType, isArray, argCount } = getTypeInfo(type)
+
+  if (actualType === 'tuple') {
+    return isArray ? `[${_getPlaceholder(actualType)}]` : _getPlaceholder(actualType)
+  }
 
   if (isArray) {
     const values = Array(argCount || 1).fill(0).map(() => `"${_getPlaceholder(actualType)}"`)
@@ -148,15 +156,6 @@ const createJoiSchema = func => {
   if (stateMutability === 'payable') joiSchema[name] = getJoiType('uint')
 
   inputs.map((i, idx1) => {
-    if (i.components) {
-      i.components.map((c, idx2) => {
-        joiSchema[`${i.name || idx1}-${c.name || idx2}`] = getJoiType(c.type)
-        return true
-      })
-
-      return true
-    }
-
     joiSchema[i.name || idx1] = getJoiType(i.type)
     return true
   })
@@ -233,29 +232,11 @@ function getDefaultEncodeData (_function) {
 
 function getWriteArguments (_function, inputData) {
   const inputs = _function.inputs.map((input, idx1) => {
-    const { isArray } = getTypeInfo(input.type)
-
-    if (input.components) {
-      const componentsArray = input.components.map((component, idx2) => {
-        const _val = inputData[`${input.name || idx1}-${component.name || idx2}`]
-
-        const { isArray: isComponentArray } = getTypeInfo(component.type)
-
-        if (isComponentArray) {
-          try {
-            const _parsed = JSON.parse(_val)
-            if (_parsed && Array.isArray(_parsed)) return _parsed
-          } catch {}
-        }
-
-        return _val
-      })
-      return isArray ? [componentsArray] : componentsArray
-    }
+    const { actualType, isArray } = getTypeInfo(input.type)
 
     const val = inputData[input.name || idx1]
 
-    if (isArray) {
+    if (isArray || actualType === 'tuple') {
       try {
         const parsed = JSON.parse(val)
         if (parsed && Array.isArray(parsed)) return parsed
