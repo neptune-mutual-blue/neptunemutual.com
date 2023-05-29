@@ -14,37 +14,35 @@ import {
   getPlaceholder,
   isInputError
 } from '../helpers/web3-tools/abi-encoder'
+import { InputFields } from '../components/InputFields'
 
 const ReadContract = (props) => {
-  const id = useId()
-
-  const { func, call, inputs, joiSchema, isReady } = props
+  const { func, call, joiSchema, isReady } = props
+  const { name, inputs, outputs } = func
 
   const [inputData, setInputData] = useState({})
-  const [outputData, setOutputData] = useState(func.outputs)
+  const [outputData, setOutputData] = useState(outputs)
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
   function getFunctionSignature () {
-    const _func = func
-    return `${_func.name}(${_func.inputs.map(_inp => _inp.type).join(', ')})`
+    return `${name}(${inputs.map(_inp => _inp.type).join(', ')})`
   }
 
   function getOutputsSignature () {
-    const _func = func
-    return `${_func.outputs.map(_inp => _inp.type).join(', ')}`
+    return `${outputs.map(_inp => _inp.type).join(', ')}`
   }
 
   async function handleQuery () {
     if (error) setError('')
     setMakingCall(true)
 
-    const methodName = func.name
+    const methodName = name
     const args = Object.values(inputData)
     const outputs = await call(methodName, args)
 
     if (outputs && !outputs.error) {
-      const _outputData = func.outputs.map((o, i) => ({
+      const _outputData = outputs.map((o, i) => ({
         ...o,
         value: outputs[i]?.toString()
       }))
@@ -64,23 +62,12 @@ const ReadContract = (props) => {
 
   return (
     <div className='read container'>
-      {inputs.map((input, i) => {
-        return (
-          <InputWithLabel
-            key={`input-${i}`}
-            label={`${input.name} (${input.type})`}
-            placeholder={getPlaceholder(input.type)}
-            id={`${id}-${i}`}
-            onChange={e => handleInputChange(input.name, e.target.value)}
-            error={
-              isInputError(joiSchema, inputData, input.name)
-                ? `Invalid value for type: ${input.type}`
-                : ''
-            }
-            errorIcon='alert-circle'
-          />
-        )
-      })}
+      <InputFields
+        func={func}
+        inputData={inputData}
+        handleChange={handleInputChange}
+        schema={joiSchema}
+      />
 
       <div className='btn wrapper'>
         <Button

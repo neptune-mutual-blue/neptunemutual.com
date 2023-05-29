@@ -125,17 +125,17 @@
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: colors.$gray-300;
+      color: colors.$gray-500;
     }
 
     &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: colors.$gray-300;
+      color: colors.$gray-500;
     }
 
     &::-ms-input-placeholder {
       /* Microsoft Edge */
-      color: colors.$gray-300;
+      color: colors.$gray-500;
     }
 
     &:hover:not(&:disabled):not([data=disabled]),

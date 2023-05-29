@@ -106,6 +106,7 @@ const Result = (props) => {
               call={callMethod}
               isReady={isReady}
               interface={ethersInterface}
+              abi={abi}
             />
           ))
         }

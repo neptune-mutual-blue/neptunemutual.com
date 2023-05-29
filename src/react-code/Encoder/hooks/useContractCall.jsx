@@ -30,16 +30,16 @@ export const useContractCall = ({ abi, address }) => {
     }
   }, [abi, address, library, account])
 
-  async function callMethod (methodName, args = []) {
+  async function callMethod (methodName, args = [], overrides = {}) {
     if (!contract || !methodName) return
 
     let methodArgs = [...args]
     let estimatedGas = null
     try {
-      estimatedGas = await contract.estimateGas[methodName](...args)
+      estimatedGas = await contract.estimateGas[methodName](...args, { ...overrides })
 
       try {
-        methodArgs = [...args, { gasLimit: calculateGasMargin(estimatedGas) }]
+        methodArgs = [...args, { gasLimit: calculateGasMargin(estimatedGas), ...overrides }]
 
         const res = await contract[methodName](...methodArgs)
         return Array.isArray(res) ? Array.from(res) : [res]

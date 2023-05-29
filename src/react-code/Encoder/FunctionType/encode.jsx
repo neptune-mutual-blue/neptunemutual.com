@@ -9,13 +9,14 @@ import {
 import { InputWithLabel } from '../../components/InputWithLabel'
 import { TextArea } from '../../components/TextArea'
 import {
-  encodeData,
-  getFunctionSignature
+  encodeData
+
 } from '../helpers/solidity/methods'
 import {
-  getPlaceholder,
-  isInputError
+  getFunctionSignature,
+  getWriteArguments
 } from '../helpers/web3-tools/abi-encoder'
+import { InputFields } from '../components/InputFields'
 
 const EncodeData = (props) => {
   const id = useId()
@@ -23,46 +24,34 @@ const EncodeData = (props) => {
   const [outputData, setOutputData] = useState('')
   const [outputError, setOutputError] = useState('')
 
-  const { inputs, encodeInterface, func, tupleInputs, joiSchema } = props
+  const { encodeInterface, func, joiSchema } = props
+  const { inputs, name } = func
 
   useEffect(() => {
     if (inputs?.length === 0) {
-      const encoded = encodeData(encodeInterface, func.name)
+      const encoded = encodeData(encodeInterface, name)
       if (encoded) setOutputData(encoded)
     }
-  }, [func, encodeInterface, inputs])
+  }, [name, encodeInterface, inputs])
 
   const checkNonEmptyInputs = (_inputData) => {
-    const nonEmptyInput = inputs.find(i => {
-      if (_inputData[i.name]) return true
-      return false
-    })
+    const nonEmptyInput = Object.values(_inputData).find(Boolean)
 
     return Boolean(nonEmptyInput)
   }
 
   const handleChange = (name, value) => {
+    const _inputData = ({ ...inputData, [name]: value })
+
     setInputData(_prev => ({ ..._prev, [name]: value }))
 
-    const _inputData = ({ ...inputData, [name]: value })
-    const signature = getFunctionSignature(func)
-    inputs.map(i => {
-      const _val = _inputData[i.name]
-      if (i.type.endsWith('[]')) {
-        try {
-          const _parsed = JSON.parse(_val)
-          if (_parsed && Array.isArray(_parsed)) _inputData[i.name] = _parsed
-        } catch {}
-      }
-      return true
-    })
-    let args = Object.values(_inputData)
-    args = tupleInputs ? [args] : args
+    const encodeSignature = getFunctionSignature(func)
+    const encodeArgs = getWriteArguments(func, _inputData)
 
-    const encoded = encodeData(encodeInterface, signature, args, (error) => {
+    const encoded = encodeData(encodeInterface, encodeSignature, encodeArgs, (error) => {
       setOutputData('')
 
-      if (checkNonEmptyInputs({ ...inputData, [name]: value })) setOutputError(error)
+      if (checkNonEmptyInputs({ ..._inputData })) setOutputError(error)
       else setOutputError('')
     })
 
@@ -74,23 +63,12 @@ const EncodeData = (props) => {
 
   return (
     <div className='encode container'>
-      {inputs.map((input, i) => {
-        return (
-          <InputWithLabel
-            key={`input-${i}`}
-            label={`${input.name} (${input.type})`}
-            placeholder={getPlaceholder(input.type)}
-            id={`${id}-${i}`}
-            onChange={e => handleChange(input.name, e.target.value)}
-            error={
-              isInputError(joiSchema, inputData, input.name)
-                ? `Invalid value for type: ${input.type}`
-                : ''
-            }
-            errorIcon='alert-circle'
-          />
-        )
-      })}
+      <InputFields
+        func={func}
+        inputData={inputData}
+        handleChange={handleChange}
+        schema={joiSchema}
+      />
 
       <div className='output container'>
         <TextArea

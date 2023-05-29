@@ -9,37 +9,29 @@ import { Button } from '../../components/Button/Button'
 import { InputWithLabel } from '../../components/InputWithLabel'
 import {
   checkInputErrors,
-  getPlaceholder,
-  isInputError
+  getWriteArguments
 } from '../helpers/web3-tools/abi-encoder'
+import { InputFields } from '../components/InputFields'
 
 const WriteContract = (props) => {
-  const id = useId()
   const [inputData, setInputData] = useState({})
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
-  const { func, inputs, tupleInputs, call, joiSchema, isReady } = props
+  const { func, call, joiSchema, isReady } = props
+  const { name } = func
 
   async function handleWrite () {
     if (error) setError('')
     setMakingCall(true)
 
-    const methodName = func.name
-    const _inputData = JSON.parse(JSON.stringify(inputData))
-    inputs.map(i => {
-      const _val = inputData[i.name]
-      if (i.type.endsWith('[]')) {
-        try {
-          const _parsed = JSON.parse(_val)
-          if (_parsed && Array.isArray(_parsed)) _inputData[i.name] = _parsed
-        } catch {}
-      }
-      return true
-    })
-    const args = tupleInputs ? [_inputData] : Object.values(_inputData)
+    const methodName = name
+    const methodArgs = getWriteArguments(func, inputData)
 
-    const res = await call(methodName, args)
+    const hasPayableStateMutability = func?.stateMutability === 'payable'
+    const value = inputData[name]
+
+    const res = await call(methodName, methodArgs, hasPayableStateMutability && { value })
 
     if (res.error) setError(res.error)
     else setError('')
@@ -54,23 +46,12 @@ const WriteContract = (props) => {
 
   return (
     <div className='write container'>
-      {inputs.map((input, i) => {
-        return (
-          <InputWithLabel
-            key={`input-${i}`}
-            label={`${input.name} (${input.type})`}
-            placeholder={getPlaceholder(input.type)}
-            id={`${id}-${i}`}
-            onChange={e => handleInputChange(input.name, e.target.value, input.type)}
-            error={
-              isInputError(joiSchema, inputData, input.name)
-                ? `Invalid value for type: ${input.type}`
-                : ''
-            }
-            errorIcon='alert-circle'
-          />
-        )
-      })}
+      <InputFields
+        func={func}
+        inputData={inputData}
+        handleChange={handleInputChange}
+        schema={joiSchema}
+      />
 
       <div className='btn wrapper'>
         <Button

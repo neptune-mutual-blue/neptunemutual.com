@@ -1,7 +1,7 @@
 const MetamaskDarkIcon = (props) => {
   return (
     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-    <g clip-path="url(#clip0_3248_302067)">
+    <g clipPath="url(#clip0_3248_302067)">
     <path d="M18.5722 1.66699L11 7.31139L12.4081 3.98496L18.5722 1.66699Z" fill="#FEFEFE"/>
     <path d="M1.75977 1.67383L7.90735 3.98557L9.24441 7.35562L1.75977 1.67383Z" fill="#FEFEFE"/>
     <path d="M15.5239 13.6709L18.8706 13.7351L17.701 17.738L13.6172 16.6053L15.5239 13.6709Z" fill="#FEFEFE"/>
