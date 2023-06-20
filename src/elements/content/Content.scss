@@ -58,6 +58,10 @@
     }
   }
 
+  .pre.wrapper {
+    position: relative;
+  }
+
   pre {
     font-family: Consolas, Monaco, monospace;
     max-width: 100%;
@@ -68,7 +72,6 @@
     border: 1px solid light.$hljs-border-color;
     padding: 1em 0;
     border-radius: 18px;
-    position: relative;
 
     code {
       animation: 500ms ease-out 0s 1 fadeIn;

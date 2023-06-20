@@ -34,10 +34,24 @@ const addCopyButtons = () => {
   }
 }
 
+const wrapAllCodeSnippets = () => {
+  const snippets = document.getElementsByTagName('pre')
+  const numberOfSnippets = snippets.length
+
+  for (let i = 0; i < numberOfSnippets; i++) {
+    const toWrap = snippets[i]
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('pre', 'wrapper')
+    toWrap.parentNode.insertBefore(wrapper, toWrap)
+    wrapper.appendChild(toWrap)
+  }
+}
+
 export const setupHighlightJS = async function () {
   hljsDefineSolidity(hljs)
   hljs.highlightAll()
   window.hljs = hljs
+  wrapAllCodeSnippets()
   addCopyButtons()
   await highlightLineNumbersLoad()
   hljs.initLineNumbersOnLoad()
