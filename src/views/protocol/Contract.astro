@@ -1,5 +1,6 @@
 ---
 import { bytes32ToString } from "../../../util/protocol";
+import { capitalizeFirstLetter } from "../../../util/capitalize-first-letter";
 import Icon from "../../elements/Icon.astro";
 
 interface Props {
@@ -12,14 +13,20 @@ interface Props {
 const { contract, network, convertBytes32, type } = Astro.props;
 const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
 
-const abi =
-  type === "cxTokens"
-    ? "ICxToken"
-    : type === "pods"
-    ? "IVault"
-    : name === "Processor"
-    ? "IClaimsProcessor"
-    : `I${name}`;
+let abi = "";
+
+if (type === "cxTokens") {
+  abi = "ICxToken";
+} else if (type === "pods") {
+  abi = "IVault";
+} else if (name === "NPM" || name === "Stablecoin") {
+  abi = "IERC20";
+} else if (name === "Processor") {
+  abi = "IClaimsProcessor";
+} else if (name) {
+  // capitalize first letter of name for contract names like cxTokenFactory
+  abi = `I${capitalizeFirstLetter(name)}`;
+}
 ---
 
 <div class="contract card item">
