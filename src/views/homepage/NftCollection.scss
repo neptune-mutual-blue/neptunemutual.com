@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
+    gap: 32px;
 
     @media (max-width: 767px) {
       gap: 32px;
@@ -59,7 +59,8 @@
       p {
         margin-top: 20px;
         color: light.$secondary-color;
-        text-align: left;
+        text-align: center;
+        padding: 0 32px;
 
 
         @include styles.text-xl;
@@ -76,7 +77,7 @@
 
   .image.container {
     margin-top: 64px;
-    height: 480px;
+    height: 410px;
     border-radius: 16px;
     overflow: hidden;
 
