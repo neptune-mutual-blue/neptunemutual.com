@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
+    gap: 32px;
 
     @media (max-width: 767px) {
       gap: 32px;
@@ -31,7 +31,6 @@
 
     .text.container {
       text-align: center;
-      max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
 
@@ -75,7 +74,7 @@
 
   .image.container {
     margin-top: 64px;
-    height: 480px;
+    height: 410px;
     border-radius: 16px;
     overflow: hidden;
 
