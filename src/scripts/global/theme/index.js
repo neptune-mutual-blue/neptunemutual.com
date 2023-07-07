@@ -36,7 +36,9 @@ window.localStorage.setItem('theme', theme)
 const updateThemeLinks = () => {
   const linksWithThemes = document.querySelectorAll('a[data-include-theme]')
 
-  linksWithThemes.forEach(link => {
+  const otherThemeLinks = document.querySelectorAll('a[href^="https://nft.neptunemutual.com"]');
+
+  [...linksWithThemes, ...otherThemeLinks].forEach(link => {
     if (link.href.includes('?theme=')) {
       link.href = link.href.replace(/\?theme=[dark|light]+/g, '') + '?theme=' + window.getTheme()
     } else {
