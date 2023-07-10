@@ -24,7 +24,7 @@ const data: LinkNav[] = [
           { title: 'Ecosystem', href: '/ecosystem/', text: 'Learn how you can participate in our marketplace', icon: 'database-01' },
           { title: 'Documentation', href: '/docs/', text: 'Learn more about decentralized insurance and Neptune Mutual protocol', icon: 'file-code-01', isExternal: false },
           { title: 'Web3 Tools', href: '/web3-tools/', text: 'Free and easy to use web3 online tools', icon: 'tool-01' },
-          { title: 'NFT Portal', href: 'https://nft.neptunemutual.com/', text: 'Participate in our cover pools and mint NFTs for free.', icon: 'clapperboard', includeTheme: true, isExternal: false }
+          { title: 'NFT Portal', href: 'https://nft.neptunemutual.com/', text: 'Participate in our cover pools and mint NFTs for free.', icon: 'clapperboard', isExternal: false }
         ]
       },
       {

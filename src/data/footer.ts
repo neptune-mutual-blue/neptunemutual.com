@@ -60,12 +60,12 @@ const getFooterData = async (): Promise<FooterData> => {
           badge: 'New!',
           badgeColor: 'success'
         },
-        { href: 'https://community.neptunemutual.com/', includeTheme: false, text: 'Community Forums', isExternal: true },
+        { href: 'https://community.neptunemutual.com/', text: 'Community Forums', isExternal: true },
         { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
         { href: '/docs/', text: 'Documentation', isExternal: false },
         { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
-        { href: 'https://nft.neptunemutual.com/', includeTheme: true, text: 'NFT Portal', isExternal: false },
-        { href: 'https://explorer.neptunemutual.net/', includeTheme: true, text: 'Explorer', isExternal: false }
+        { href: 'https://nft.neptunemutual.com/', text: 'NFT Portal', isExternal: false },
+        { href: 'https://explorer.neptunemutual.net/', text: 'Explorer', isExternal: false }
       ]
     },
     {

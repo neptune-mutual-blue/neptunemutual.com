@@ -33,14 +33,53 @@ window.history.replaceState({}, undefined, newURL)
 
 window.localStorage.setItem('theme', theme)
 
-const updateThemeLinks = () => {
-  const linksWithThemes = document.querySelectorAll('a[data-include-theme]')
+const isValidUrl = (href) => {
+  try {
+    // eslint-disable-next-line no-new
+    new URL(href) // Throws error for relative urls
+    return true
+  } catch (error) { }
+  return false
+}
 
-  linksWithThemes.forEach(link => {
-    if (link.href.includes('?theme=')) {
-      link.href = link.href.replace(/\?theme=[dark|light]+/g, '') + '?theme=' + window.getTheme()
-    } else {
-      link.href = link.href + '?theme=' + window.getTheme()
+const isSameHost = (href) => {
+  const url = new URL(href)
+  const currentUrl = new URL(window.location)
+  return url.host === currentUrl.host
+}
+
+const supportsTheme = (href) => {
+  if (!isValidUrl(href) || isSameHost(href)) {
+    return false
+  }
+
+  const hostsWithSameHeader = ['nft.neptunemutual.com', 'neptunemutual.com', 'explorer.neptunemutual.net', 'ipfs.neptunemutual.net']
+
+  const url = new URL(href)
+
+  if (!hostsWithSameHeader.includes(url.host)) {
+    return false
+  }
+
+  return true
+}
+
+const addTheme = (href, theme) => {
+  if (!theme) {
+    return href
+  }
+
+  const url = new URL(href)
+  url.searchParams.set('theme', theme)
+  return url.href
+}
+
+const updateThemeLinks = () => {
+  const links = document.querySelectorAll('a')
+
+  links.forEach(link => {
+    if (supportsTheme(link.href)) {
+      link.href = addTheme(link.href, window.getTheme())
     }
   })
 }

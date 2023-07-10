@@ -28,22 +28,13 @@ const { lists, socials } = await getFooterData();
                   {list.links.map((link) => {
                     return (
                       <li>
-                        {link.isExternal ? (
-                          <a
-                            href={normalizeUrl(link.href)}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {link.text}
-                          </a>
-                        ) : (
-                          <a
-                            href={normalizeUrl(link.href)}
-                            data-include-theme={link.includeTheme ? true : null}
-                          >
-                            {link.text}
-                          </a>
-                        )}
+                        <a
+                          href={normalizeUrl(link.href)}
+                          target={link.isExternal ? "_blank" : undefined}
+                          rel={link.isExternal ? "noreferrer" : undefined}
+                        >
+                          {link.text}
+                        </a>
 
                         {link.badge && (
                           <div
