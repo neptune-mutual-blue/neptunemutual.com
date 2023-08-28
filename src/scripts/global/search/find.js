@@ -25,7 +25,7 @@ const find = async (searchTerm) => {
     return null
   }
 
-  return results.slice(0, 10)
+  return results
 }
 
 export { find }
