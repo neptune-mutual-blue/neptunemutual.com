@@ -1,0 +1,14 @@
+---
+import DarkImage from "./ipfs-gateway-dark.svg?raw";
+import LightImage from "./ipfs-gateway-light.svg?raw";
+---
+
+<div class="ipfs hero image">
+  <div class="icon light only">
+    <Fragment set:html={LightImage} />
+  </div>
+
+  <div class="icon dark only">
+    <Fragment set:html={DarkImage} />
+  </div>
+</div>

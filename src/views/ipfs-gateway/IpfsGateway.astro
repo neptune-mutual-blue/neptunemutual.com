@@ -1,0 +1,22 @@
+---
+import HeroImage from "./HeroImage.astro";
+
+const t = (x: string) => x;
+---
+
+<HeroImage />
+
+<div class="ipfs gateway content container">
+  <div class="text container">
+    <h2>
+      <div class="sub heading">
+        {t("Neptune Mutual IPFS Gateway")}
+      </div>
+      <div class="heading">{t("Welcome to Neptune Mutual IPFS Gateway")}</div>
+    </h2>
+  </div>
+
+  <input type="text" placeholder="Enter IPFS Hash" class="ipfs hash" />
+
+  <iframe class="display result" allowtransparency></iframe>
+</div>

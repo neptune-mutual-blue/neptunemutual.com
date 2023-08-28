@@ -44,13 +44,13 @@ const tools: Web3ToolItem[] = [
     badges: []
   },
   {
-    path: 'https://ipfs.neptunemutual.net/',
+    path: '/ipfs-gateway',
     title: 'Neptune Mutual IPFS Gateway',
     intro: 'Retrieve the IPFS content of our marketplace, the details surrounding our protocol.',
     category: 'IPFS Gateway',
     icon: 'code-square-01',
     badges: [],
-    isExternal: true
+    isExternal: false
   }
 ]
 

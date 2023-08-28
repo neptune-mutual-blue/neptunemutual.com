@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Seo from "../../components/Seo.astro";
+
+import styles from "./index.scss?inline";
+import IpfsGateway from "../../views/ipfs-gateway/IpfsGateway.astro";
+---
+
+<BaseLayout>
+  <Seo
+    slot="seo"
+    title="IPFS Gateway / Neptune Mutual"
+    description="The Public Gateway allows to retrieve the IPFS content of our marketplace, the details surrounding our protocol."
+    og={{
+      image: "/assets/images/meta/og/ipfs.png",
+      imageAlt: "Neptune Mutual IPFS Gateway Open Graph Banner",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <IpfsGateway />
+
+  <Fragment slot="footer">
+    <script src="../../scripts/ipfs-gateway/index.js"></script>
+  </Fragment>
+</BaseLayout>

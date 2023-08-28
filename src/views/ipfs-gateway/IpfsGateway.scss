@@ -1,0 +1,128 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/shadows";
+
+.ipfs.hero.image,
+.ipfs.gateway.content.container {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+
+  margin-top: 64px;
+  margin-bottom: 64px;
+
+  @media (max-width: 767px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.ipfs.gateway.content.container {
+  padding-bottom: 96px;
+
+  i,
+  i svg {
+    width: 100%;
+  }
+
+  input {
+    margin-top: 32px;
+
+    width: 100%;
+    padding: 10px 14px;
+    color: colors.$gray-500;
+    border-radius: 8px;
+    border: 1px solid colors.$gray-300;
+    box-shadow: shadows.$xs;
+
+    @include styles.text-md;
+    @include weights.regular;
+  }
+
+  iframe {
+    margin-top: 16px;
+    border: 1px solid colors.$gray-300;
+    width: 100%;
+    height: 1000px;
+    min-height: 420px;
+    max-height: 75vh;
+    border-radius: 8px;
+    transition: height 500ms;
+  }
+
+  .text.container {
+    max-width: 767px;
+    margin-top: 2rem;
+  }
+
+  h2 {
+    .sub.heading {
+      color: colors.$primary-700;
+      @include styles.text-md;
+      @include weights.semibold;
+
+      @media (max-width: 767px) {
+        @include styles.text-sm;
+      }
+    }
+
+    .heading {
+      margin-top: 12px;
+      color: light.$color;
+
+      @include styles.display-md;
+      @include weights.semibold;
+
+      @media (max-width: 767px) {
+        margin-top: 0;
+        text-align: center;
+        @include styles.display-sm;
+      }
+    }
+  }
+
+  .supporting.text {
+    margin-top: 20px;
+    color: light.$secondary-color;
+
+    @include styles.text-xl;
+    @include weights.regular;
+
+    @media (max-width: 767px) {
+      margin-top: 16px;
+      @include styles.text-lg;
+    }
+  }
+}
+
+.dark .ipfs.gateway.content.container {
+  h2 {
+    .sub.heading {
+      color: colors.$primary-400;
+    }
+
+    .heading {
+      color: dark.$color;
+    }
+  }
+
+  .supporting.text {
+    color: dark.$secondary-color;
+  }
+
+  input {
+    border-color: colors.$gray-800;
+    background-color: colors.$black-800;
+    color: colors.$white;
+  }
+
+  iframe {
+    border-color: colors.$gray-800;
+  }
+}
