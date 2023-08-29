@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Seo from "../../../components/Seo.astro";
+
+import styles from "../protocol.scss?inline";
+
+import * as api from "../../../../service/api";
+import { Api } from "../../../../types/enum";
+import HeaderSection from "../../../components/HeaderSection.astro";
+import ProtocolContracts from "../../../views/protocol/ProtocolContracts.astro";
+
+const t = (x: string) => x;
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { network: "arbitrum", type: "contracts" },
+      props: {
+        networkId: 42161,
+        type: "contracts",
+        paginated: await api.getContracts(Api.ContractArbitrum),
+        networkName: "Arbitrum Network",
+      },
+    },
+    {
+      params: { network: "base-goerli", type: "contracts" },
+      props: {
+        networkId: 84531,
+        type: "contracts",
+        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        networkName: "Base Goerli Network",
+      },
+    },
+    {
+      params: { network: "bsc", type: "contracts" },
+      props: {
+        networkId: 56,
+        type: "contracts",
+        paginated: await api.getContracts(Api.ContractBSC),
+        networkName: "BNB Smart Chain Network",
+      },
+    },
+    {
+      params: { network: "ethereum", type: "contracts" },
+      props: {
+        networkId: 1,
+        type: "contracts",
+        paginated: await api.getContracts(Api.Contract),
+        networkName: "Ethereum Network",
+      },
+    },
+    {
+      params: { network: "arbitrum", type: "cx-tokens" },
+      props: {
+        networkId: 42161,
+        type: "cxTokens",
+        paginated: await api.getContracts(Api.ContractArbitrum),
+        networkName: "Arbitrum Network",
+      },
+    },
+    {
+      params: { network: "base-goerli", type: "cx-tokens" },
+      props: {
+        networkId: 84531,
+        type: "cxTokens",
+        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        networkName: "Base Goerli Network",
+      },
+    },
+    {
+      params: { network: "bsc", type: "cx-tokens" },
+      props: {
+        networkId: 56,
+        type: "cxTokens",
+        paginated: await api.getContracts(Api.ContractBSC),
+        networkName: "BNB Smart Chain Network",
+      },
+    },
+    {
+      params: { network: "ethereum", type: "cx-tokens" },
+      props: {
+        networkId: 1,
+        type: "cxTokens",
+        paginated: await api.getContracts(Api.Contract),
+        networkName: "Ethereum Network",
+      },
+    },
+    {
+      params: { network: "arbitrum", type: "pods" },
+      props: {
+        networkId: 42161,
+        type: "pods",
+        paginated: await api.getContracts(Api.ContractArbitrum),
+        networkName: "Arbitrum Network",
+      },
+    },
+    {
+      params: { network: "base-goerli", type: "pods" },
+      props: {
+        networkId: 84531,
+        type: "pods",
+        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        networkName: "Base Goerli Network",
+      },
+    },
+    {
+      params: { network: "bsc", type: "pods" },
+      props: {
+        networkId: 56,
+        type: "pods",
+        paginated: await api.getContracts(Api.ContractBSC),
+        networkName: "BNB Smart Chain Network",
+      },
+    },
+    {
+      params: { network: "ethereum", type: "pods" },
+      props: {
+        networkId: 1,
+        type: "pods",
+        paginated: await api.getContracts(Api.Contract),
+        networkName: "Ethereum Network",
+      },
+    },
+  ];
+}
+
+const networkId = Astro.props.networkId;
+const type = Astro.props.type;
+const paginated = Astro.props.paginated as ApiResponse<ProtocolContracts>;
+const networkName = Astro.props.networkName;
+
+const prefix =
+  type === "cxTokens" ? "cxTokens / " : type === "pods" ? "PODs / " : "";
+const contractType =
+  type === "cxTokens" ? "cxToken " : type === "pods" ? "POD " : "";
+---
+
+<BaseLayout headerStyle={"colored"}>
+  <Seo
+    slot="seo"
+    title={prefix + "Neptune Mutual Protocol Contracts on " + networkName}
+    description={`View all Neptune Mutual Protocol ${contractType}contracts on ${networkName}`}
+    og={{
+      image: "/assets/images/meta/og/protocol-contracts.png",
+      imageAlt: prefix + "Neptune Mutual Protocol Contracts on " + networkName,
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <HeaderSection
+    color={"basic"}
+    alignment={"center"}
+    heading={t("Neptune Mutual Protocol Contracts")}
+  />
+
+  <ProtocolContracts networkId={networkId} type={type} data={paginated.data} />
+
+  <Fragment slot="footer">
+    <script src="../../../scripts/protocol/index.js"></script>
+  </Fragment>
+</BaseLayout>

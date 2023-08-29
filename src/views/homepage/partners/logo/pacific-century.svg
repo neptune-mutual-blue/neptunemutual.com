@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="232" height="64" xmlns:v="https://vecta.io/nano"><style><![CDATA[.C{font-family:CoreSansNSCW01-63ExtraBold}.D{font-size:16.869px}]]></style><path d="M0 21.9h232v22.4H0z" fill="#565656"/><text transform="translate(5.004 38.755)" fill="#fff" class="C D">Pacific</text><text transform="translate(77.523 38.94)" fill="#fff" class="C D">Century</text><text transform="translate(164.884 38.94)" fill="#fff" class="C D">Group</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="232" height="64" font-family="sans-serif" font-size="16.869" font-weight="700" viewBox="0 0 232 64">
+  <path fill="#565656" d="M0 21.9h232v22.4H0z"/>
+  <text fill="#fff" transform="translate(5.004 38.755)">Pacific</text>
+  <text fill="#fff" transform="translate(77.523 38.94)">Century</text>
+  <text fill="#fff" transform="translate(164.884 38.94)">Group</text>
+</svg>

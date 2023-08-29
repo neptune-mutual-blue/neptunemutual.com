@@ -5,8 +5,6 @@ import {
   useState
 } from 'react'
 
-import { useHotkeys } from 'react-hotkeys-hook'
-
 import { useWeb3React } from '@web3-react/core'
 
 import { chains } from '../../Encoder/helpers/wallet/chains'
@@ -29,13 +27,6 @@ const ConnectedDropdown = () => {
   const ref = useRef()
 
   useOnClickOutside(ref, () => setOpen(false))
-
-  useHotkeys('Alt+Shift+Q', (e) => {
-    e.preventDefault()
-    if (open) {
-      logout()
-    }
-  }, [open])
 
   return (
     <div className='wallet connected dropdown' ref={ref}>
@@ -84,9 +75,6 @@ const ConnectedDropdown = () => {
               Logout
             </span>
           </div>
-          <span className='shortcut'>
-            ⌥⇧Q
-          </span>
         </button>
       </div>
     </div>
