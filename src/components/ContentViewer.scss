@@ -6,7 +6,6 @@
 @use "../design-system/typography/styles";
 @use "../design-system/typography/weights";
 
-
 .content.viewer.container {
   word-break: break-word;
   padding-left: 86px;
@@ -84,7 +83,7 @@
       position: sticky;
       top: 100px;
       max-height: calc(100vh - 100px);
-      overflow-y: auto
+      overflow-y: auto;
     }
 
     p {
@@ -136,7 +135,7 @@
 
   color: light.$secondary-color;
 
-  &>*:first-child {
+  & > *:first-child {
     margin-top: 0;
     padding-top: 0;
   }
@@ -193,7 +192,7 @@
     :not(:first-child) {
       margin-top: 20px;
     }
-    
+
     @media screen and (max-width: 767px) {
       @include styles.display-xs;
       margin-bottom: 16px;
@@ -213,7 +212,7 @@
   }
 
   img {
-    filter: 'inherit';
+    filter: "inherit";
   }
 
   strong {
@@ -271,6 +270,7 @@
     border: 1px dashed colors.$gray-300;
 
     figcaption {
+      font-style: italic;
       margin-top: 1em;
     }
 
@@ -308,7 +308,7 @@
     padding: 0;
 
     p {
-      margin: 0
+      margin: 0;
     }
 
     img {
@@ -381,13 +381,13 @@
       background-color: colors.$gray-900;
       border: 1px solid colors.$gray-800;
     }
-  
+
     a {
       color: colors.$primary-400;
     }
 
     img {
-      filter: 'invert(100%)';
+      filter: "invert(100%)";
     }
 
     h1,
@@ -460,7 +460,7 @@
     -webkit-box-orient: vertical;
   }
 
-  .kg-bookmark-card+.kg-bookmark-card {
+  .kg-bookmark-card + .kg-bookmark-card {
     margin-top: -35px;
   }
 
@@ -469,7 +469,7 @@
     position: relative;
     min-height: 150px;
     padding-bottom: 0;
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
     text-decoration: none;
     background-color: colors.$primary-25;
   }
@@ -520,7 +520,7 @@
   .kg-bookmark-metadata span:nth-of-type(2)::before {
     margin-right: 6px;
     margin-left: 6px;
-    content: '•';
+    content: "•";
   }
 
   .kg-bookmark-thumbnail {
@@ -549,10 +549,10 @@
 
   /* Margin Elements */
   iframe,
-  .kg-embed-card>div,
-  .kg-embed-card>iframe,
-  .kg-embed-card>.fb-post,
-  .kg-embed-card>.twitter-tweet {
+  .kg-embed-card > div,
+  .kg-embed-card > iframe,
+  .kg-embed-card > .fb-post,
+  .kg-embed-card > .twitter-tweet {
     margin-right: auto !important;
     margin-left: auto !important;
   }
@@ -564,7 +564,8 @@
   }
 }
 
-.medium-zoom--opened .medium-zoom-overlay, .medium-zoom-image {
+.medium-zoom--opened .medium-zoom-overlay,
+.medium-zoom-image {
   z-index: 9999;
 }
 

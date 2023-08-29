@@ -28,7 +28,7 @@
     &:focus,
     &:active,
     &:focus-visible {
-      border: 1px solid colors.$gray-200;
+      border: 1px solid colors.$gray-300;
       box-shadow: shadows.$xs, 0px 0px 0px 4px colors.$gray-100;
     }
   }
