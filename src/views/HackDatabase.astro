@@ -5,9 +5,10 @@ import HackTable from "./hack-database/HackTable.astro";
 
 interface Props {
   hacks: Hack[];
+  totalCount: number;
 }
 
-const { hacks } = Astro.props;
+const { hacks, totalCount } = Astro.props;
 ---
 
 <HeaderSection
@@ -22,7 +23,7 @@ const { hacks } = Astro.props;
 </HeaderSection>
 
 <div class="hackdatabase announcement full width container">
-  <HackTable hacks={hacks} />
+  <HackTable hacks={hacks} totalCount={totalCount} />
 </div>
 
 <NewsletterSignupForm

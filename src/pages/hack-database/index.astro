@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Pressroom from "../../views/Pressroom.astro";
 import Seo from "../../components/Seo.astro";
 
 import * as api from "../../../service/api";
@@ -8,7 +7,9 @@ import styles from "./index.scss?inline";
 import { Api } from "../../../types/enum";
 import HackDatabase from "../../views/HackDatabase.astro";
 
-const hacks = await api.getEnumerable<Hack>(Api.Hack, 20, 0);
+const hacks = await api.getEnumerable<Hack>(Api.Hack, 10000, 0);
+const firstPage = hacks.slice(0, 20);
+const totalCount = hacks.length;
 ---
 
 <BaseLayout>
@@ -24,7 +25,7 @@ const hacks = await api.getEnumerable<Hack>(Api.Hack, 20, 0);
   />
   <style slot="header" is:inline set:html={styles}></style>
 
-  <HackDatabase hacks={hacks} />
+  <HackDatabase hacks={firstPage} totalCount={totalCount} />
 
   <Fragment slot="footer">
     <script src="../../scripts/hack-database/index.js"></script>

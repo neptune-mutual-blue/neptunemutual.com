@@ -1,4 +1,3 @@
-
 import { setupPagination } from './pagination'
 import { getTableRows } from './renderers'
 import { setupTogglers } from './togglers'
@@ -12,7 +11,6 @@ const filterHackData = async (
 
     const tbody = table?.querySelector('tbody')
     const tablePrefixHeader = document.querySelector('.prefix.header')
-    const hackCounter = document.querySelector('.hack.counter')
 
     const currentSortKey = table?.dataset.sortKey ?? ''
 
@@ -36,11 +34,9 @@ const filterHackData = async (
 
     const html = getTableRows(response.docs)
 
-    if (tbody != null && table != null && hackCounter != null) {
+    if (tbody != null && table != null) {
       tbody.innerHTML = html
-
       table.dataset.page = response.page
-      hackCounter.innerHTML = response.totalDocs
     }
 
     setupTogglers()

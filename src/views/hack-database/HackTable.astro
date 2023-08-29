@@ -9,9 +9,10 @@ import Pagination from "../../elements/Pagination.astro";
 
 interface Props {
   hacks: Hack[];
+  totalCount: number;
 }
 
-const { hacks } = Astro.props;
+const { hacks, totalCount } = Astro.props;
 
 const availableChainIcons = Object.keys(chainIconMapping);
 
@@ -66,7 +67,7 @@ const sortableColumns = Object.keys(sortKeys);
           <p class="prefix subtitle">
             Total Events
             <span class="hack counter">
-              {hacks.length}
+              {totalCount}
             </span>
           </p>
         </div>
