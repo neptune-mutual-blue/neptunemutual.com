@@ -27,6 +27,8 @@ const setupSearchPagination = (totalPages, currentPage) => {
 
   if (pageNumbers != null) {
     pageNumbers.innerHTML = pagesHtml
+
+    searchModal.dataset.page = currentPage.toString()
   }
 
   const previousPage = searchModal.querySelector('.previous.page')
