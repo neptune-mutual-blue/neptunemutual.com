@@ -1,17 +1,23 @@
-import { getRootPath, getUpdatedHtml } from '../../util/search'
+import {
+  getRootPath,
+  getUpdatedHtml
+} from '../../util/search'
 import { compose } from './dom'
 import { find } from './find'
+import { setupSearchPagination } from './search-pagination'
 
-const search = async (searchTerm) => {
+const search = async (searchTerm, page = 1) => {
   document.querySelector('.search.result').innerHTML = ''
 
   if (!searchTerm || searchTerm.length < 4) {
+    setupSearchPagination(1, 1)
     return
   }
 
-  const results = await find(searchTerm)
+  const results = await find(searchTerm, page)
 
   if (!results) {
+    setupSearchPagination(1, 1)
     return
   }
 

@@ -1,11 +1,14 @@
 import { getIDBValidKey } from '../../util/search'
 import { getDocs } from './request'
+import { setupSearchPagination } from './search-pagination'
+
+const PAGE_SIZE = 10
 
 const coalesce = (x, or) => {
   return x ?? or
 }
 
-const find = async (searchTerm) => {
+const find = async (searchTerm, page = 1) => {
   searchTerm = coalesce(searchTerm, '')
 
   const key = getIDBValidKey()
@@ -25,7 +28,9 @@ const find = async (searchTerm) => {
     return null
   }
 
-  return results
+  setupSearchPagination(Math.ceil(results.length / PAGE_SIZE), page)
+
+  return results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 }
 
 export { find }

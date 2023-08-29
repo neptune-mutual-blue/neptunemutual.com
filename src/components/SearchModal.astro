@@ -1,5 +1,6 @@
 ---
 import Icon from "../elements/Icon.astro";
+import Pagination from "../elements/Pagination.astro";
 
 interface Props {
   inputPlaceholder: string;
@@ -9,7 +10,7 @@ const { inputPlaceholder } = Astro.props;
 ---
 
 <div class="initially hidden search dimmer">
-  <div class="ui search modal">
+  <div class="ui search modal" data-page="1">
     <div class="input wrapper">
       <div class="search header input">
         <Icon size="lg" variant={"search-lg"} />
@@ -26,5 +27,9 @@ const { inputPlaceholder } = Astro.props;
     </div>
 
     <div class="search result"></div>
+
+    <div class="search footer">
+      <Pagination className="no padding" currentPage={1} totalPages={1} />
+    </div>
   </div>
 </div>

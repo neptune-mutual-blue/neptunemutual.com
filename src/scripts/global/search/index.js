@@ -1,7 +1,7 @@
-import { search } from './search'
-
 import { copyToClipboard } from '../../util/copy'
 import { debounce } from '../../util/search'
+import { search } from './search'
+import { setupSearchPagination } from './search-pagination'
 
 const searchOverlay = document.querySelector('.search.dimmer')
 const searchInputField = document.getElementById('ModalSearchInputSearch')
@@ -52,6 +52,7 @@ const debouncedOnSearch = debounce(onSearch)
 const onClear = () => {
   searchInputField.value = ''
   searchInputField.focus()
+  setupSearchPagination(1, 1)
   search()
 }
 
@@ -79,3 +80,5 @@ function updateCopyButtons () {
     copyButton.addEventListener('click', handleCopy)
   })
 }
+
+setupSearchPagination(1, 1)
