@@ -3,7 +3,7 @@ enum Api {
   Blog = 'blog',
   Contract = 'contracts',
   ContractArbitrum = 'contracts.arbitrum',
-  ContractBaseGoerli = 'contracts.base-goerli',
+  ContractMumbai = 'contracts.mumbai',
   ContractBSC = 'contracts.bsc',
   Ecosystem = 'ecosystems',
   Doc = 'docs',
@@ -23,6 +23,7 @@ type BlogOrPressroom = Api.Blog | Api.Pressroom
 enum Network {
   Ethereum = 1,
   Arbitrum = 42161,
+  Mumbai = 80001,
   BaseGoerli = 84531,
   BSC = 56
 }
