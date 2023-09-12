@@ -21,15 +21,16 @@ darkModeInputCheckboxes.forEach(darkModeInputCheckbox => {
   darkModeInputCheckbox.addEventListener('click', switchTheme, { passive: true })
 })
 
-// This doesn't account for theme being a middle parameter in the URL Search Param. Please use only as first or last param.
-const search = window.location.search
-  .replace(/&?theme=[dark|light]+&?/g, '')
-  .trim()
+try {
+  const updateUrl = new URL(window.location)
 
-const newURL =
-window.location.pathname + (search.length <= 1 ? '' : search)
+  updateUrl.searchParams.delete('theme')
 
-window.history.replaceState({}, undefined, newURL)
+  window.history.replaceState({}, undefined, updateUrl)
+} catch (error) {
+  console.error(error)
+  console.warn('Unable to clear search params')
+}
 
 window.localStorage.setItem('theme', theme)
 
