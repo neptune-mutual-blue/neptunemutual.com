@@ -22,15 +22,15 @@ export async function getStaticPaths() {
         networkName: "Arbitrum Network",
       },
     },
-    {
-      params: { network: "base-goerli", type: "contracts" },
-      props: {
-        networkId: 84531,
-        type: "contracts",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
-        networkName: "Base Goerli Network",
-      },
-    },
+    // {
+    //   params: { network: "base-goerli", type: "contracts" },
+    //   props: {
+    //     networkId: 84531,
+    //     type: "contracts",
+    //     paginated: await api.getContracts(Api.ContractBaseGoerli),
+    //     networkName: "Base Goerli Network",
+    //   },
+    // },
     {
       params: { network: "bsc", type: "contracts" },
       props: {
@@ -58,15 +58,15 @@ export async function getStaticPaths() {
         networkName: "Arbitrum Network",
       },
     },
-    {
-      params: { network: "base-goerli", type: "cx-tokens" },
-      props: {
-        networkId: 84531,
-        type: "cxTokens",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
-        networkName: "Base Goerli Network",
-      },
-    },
+    // {
+    //   params: { network: "base-goerli", type: "cx-tokens" },
+    //   props: {
+    //     networkId: 84531,
+    //     type: "cxTokens",
+    //     paginated: await api.getContracts(Api.ContractBaseGoerli),
+    //     networkName: "Base Goerli Network",
+    //   },
+    // },
     {
       params: { network: "bsc", type: "cx-tokens" },
       props: {
@@ -94,15 +94,15 @@ export async function getStaticPaths() {
         networkName: "Arbitrum Network",
       },
     },
-    {
-      params: { network: "base-goerli", type: "pods" },
-      props: {
-        networkId: 84531,
-        type: "pods",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
-        networkName: "Base Goerli Network",
-      },
-    },
+    // {
+    //   params: { network: "base-goerli", type: "pods" },
+    //   props: {
+    //     networkId: 84531,
+    //     type: "pods",
+    //     paginated: await api.getContracts(Api.ContractBaseGoerli),
+    //     networkName: "Base Goerli Network",
+    //   },
+    // },
     {
       params: { network: "bsc", type: "pods" },
       props: {
