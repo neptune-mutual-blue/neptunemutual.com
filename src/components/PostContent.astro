@@ -1,0 +1,47 @@
+---
+import SocialShare from "../elements/SocialShare.astro";
+import Tags from "../elements/Tags.astro";
+
+import { toTagsWithHref } from "../../util/tag";
+import { Api } from "../../types/enum";
+import RichTextContent from "./RichTextContent.astro";
+
+interface Props {
+  type: Api;
+  title: string;
+  intro: string;
+  html: string;
+  tags?: Tag[];
+  pageUrl: string;
+  showSocial: boolean;
+}
+
+const { type, title, intro, html, tags, pageUrl, showSocial } = Astro.props;
+---
+
+<div class="post content">
+  <slot name="pre" />
+
+  <div class="article">
+    <RichTextContent html={html} />
+  </div>
+
+  <div class="author">
+    By
+    <span
+      itemprop="author"
+      itemscope
+      itemtype="https://schema.org/Organization"
+    >
+      <span itemprop="name">Neptune Mutual</span>
+      <span itemprop="url" content="https://neptunemutual.com"></span>
+    </span>
+  </div>
+
+  {tags && <h4 class="title tags">Tags</h4>}
+  <Tags tags={toTagsWithHref(type, tags)} showAll />
+
+  {showSocial && <SocialShare title={title} intro={intro} pageUrl={pageUrl} />}
+
+  <slot name="post" />
+</div>

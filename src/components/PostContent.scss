@@ -1,0 +1,33 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+
+.post.content {
+  @media (max-width: 767px) {
+    padding-bottom: 64px;
+  }
+
+  .author {
+    margin-top: 24px 0;
+  }
+
+  .title.tags {
+    margin-top: 48px;
+    display: block;
+    @include weights.semibold;
+  }
+
+  .tags.container {
+    margin-top: 16px;
+
+    .tag {
+      @include styles.text-sm;
+      @include weights.medium;
+      padding: 2px 10px;
+      gap: 8px;
+    }
+  }
+}

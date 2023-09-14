@@ -1,0 +1,9 @@
+---
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+---
+
+<div class="rich text container" set:html={html} />

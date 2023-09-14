@@ -6,8 +6,9 @@
 
 @import "../../elements/SocialShare.scss";
 
-@import "../../components/Footer.scss";
-@import "../../components/ContentViewer.scss";
+@import "../../components/PostContentContainer.scss";
+@import "../../components/PostContent.scss";
+@import "../../components/RichTextContent.scss";
 @import "../../components/HeaderSection.scss";
 
 @import "../../components/Header/Header.scss";
@@ -21,6 +22,7 @@
 @import "../../components/Header/HamburgerButton.scss";
 @import "../../components/CookiePopup.scss";
 
+@import "../../components/Footer.scss";
 
 @import "../../views/PolicyPage.scss"
 

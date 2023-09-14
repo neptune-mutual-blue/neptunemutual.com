@@ -75,6 +75,19 @@ const addTheme = (href, theme) => {
   return url.href
 }
 
+const switchTweetTheme = (currentTheme, targetTheme) => {
+  if (currentTheme === targetTheme) {
+    return
+  }
+
+  const tweets = document.querySelectorAll('[data-tweet-id]')
+
+  tweets.forEach((tweet) => {
+    const src = tweet.getAttribute('src')
+    tweet.setAttribute('src', src.replace('theme=' + currentTheme, 'theme=' + targetTheme))
+  })
+}
+
 const updateThemeLinks = () => {
   const links = document.querySelectorAll('a')
 
@@ -83,6 +96,13 @@ const updateThemeLinks = () => {
       link.href = addTheme(link.href, window.getTheme())
     }
   })
+
+  switchTweetTheme('light', window.getTheme())
 }
 
 updateThemeLinks()
+
+// Wait for the loading of the theme
+setTimeout(() => {
+  switchTweetTheme('light', window.getTheme())
+}, 1000)

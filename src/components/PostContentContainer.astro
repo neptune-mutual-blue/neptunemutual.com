@@ -1,0 +1,65 @@
+---
+import { slugify } from "../../util/slug";
+import { Api } from "../../types/enum";
+import PostContent from "./PostContent.astro";
+
+const t = (x: string): string => x;
+
+interface Props {
+  type: Api;
+  title: string;
+  intro: string;
+  toc?: TableOfContentEntry[];
+  html: string;
+  tags?: Tag[];
+  pageUrl: string;
+  showSocial: boolean;
+}
+
+const { type, title, intro, toc, html, tags, pageUrl, showSocial } =
+  Astro.props;
+---
+
+<div class="post content full width container">
+  {
+    toc && (
+      <div class="sidebar">
+        <div class="table of contents container">
+          <p class="label">{t("Table of Contents")}</p>
+          <a class="active title item" href={"#" + slugify(title)}>
+            {title}
+          </a>
+
+          {toc.length > 0 && (
+            <div class="content">
+              {toc.map((e) => (
+                <div class="header">
+                  <a
+                    class="item"
+                    style={`margin-left: ${(e.type || 2) * 8}px`}
+                    href={`#${e.id || ""}`}
+                  >
+                    <span>{e.text}</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  <PostContent
+    html={html}
+    type={type}
+    tags={tags}
+    showSocial={showSocial}
+    title={title}
+    intro={intro}
+    pageUrl={pageUrl}
+  >
+    <slot name="pre" slot="pre" />
+    <slot name="post" slot="post" />
+  </PostContent>
+</div>

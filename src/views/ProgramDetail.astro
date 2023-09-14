@@ -1,9 +1,10 @@
 ---
 import Breadcrumb from "../elements/Breadcrumb.astro";
-import ContentViewer from "../components/ContentViewer.astro";
 import HeaderSection from "../components/HeaderSection.astro";
+import PostContentContainer from "../components/PostContentContainer.astro";
 
 import { parseContent } from "../../util/content-viewer";
+import { Api } from "../../types/enum";
 
 interface Props {
   program: Program;
@@ -39,8 +40,8 @@ const items = [
   <HeaderSection color={"basic"} heading={title} alignment={"center"} />
 
   <div class="main wrapper">
-    <ContentViewer
-      type="grants-and-bounties"
+    <PostContentContainer
+      type={Api.Program}
       title={title}
       intro={intro}
       toc={toc}
@@ -51,6 +52,6 @@ const items = [
       <Fragment slot="pre">
         <Breadcrumb items={items} />
       </Fragment>
-    </ContentViewer>
+    </PostContentContainer>
   </div>
 </div>
