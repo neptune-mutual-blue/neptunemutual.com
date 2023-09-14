@@ -212,9 +212,9 @@ $sidebar-width: 300px;
     gap: 8px;
     background-color: light.$primary-background-color;
     border-right: 1px solid colors.$gray-200;
-    height: 100vh;
+    height: calc(100vh - var(--header-height));
     position: sticky;
-    top: 0;
+    top: var(--header-height);
     overflow: auto;
 
     @media (max-width: 1023px) {
