@@ -8,6 +8,7 @@ const filterHackData = async (
 ): Promise<void> => {
   try {
     const table = document.querySelector('table')
+    const count = document.querySelector('span.hack.counter')
 
     const tbody = table?.querySelector('tbody')
     const tablePrefixHeader = document.querySelector('.prefix.header')
@@ -41,6 +42,10 @@ const filterHackData = async (
 
     setupTogglers()
     setupPagination(response.totalPages, response.page)
+
+    if (count != null) {
+      count.innerHTML = response.totalDocs
+    }
 
     if (!initial && tablePrefixHeader != null) {
       tablePrefixHeader.scrollIntoView({ behavior: 'smooth' })
