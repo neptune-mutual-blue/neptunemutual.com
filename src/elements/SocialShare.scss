@@ -30,9 +30,7 @@
   }
 
     .outlined.button {
-      backdrop-filter: blurs.$sm;
-
-      background-color: colors.$white;
+      background-color: colors.$base-white;
       color: colors.$gray-500;
       border: 1px solid colors.$gray-200;
 

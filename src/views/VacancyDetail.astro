@@ -1,12 +1,13 @@
 ---
 import Breadcrumb from "../elements/Breadcrumb.astro";
 import Button from "../elements/buttons/Button.astro";
-import ContentViewer from "../components/ContentViewer.astro";
+import PostContentContainer from "../components/PostContentContainer.astro";
 import HeaderSection from "../components/HeaderSection.astro";
 
 import { parseContent } from "../../util/content-viewer";
 import { normalizeUrl } from "../../util/url";
 import Icon from "../elements/Icon.astro";
+import { Api } from "../../types/enum";
 
 interface Props {
   vacancy: Vacancy;
@@ -43,8 +44,8 @@ const { expired } = vacancy;
   <HeaderSection color={"basic"} heading={title} alignment={"center"} />
 
   <div class="main wrapper">
-    <ContentViewer
-      type="careers"
+    <PostContentContainer
+      type={Api.Vacancy}
       title={title}
       intro={intro}
       toc={toc}
@@ -118,6 +119,6 @@ const { expired } = vacancy;
           </Fragment>
         )
       }
-    </ContentViewer>
+    </PostContentContainer>
   </div>
 </div>

@@ -68,20 +68,7 @@
     }
 
     .view-job-button {
-      background: transparent;
-      border: none;
-      box-shadow: none;
       padding: 0;
-      
-      &:hover {
-        background: transparent !important;
-        color: inherit !important;
-      }
-      
-      &:focus-visible, &:focus {
-        background: transparent !important;
-        color: inherit !important;
-      }
     }
   }
 
