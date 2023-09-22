@@ -8,6 +8,7 @@ import Icon from "../elements/Icon.astro";
 import Breadcrumb from "../elements/Breadcrumb.astro";
 import Enumerable from "linq";
 import SearchModal from "../components/SearchModal.astro";
+import RichTextContent from "../components/RichTextContent.astro";
 
 interface Props {
   items: Documentation[];
@@ -104,7 +105,7 @@ const breadcrumbs = [
           <div class="title">{page.title}</div>
           {page.subtitle && <div class="sub title">{page.subtitle}</div>}
         </h1>
-        <div class="content" set:html={html} />
+        <RichTextContent html={html} />
       </div>
 
       <div class="ui more stories">
