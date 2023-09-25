@@ -1,4 +1,5 @@
 ---
+import Button from "../../elements/buttons/Button.astro";
 import VacancyList from "./vacancies/VacancyList.astro";
 
 interface Props {
@@ -33,7 +34,14 @@ const t = (x: string): string => x;
           )
         }
       </p>
-      <a href="/careers/archived" class="view archived">View Archived Posts</a>
+      <Button
+        href="/careers/archived"
+        classname="view archived"
+        type="anchor"
+        variant="secondary-gray"
+      >
+        View Archived Posts
+      </Button>
     </div>
 
     <div class="content">

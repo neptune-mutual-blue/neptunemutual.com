@@ -5,13 +5,12 @@
 @use "../design-system/theme/light";
 @use "../design-system/theme/dark";
 
-
 .vacancy.detail.container {
   .job.details {
     display: flex;
     margin-bottom: 56px;
     gap: 32px;
-  
+
     @media (max-width: 767px) {
       flex-direction: column;
       gap: 16px;
@@ -21,37 +20,35 @@
     .item {
       display: flex;
       flex-direction: column;
-      
-    
-      &:nth-of-type(1){
+
+      &:nth-of-type(1) {
         margin-left: 0;
       }
 
-      &:nth-last-of-type(1){
+      &:nth-last-of-type(1) {
         margin-right: 0;
       }
-    
+
       @media (max-width: 767px) {
         margin: 0;
-      }      
+      }
     }
 
     .label {
-      color:colors.$gray-600;
+      color: colors.$gray-600;
       @include styles.text-sm;
       @include weights.regular;
 
       @media (max-width: 767px) {
         display: block;
         margin-bottom: 4px;
-      }    
+      }
     }
 
     .value {
-      color:colors.$gray-900;
+      color: colors.$gray-900;
       @include styles.text-lg;
       @include weights.medium;
-
     }
   }
 
@@ -59,10 +56,10 @@
     display: flex;
     margin-top: 56px;
     justify-content: center;
-  
+
     @media (min-width: 768px) {
       justify-content: start;
-    }    
+    }
   }
 
   .about.this.vacancy {
@@ -72,53 +69,24 @@
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
-  
+
     div {
       position: relative;
-      background-color:colors.$base-white;
+      background-color: colors.$base-white;
       padding: 0 24px;
       @include styles.text-xl;
       @include weights.semibold;
     }
-  
+
     span {
       border-top: 1px solid colors.$gray-200;
       display: block;
       width: 100%;
       position: absolute;
       top: 50%;
-    }    
-  }
-
-  .expired.banner {
-    margin-bottom: 24px;
-    border-radius: 12px;
-    border: 1px solid colors.$warning-300;
-    background-color: colors.$warning-25;
-    padding: 16px;
-    color: colors.$warning-700;
-
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-
-    svg {
-      color: colors.$warning-600;
-    }
-
-    p.title {
-      @include styles.text-md;
-      @include weights.semibold;
-    }
-
-    p.desc {
-      margin-top: 4px;
-      @include styles.text-sm;
-      @include weights.regular;
     }
   }
 }
-
 
 .dark .vacancy.detail.container {
   .hero.header {
@@ -131,29 +99,17 @@
     }
 
     .value {
-      color:colors.$gray-25;
+      color: colors.$gray-25;
     }
   }
 
   .about.this.vacancy {
-  
     div {
       background-color: colors.$black-900;
     }
-  
+
     span {
       border-top: 1px solid colors.$gray-800;
-    }    
-  }
-
-  .expired.banner {
-    border-color: colors.$warning-300;
-    background-color: colors.$black-800;
-    color: colors.$base-white;
-    
-    svg {
-      color: colors.$warning-300;
     }
   }
-
 }

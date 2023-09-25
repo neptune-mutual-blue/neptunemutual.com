@@ -58,15 +58,11 @@ const { expired } = vacancy;
 
         {
           expired && (
-            <div class="expired banner">
-              <Icon variant="alert-triangle" size="md" />
-
-              <div>
-                <p class="title">Expired</p>
-                <p class="desc">
-                  We are no longer accepting candidates for this vacancy.
-                </p>
+            <div class="ui warning">
+              <div class="header">
+                <strong>Expired</strong>
               </div>
+              <p>We are no longer accepting candidates for this vacancy.</p>
             </div>
           )
         }

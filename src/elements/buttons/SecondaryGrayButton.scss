@@ -62,9 +62,9 @@
 }
 
 .dark .button.secondary.gray {
-  border: 1px solid colors.$gray-300;
-  background-color: colors.$white;
-  color: colors.$gray-700;
+  background-color: colors.$black-800;
+  color: colors.$base-white;
+  border-color: colors.$gray-800;
 
   &:disabled,
   &[data-disabled] {

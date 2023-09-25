@@ -22,7 +22,6 @@ $sidebar-width: 300px;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-
 .docs.content.menu {
   display: flex;
   justify-content: flex-start;
@@ -67,7 +66,6 @@ $sidebar-width: 300px;
   }
 }
 
-
 .documentation.container {
   .meta {
     display: flex;
@@ -99,7 +97,7 @@ $sidebar-width: 300px;
         @media (max-width: 767px) {
           width: 100%;
         }
-  
+
         &:hover,
         &:active,
         &:focus {
@@ -107,7 +105,7 @@ $sidebar-width: 300px;
           box-shadow: none !important;
           border-color: colors.$primary-700;
         }
-      }  
+      }
     }
   }
 
@@ -162,7 +160,7 @@ $sidebar-width: 300px;
           @media (max-width: 767px) {
             width: 100%;
           }
-  
+
           &:hover {
             background-color: colors.$gray-50;
             border-color: colors.$gray-300;
@@ -229,12 +227,12 @@ $sidebar-width: 300px;
         overflow-y: auto;
         width: 316px;
         transition: transform 300ms ease;
-        
-        &[data-open='false'] {
+
+        &[data-open="false"] {
           transform: translateX(-100%);
         }
-        
-        &[data-open='true'] {
+
+        &[data-open="true"] {
           transform: translateX(0%);
         }
       }
@@ -301,7 +299,6 @@ $sidebar-width: 300px;
 
   .full.width.container {
     .story.container {
-
       .ui.more.stories {
         .story,
         a {
@@ -338,5 +335,56 @@ $sidebar-width: 300px;
         background-color: colors.$gray-800;
       }
     }
+  }
+}
+
+.story.container .story {
+  @include styles.text-md;
+  @include weights.regular;
+
+  h1 {
+    @include styles.display-md;
+    @include weights.semibold;
+    margin-bottom: 1em;
+
+    .sub.title {
+      @include styles.text-xl;
+      @include weights.regular;
+      margin-top: 0.5em;
+      color: colors.$gray-500;
+    }
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: colors.$gray-700;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    display: block;
+    margin-top: 0.15em;
+    margin-bottom: 1em;
+
+    strong {
+      @include weights.bold;
+    }
+  }
+
+  iframe {
+    margin: 0;
+  }
+
+  img {
+    margin: 0 auto;
   }
 }

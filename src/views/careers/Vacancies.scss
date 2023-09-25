@@ -71,12 +71,8 @@
 
     a.view.archived {
       width: max-content;
-      display: block;
       margin-top: 24px;
       padding: 16px 28px;
-      border-radius: 8px;
-      background-color: colors.$gray-100;
-      color: colors.$gray-600;
       @include styles.text-lg;
       @include weights.semibold;
     }
@@ -95,11 +91,6 @@
 
     .supporting.text {
       color: dark.$secondary-color;
-    }
-
-    a.view.archived {
-      background-color: colors.$gray-800;
-      color: colors.$gray-50;
     }
   }
 }

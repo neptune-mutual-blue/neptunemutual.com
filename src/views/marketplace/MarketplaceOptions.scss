@@ -111,18 +111,18 @@
         align-items: center;
         gap: 24px;
         
-        .swap {
+        .swap.container {
           width: 396px;
           border-radius: 12px;
           padding: 24px;
           background-color: colors.$gray-50;
 
-          svg {
+          .swap.logo svg {
             width: 56px;
             height: auto;
           }
 
-          p.title {
+          .title {
             margin-top: 32px;
             @include styles.text-xl;
             @include weights.semibold;
@@ -130,19 +130,9 @@
           }
 
           a {
+            padding: 0;
             margin-top: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            @include styles.text-md;
-            @include weights.semibold;
-            color: colors.$primary-700;
-
-            svg {
-              width: 20px;
-
-            }
+            display: inline-flex;
           }
 
           *[data-mode="light"] {
@@ -208,10 +198,6 @@
 
         p.title {
           color: colors.$base-white;
-        }
-
-        a {
-          color: colors.$primary-500;
         }
 
         *[data-mode="dark"] {
