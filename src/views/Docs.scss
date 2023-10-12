@@ -217,6 +217,8 @@ $sidebar-width: 300px;
     overflow: auto;
 
     @media (max-width: 1023px) {
+      height: 100vh;
+
       &:not(&[data-noscript]) {
         position: fixed;
         top: 0px;

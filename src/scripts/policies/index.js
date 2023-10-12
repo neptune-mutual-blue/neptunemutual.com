@@ -5,4 +5,5 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 // Global End
-import '../components/content-viewer/index'
+import '../components/rich-text-content/index'
+import '../components/table-of-contents/index'

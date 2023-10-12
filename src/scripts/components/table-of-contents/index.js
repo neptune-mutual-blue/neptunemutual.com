@@ -1,5 +1,3 @@
-import mediumZoom from '../../utils/image-zoom.min'
-
 {
   function click () {
     document.querySelectorAll('.table.of.contents.container a.active.item').forEach(x => x.classList.remove('active'))
@@ -9,6 +7,7 @@ import mediumZoom from '../../utils/image-zoom.min'
   const anchors = document.querySelectorAll('.table.of.contents.container a.item')
   anchors.forEach(x => x.addEventListener('click', click, { passive: true }))
 }
+
 {
   const socialShareContainer = document.querySelector('.social.share.container')
 
@@ -57,12 +56,4 @@ import mediumZoom from '../../utils/image-zoom.min'
       }, 1000)
     })
   }
-}
-
-{
-  const images = [
-    ...document.querySelectorAll('.content.viewer img')
-  ]
-
-  mediumZoom(images)
 }

@@ -1,14 +1,6 @@
-import hljs from 'highlight.js'
-
-import hljsDefineSolidity from '../../../lib/hljs-solidity/index'
-
-const highlightLineNumbersLoad = async () => {
-  return await import('highlightjs-line-numbers.js')
-}
-
-const addCopyButtons = () => {
-  const snippets = document.getElementsByTagName('pre')
+const addCopyButtons = (snippets) => {
   const numberOfSnippets = snippets.length
+
   for (let i = 0; i < numberOfSnippets; i++) {
     const code = snippets[i].getElementsByTagName('code')[0].innerText
 
@@ -34,8 +26,7 @@ const addCopyButtons = () => {
   }
 }
 
-const wrapAllCodeSnippets = () => {
-  const snippets = document.getElementsByTagName('pre')
+const wrapAllCodeSnippets = (snippets) => {
   const numberOfSnippets = snippets.length
 
   for (let i = 0; i < numberOfSnippets; i++) {
@@ -47,12 +38,19 @@ const wrapAllCodeSnippets = () => {
   }
 }
 
-export const setupHighlightJS = async function () {
-  hljsDefineSolidity(hljs)
-  hljs.highlightAll()
-  window.hljs = hljs
-  wrapAllCodeSnippets()
-  addCopyButtons()
-  await highlightLineNumbersLoad()
+async function setupHighlightJS () {
+  const snippets = document.getElementsByTagName('pre')
+  if (snippets.length === 0) {
+    return
+  }
+
+  const { init } = await import('./init')
+  const hljs = await init()
+
+  wrapAllCodeSnippets(snippets)
+  addCopyButtons(snippets)
+
   hljs.initLineNumbersOnLoad()
 }
+
+export { setupHighlightJS }

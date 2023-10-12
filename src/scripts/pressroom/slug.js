@@ -5,6 +5,6 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 // Global End
+import '../components/rich-text-content/index'
+import '../components/social-share/index'
 import '../components/subscription/index'
-import '../components/content-viewer/index'
-import '../components/blog-pressroom-viewer/index'
