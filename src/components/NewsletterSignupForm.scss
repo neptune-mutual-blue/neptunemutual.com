@@ -18,7 +18,6 @@
   .box {
     border-radius: 16px;
     background-color: colors.$primary-25;
-    border: 1px solid colors.$gray-200;
 
     padding-top: 64px;
     padding-bottom: 64px;
@@ -68,7 +67,6 @@
 .dark .newsletter.signup {
   .box {
     background-color: colors.$black-800;
-    border: 1px solid colors.$gray-900;
   }
 
   .content.container {
