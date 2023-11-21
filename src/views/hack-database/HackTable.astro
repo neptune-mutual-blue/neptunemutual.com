@@ -95,11 +95,18 @@ const sortableColumns = Object.keys(sortKeys);
                     <button
                       data-sorting-key={sortKeys[column]}
                       class={
-                        initialSortKey.includes(sortKeys[column]) ? "desc" : ""
+                        initialSortKey.includes(sortKeys[column])
+                          ? "active desc"
+                          : ""
                       }
                     >
                       <span>{column}</span>
-                      <Icon variant="arrow-down" />
+                      <div class="sort icon">
+                        <Icon variant="chevron-up-down" size="lg" />
+                      </div>
+                      <div class="active icon">
+                        <Icon variant="chevron-up" />
+                      </div>
                     </button>
                   ) : (
                     <span>{column}</span>

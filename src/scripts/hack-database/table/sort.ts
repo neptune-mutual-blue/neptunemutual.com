@@ -22,8 +22,8 @@ const setupSorting = (): void => {
         }
       } else {
         newSortKey = '-' + sortingKey
-        buttons.forEach((b) => b.classList.remove('desc'))
-        btn.classList.add('desc')
+        buttons.forEach((b) => b.classList.remove('desc', 'active'))
+        btn.classList.add('desc', 'active')
       }
 
       if (table != null) {

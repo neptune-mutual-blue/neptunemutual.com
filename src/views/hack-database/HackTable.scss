@@ -142,8 +142,27 @@
           display: flex;
           align-items: center;
           gap: 4px;
-
+          
           color: colors.$gray-600;
+
+          &:not(.active) {
+            .active.icon {
+              display: none;
+            }
+          }
+
+
+          .sort.icon {
+            svg {
+              width: 20px;
+            }
+          }
+
+          &.active {
+            .sort.icon {
+              display: none;
+            }
+          }
 
           &.desc {
             svg {
