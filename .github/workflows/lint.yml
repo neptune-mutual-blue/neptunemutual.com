@@ -4,13 +4,22 @@ on:
     branches: '**'
   pull_request:
     branches: '**'
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.15.0'
-      - run: yarn install --frozen-lockfile
-      - run: yarn lint
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Volta
+        uses: volta-cli/action@v4
+
+      - name: Check versions
+        run: node -v && npm -v && yarn -v
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
