@@ -57,5 +57,8 @@
     "highlight.js": "^11.7.0",
     "highlightjs-line-numbers.js": "^2.8.0",
     "idb-keyval": "^6.2.0"
-  }
+  },
+  "resolutions": {
+    "undici": "5.26.2"
+}
 }
