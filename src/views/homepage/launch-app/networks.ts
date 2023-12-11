@@ -21,6 +21,12 @@ const networks: Array<{
     id: 'bsc',
     href: 'https://bsc.neptunemutual.net',
     link: 'bsc.neptunemutual.net'
+  },
+  {
+    value: 'Polygon',
+    id: 'polygon',
+    href: 'https://polygon.neptunemutual.net',
+    link: 'polygon.neptunemutual.net'
   }
 ]
 

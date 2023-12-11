@@ -39,6 +39,17 @@ const networks: NetworkOption[] = [
     ).then((x: any) => x.default),
     text: 'bsc.neptunemutual.net',
     link: 'https://bsc.neptunemutual.net'
+  },
+  {
+    name: 'Polygon',
+    src: import(
+      '../elements/icons/custom/Brands/default/SvgPolygon.svg?raw'
+    ).then((x: any) => x.default),
+    srcDark: import(
+      '../elements/icons/custom/Brands/dark/SvgPolygonDark.svg?raw'
+    ).then((x: any) => x.default),
+    text: 'polygon.neptunemutual.net',
+    link: 'https://polygon.neptunemutual.net'
   }
 ]
 
@@ -54,6 +65,10 @@ const tokens = {
   bsc: {
     npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
     usdc: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d'
+  },
+  polygon: {
+    npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
+    usdc: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
   }
 }
 
@@ -74,6 +89,12 @@ const swaps: Array<{
     srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
     title: 'Sushiswap (BNB Chain)',
     href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
+  },
+  {
+    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (Polygon)',
+    href: `https://www.sushi.com/swap?token0=${tokens.polygon.usdc}&token1=${tokens.polygon.npm}&chainId=137`
   },
   {
     src: import('../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),

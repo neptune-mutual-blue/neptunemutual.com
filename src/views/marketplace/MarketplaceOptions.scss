@@ -115,10 +115,20 @@
           border-radius: 12px;
           padding: 24px;
           background-color: colors.$gray-50;
+          display: flex;
+          flex-direction: column;
 
           .swap.logo svg {
             width: 56px;
             height: auto;
+          }
+
+          .swap.link {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: flex-end;
+            align-items: flex-start;
           }
 
           .title {
