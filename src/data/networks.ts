@@ -78,30 +78,30 @@ const swaps: Array<{
   title: string
   href: string
 }> = [
-    {
-      src: import('../elements/icons/custom/sushi-arb.svg?raw').then((x: any) => x.default),
-      srcDark: import('../elements/icons/custom/sushi-arb-dark.svg?raw').then((x: any) => x.default),
-      title: 'Sushiswap (Arbitrum)',
-      href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
-    },
-    {
-      src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
-      srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
-      title: 'Sushiswap (BNB Chain)',
-      href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
-    },
-    {
-      src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
-      srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
-      title: 'Sushiswap (Polygon)',
-      href: `https://www.sushi.com/swap?token0=${tokens.polygon.usdc}&token1=${tokens.polygon.npm}&chainId=137`
-    },
-    {
-      src: import('../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),
-      srcDark: import('../elements/icons/custom/uniswap-eth-dark.svg?raw').then((x: any) => x.default),
-      title: 'Uniswap (Ethereum)',
-      href: `https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=${tokens.eth.npm}&chain=mainnet`
-    }
-  ]
+  {
+    src: import('../elements/icons/custom/sushi-arb.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/sushi-arb-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (Arbitrum)',
+    href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
+  },
+  {
+    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (BNB Chain)',
+    href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
+  },
+  {
+    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (Polygon)',
+    href: `https://www.sushi.com/swap?token0=${tokens.polygon.usdc}&token1=${tokens.polygon.npm}&chainId=137`
+  },
+  {
+    src: import('../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/uniswap-eth-dark.svg?raw').then((x: any) => x.default),
+    title: 'Uniswap (Ethereum)',
+    href: `https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=${tokens.eth.npm}&chain=mainnet`
+  }
+]
 
 export { networks, swaps }
