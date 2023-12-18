@@ -137,5 +137,10 @@
     "Ελληνικά",
     "русский"
   ],
-  "csharp.format.enable": false
+  "csharp.format.enable": false,
+  "[astro][javascript][javascriptreact][typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    }
+  }
 }
