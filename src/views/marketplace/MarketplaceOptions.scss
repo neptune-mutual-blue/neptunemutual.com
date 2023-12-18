@@ -9,16 +9,20 @@
   @include utils.full-width-container;
   margin-bottom: 96px;
 
+  h2 a {
+    color: inherit;
+  }
+
   .inner.container {
-    padding: 0  0 96px;
-    
+    padding: 0 0 96px;
+
     .networks.section {
       padding: 96px 0;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 32px;
-      
+
       @media (max-width: 767px) {
         gap: 16px;
         flex-direction: column;
@@ -27,52 +31,53 @@
       .network.item {
         border-radius: 12px;
         padding: 48px 16px;
-        
+
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 16px;
-  
-        &:hover, &:focus-visible {
+
+        &:hover,
+        &:focus-visible {
           background-color: colors.$gray-100;
         }
-  
+
         svg {
           width: 112px;
           height: 112px;
         }
-  
+
         @media (max-width: 767px) {
           padding: 16px 8px;
-  
+
           svg {
             width: 80px;
             height: 80px;
           }
         }
-  
+
         i[data-mode="light"] {
           display: block;
         }
-  
+
         i[data-mode="dark"] {
           display: none;
         }
-  
+
         .text.container {
           text-align: center;
           padding: 0 14px;
-  
+
           p.name {
             @include styles.display-xs;
             @include weights.semibold;
             color: colors.$black;
-            
+
             @media (max-width: 767px) {
               @include styles.text-lg;
             }
           }
-          
+
           p.text {
             @include styles.text-sm;
             @include weights.regular;
@@ -90,13 +95,13 @@
         max-width: 768px;
         text-align: center;
         margin: 0 auto;
-        
-        p.title {
+
+        h2.title {
           @include styles.display-md;
           @include weights.semibold;
           color: colors.$gray-900;
         }
-        
+
         p.desc {
           margin-top: 20px;
           @include styles.text-xl;
@@ -109,7 +114,7 @@
         display: flex;
         justify-content: center;
         gap: 24px;
-        
+
         .swap.container {
           width: 396px;
           border-radius: 12px;
@@ -131,7 +136,7 @@
             align-items: flex-start;
           }
 
-          .title {
+          h3 {
             margin-top: 32px;
             @include styles.text-xl;
             @include weights.semibold;
@@ -172,23 +177,25 @@
   .inner.container {
     .networks.section {
       .network.item {
-        &:hover, &:focus-visible {
+
+        &:hover,
+        &:focus-visible {
           background-color: colors.$black-800;
         }
-  
+
         i[data-mode="light"] {
           display: none;
         }
-  
+
         i[data-mode="dark"] {
           display: block;
         }
-  
+
         .text.container {
           p.name {
             color: colors.$white;
           }
-          
+
           p.text {
             color: colors.$gray-25;
           }
@@ -198,6 +205,8 @@
 
     .get.npm.section {
       .header {
+
+        h2,
         p {
           color: colors.$base-white;
         }
@@ -206,7 +215,7 @@
       .swaps .swap {
         background-color: colors.$black-800;
 
-        p.title {
+        h3 {
           color: colors.$base-white;
         }
 

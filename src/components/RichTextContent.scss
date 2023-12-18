@@ -38,20 +38,23 @@
   h6 {
     margin-top: 0;
 
+
     .heading.anchor {
-      display: inline-block;
-      margin-left: 0.5rem;
-      opacity: 0;
-      color: colors.$gray-400;
-      font-weight: 300;
+      display: none;
       user-select: none;
+      opacity: 0;
+      font-weight: 300;
+      color: colors.$gray-500;
+      margin-left: 0.5rem;
     }
 
-    &:hover .heading.anchor {
+    &:hover .heading.anchor,
+    &:active .heading.anchor {
+      display: inline-block;
       opacity: 1;
       text-decoration: none;
       color: colors.$indigo-600;
-
+      
       &:hover {
         color: colors.$gray-500;
       }
@@ -494,18 +497,6 @@
       @include weights.regular;
     }
 
-    .heading.anchor {
-      display: none;
-      user-select: none;
-      font-weight: 300;
-      color: colors.$gray-500;
-      margin-left: 0.5rem;
-    }
-
-    &:hover .heading.anchor,
-    &:active .heading.anchor {
-      display: inline-block;
-    }
   }
 
   h1 {
@@ -712,12 +703,18 @@
   h4,
   h5,
   h6 {
+    color: colors.$gray-200;
+
+    .heading.anchor {
+      color: colors.$gray-200;
+    }
+
     &:hover .heading.anchor {
       color: colors.$indigo-500;
+    }
 
-      &:hover {
-        color: colors.$gray-300;
-      }
+    &:hover .heading.anchor:hover {
+      color: colors.$gray-300;
     }
   }
 
@@ -866,18 +863,7 @@
     }
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: colors.$gray-200;
 
-    .heading.anchor {
-      color: colors.$gray-200;
-    }
-  }
 
   .table.container {
     border-radius: 10px;
