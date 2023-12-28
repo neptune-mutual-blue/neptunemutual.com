@@ -102,7 +102,9 @@ const updateThemeLinks = (currentTheme, newTheme) => {
 
 updateThemeLinks()
 
-// Wait for the loading of the theme
-setTimeout(() => {
-  switchTweetTheme('light', window.getTheme())
-}, 1000)
+window.addEventListener('load', () => {
+  // Wait for the loading of the theme
+  setTimeout(() => {
+    switchTweetTheme('light', window.getTheme())
+  }, 2000)
+})

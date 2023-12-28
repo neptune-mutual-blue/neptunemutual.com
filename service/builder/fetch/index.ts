@@ -13,7 +13,6 @@ const resources: ApiResource[] = [
   [Api.ContractArbitrum, 'https://api.neptunemutual.net/protocol/contracts/arbitrum', true],
   [Api.ContractMumbai, 'https://api.neptunemutual.net/protocol/contracts/mumbai', true],
   [Api.ContractBSC, 'https://api.neptunemutual.net/protocol/contracts/bsc', true],
-  [Api.ContractBSC, 'https://api.neptunemutual.net/protocol/contracts/bsc', true],
   [Api.Media, 'api/media?limit=1000'],
   [Api.Blog, 'api/articles?limit=1000'],
   [Api.Doc, 'api/docs?limit=1000'],
