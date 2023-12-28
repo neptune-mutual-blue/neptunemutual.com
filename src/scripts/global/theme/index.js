@@ -6,7 +6,7 @@ const switchTheme = async () => {
 
   window.localStorage.setItem('theme', switchTo)
 
-  updateThemeLinks()
+  updateThemeLinks(theme, switchTo)
 
   darkModeInputCheckboxes.forEach(async (darkModeInputCheckbox) => {
     await window.loadTheme(darkModeInputCheckbox)
@@ -88,7 +88,7 @@ const switchTweetTheme = (currentTheme, targetTheme) => {
   })
 }
 
-const updateThemeLinks = () => {
+const updateThemeLinks = (currentTheme, newTheme) => {
   const links = document.querySelectorAll('a')
 
   links.forEach(link => {
@@ -97,7 +97,7 @@ const updateThemeLinks = () => {
     }
   })
 
-  switchTweetTheme('light', window.getTheme())
+  switchTweetTheme(currentTheme || 'light', newTheme || window.getTheme())
 }
 
 updateThemeLinks()

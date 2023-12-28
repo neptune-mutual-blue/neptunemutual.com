@@ -228,6 +228,10 @@
     }
   }
 
+  .twitter-tweet iframe {
+    min-height: unset !important;
+  }
+
   .gist {
     width: 100% !important;
   }
