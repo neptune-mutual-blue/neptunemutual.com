@@ -80,11 +80,17 @@ const switchTweetTheme = (currentTheme, targetTheme) => {
     return
   }
 
-  const tweets = document.querySelectorAll('[data-tweet-id]')
+  const renderedTweets = document.querySelectorAll('[data-tweet-id]')
 
-  tweets.forEach((tweet) => {
+  renderedTweets.forEach((tweet) => {
     const src = tweet.getAttribute('src')
     tweet.setAttribute('src', src.replace('theme=' + currentTheme, 'theme=' + targetTheme))
+  })
+
+  const unRenderedTweets = document.querySelectorAll('blockquote.twitter-tweet')
+
+  unRenderedTweets.forEach((tweet) => {
+    tweet.setAttribute('data-theme', targetTheme)
   })
 }
 
@@ -102,9 +108,7 @@ const updateThemeLinks = (currentTheme, newTheme) => {
 
 updateThemeLinks()
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   // Wait for the loading of the theme
-  setTimeout(() => {
-    switchTweetTheme('light', window.getTheme())
-  }, 2000)
+  switchTweetTheme('light', window.getTheme())
 })
