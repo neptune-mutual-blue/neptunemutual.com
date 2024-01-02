@@ -42,7 +42,11 @@ export const useContractCall = ({ abi, address }) => {
         methodArgs = [...args, { gasLimit: calculateGasMargin(estimatedGas), ...overrides }]
 
         const res = await contract[methodName](...methodArgs)
-        return Array.isArray(res) ? Array.from(res) : [res]
+
+        if (res.wait) await res.wait()
+
+        const data = Array.isArray(res) ? Array.from(res) : [res]
+        return { hash: res.hash, data }
       } catch (error) {
         console.log(`Error in calling ${methodName} function: ${error}`)
         return { error: getErrorMessage(error, iface) }

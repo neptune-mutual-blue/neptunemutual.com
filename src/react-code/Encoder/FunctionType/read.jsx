@@ -40,18 +40,18 @@ const ReadContract = (props) => {
 
     const methodName = name
     const args = getWriteArguments(func, inputData)
-    const outputResponse = await call(methodName, args, undefined, iface)
+    const { data, error: _error } = await call(methodName, args, undefined, iface)
 
-    if (outputResponse && !outputResponse.error && !outputResponse.length) {
+    if (!_error && !data.length) {
       setSuccessfulResponse('✅ Call Successfull')
     }
 
-    if (outputResponse && !outputResponse.error) {
-      const _outputData = getOutputResponse(func, outputResponse)
+    if (!_error) {
+      const _outputData = getOutputResponse(func, data)
       setOutputData(_outputData)
     }
 
-    if (outputResponse?.error) setError(outputResponse.error)
+    if (_error) setError(_error)
     else setError('')
 
     setMakingCall(false)

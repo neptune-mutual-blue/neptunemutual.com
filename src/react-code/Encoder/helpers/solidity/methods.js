@@ -7,6 +7,19 @@ BigNumber.config({
 
 const GAS_MARGIN_MULTIPLIER = 1.5
 
+const parseError = (iface, errorData) => {
+  try {
+    const errorDescription = iface.parseError(errorData)
+
+    const message = `${errorDescription.name}(${errorDescription.args.join(', ')})`
+
+    return message
+  } catch (error) {
+    // swallow
+    // console.error(error)
+  }
+}
+
 const getErrorMessage = (_error, iface = null) => {
   try {
     const error = _error.error || _error
@@ -15,8 +28,8 @@ const getErrorMessage = (_error, iface = null) => {
     }
 
     if (iface && error.data.data) {
-      const parsedError = iface.parseError(error.data.data)
-      return `Error: ${parsedError.name}`
+      const parsedError = parseError(iface, error.data.data)
+      if (parsedError) return `Error: ${parsedError.name}`
     }
 
     if (error?.reason) return error.reason
