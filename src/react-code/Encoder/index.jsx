@@ -11,7 +11,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
 import { Button } from '../components/Button/Button'
-import { InputWithLabel } from '../components/InputWithLabel'
+import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { TextArea } from '../components/TextArea'
 import { getLibrary } from '../lib/connect-wallet/utils/web3'
 import {

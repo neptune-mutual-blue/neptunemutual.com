@@ -6,7 +6,7 @@ import {
   useState
 } from 'react'
 
-import { InputWithLabel } from '../../components/InputWithLabel'
+import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import { TextArea } from '../../components/TextArea'
 import {
   encodeData

@@ -27,7 +27,7 @@ const getErrorMessage = (_error, iface = null) => {
       return 'Unexpected Error Occurred'
     }
 
-    if (iface && error.data.data) {
+    if (iface && error?.data?.data) {
       const parsedError = parseError(iface, error.data.data)
       if (parsedError) return `Error: ${parsedError.name}`
     }

@@ -7,7 +7,7 @@ import {
 } from 'react'
 
 import { Button } from '../../components/Button/Button'
-import { InputWithLabel } from '../../components/InputWithLabel'
+import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import {
   checkEmptyInputs,
   checkInputErrors,

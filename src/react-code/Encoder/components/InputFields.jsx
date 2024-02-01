@@ -1,4 +1,4 @@
-import { InputWithLabel } from '../../components/InputWithLabel'
+import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import { getIndex, getPlaceholder, isInputError } from '../helpers/web3-tools/abi-encoder'
 
 const Inputs = ({ inputs, handleChange, schema, inputData, prevIndex }) => {
@@ -28,6 +28,7 @@ const Inputs = ({ inputs, handleChange, schema, inputData, prevIndex }) => {
               key={`input-${getIndex(i, prevIndex)}`}
               label={`${input.name || '<input>'} (${input.type})`}
               placeholder={getPlaceholder(input.type)}
+              inputType={input.type}
               id={i}
               onChange={e => handleChange(getIndex(i, prevIndex), e.target.value)}
               error={
@@ -50,6 +51,7 @@ export const InputFields = ({ func, schema, inputData, handleChange }) => (
       func?.stateMutability === 'payable' && (
         <InputWithLabel
           label={func.name}
+          inputType='uint256'
           placeholder={'payableAmount'}
           id={'payble-amount-field'}
           onChange={e => handleChange(func.name, e.target.value)}

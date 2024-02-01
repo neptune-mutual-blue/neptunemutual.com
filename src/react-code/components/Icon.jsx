@@ -20,6 +20,8 @@ import { OkxWalletIcon } from './icons/OkxWalletIcon'
 import { RefreshIcon } from './icons/RefreshIcon'
 import { TrashIcon } from './icons/TrashIcon'
 import { WalletIcon } from './icons/WalletIcon'
+import { PlusIcon } from './icons/PlusIcon'
+import { SwitchHorizontalIcon } from './icons/SwitchHorizontal'
 
 const icons = {
   'chevron-right': <ChevronRight />,
@@ -43,7 +45,9 @@ const icons = {
   folder: <FolderIcon />,
   'chevron-right-double': <ChevronRightDouble />,
   coinbase: <CoinbaseIcon />,
-  'coinbase-dark': <CoinbaseDarkIcon />
+  'coinbase-dark': <CoinbaseDarkIcon />,
+  plus: <PlusIcon />,
+  'switch-horizontal-01': <SwitchHorizontalIcon />
 }
 
 export const Icon = ({ variant, size }) => {
