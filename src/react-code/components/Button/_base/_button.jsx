@@ -1,4 +1,6 @@
-const BaseButton = (props) => {
+import React, { forwardRef } from 'react'
+
+const BaseButton = forwardRef((props, ref) => {
   const {
     id,
     className,
@@ -16,6 +18,7 @@ const BaseButton = (props) => {
 
   return (
     <button
+      ref={ref}
       id={id}
       onClick={onClick}
       className={`ui ${(className || '').trim()} button`}
@@ -29,6 +32,6 @@ const BaseButton = (props) => {
       {children}
     </button>
   )
-}
+})
 
 export { BaseButton }

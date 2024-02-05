@@ -1,0 +1,124 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.decode.container {
+  .btn.wrapper {
+    margin-top: 16px;
+  }
+
+  .decoded.data.container {
+    margin-top: 24px;
+    padding: 32px 24px;
+    background-color: colors.$blue-25;
+    border-radius: 9px;
+    border: 1px solid colors.$gray-300;
+
+    p, span {
+      color: colors.$gray-700;
+      white-space: wrap;
+      word-wrap: break-word;
+    }
+
+    p.kv {
+      @include styles.text-sm;
+      @include weights.regular;
+  
+      span {
+        @include weights.medium;
+      }
+    }
+
+    p.title {
+      @include styles.text-md;
+      @include weights.medium;
+    }
+
+    p.func.name {
+      margin-top: 8px;
+    }
+
+    p.func.signature {
+      margin-top: 4px;
+    }
+
+    .args.container {
+      margin-top: 24px;
+
+      p.title {
+        @include styles.text-md;
+        @include weights.medium;
+      }
+
+      .list {
+        margin-top: 16px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .card {
+          padding: 10px 14px;
+          background-color: colors.$base-white;
+          border: 1px solid colors.$gray-300;
+          border-radius: 8px;
+
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .array.values {
+            div {
+              margin-top: 8px;
+              padding-left: 8px;
+            }
+            
+            .tuples.array {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+          }
+
+        }
+
+        .inner  {
+          margin-top: 8px;
+
+          .card {
+            background-color: colors.$gray-25;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dark .decode.container {
+  .decoded.data.container {
+    background-color: colors.$black-800;
+    border: 1px solid colors.$gray-800;
+
+    p, span {
+      color: colors.$base-white;
+    }
+
+    .args.container {
+      .list {
+        .card {
+          background-color: colors.$gray-true-900;
+          border: 1px solid colors.$gray-800;
+        }
+
+        .inner  {
+          .card {
+            background-color: colors.$gray-true-800;
+          }
+        }
+      }
+    }
+  }
+}

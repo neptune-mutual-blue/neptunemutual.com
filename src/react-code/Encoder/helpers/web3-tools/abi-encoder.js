@@ -316,6 +316,7 @@ function getIndex (idx, prevIndex) {
 }
 
 export {
+  getTypeInfo,
   checkInputErrors,
   createJoiSchema,
   getPlaceholder,

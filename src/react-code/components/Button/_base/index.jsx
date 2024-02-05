@@ -2,13 +2,15 @@ import { Icon } from '../../Icon'
 import { AnchorButton } from './_anchor'
 import { BaseButton } from './_button'
 
-const VanillaButton = (props) => {
+import React, { forwardRef } from 'react'
+
+const VanillaButton = forwardRef((props, ref) => {
   const { type, icon, iconOnlyMobile, iconVariant, iconLeading, iconTrailing, children } = props
 
   const UntypedElement = type === 'anchor' ? AnchorButton : BaseButton
 
   return (
-    <UntypedElement {...props}>
+    <UntypedElement ref={ref} {...props}>
       {iconLeading && <Icon variant={iconVariant} />}
 
       <span
@@ -25,6 +27,6 @@ const VanillaButton = (props) => {
     }
     </UntypedElement>
   )
-}
+})
 
 export { VanillaButton }

@@ -67,9 +67,71 @@ const encodeData = (encodeInterface, methodName, methodArgs = [], onError = (err
   }
 }
 
+const parseEncoded = (data) => {
+  data = data.trim()
+
+  const alphaNumRegex = /^0x[a-zA-Z0-9]+$/
+
+  if (data.match(alphaNumRegex)) {
+    return {
+      parsed: data
+    }
+  }
+
+  return {
+    error: 'Invalid format.'
+  }
+}
+
+const decodeData = (encodeInterface, encodedData, onError = (message, error) => {}) => {
+  if (!encodeInterface) return
+
+  function getInputsWithArgs (inputs, args) {
+    return inputs.map(input => {
+      const components = input.components
+
+      const isArray = input.baseType === 'array'
+
+      let arg = args[input.name]
+
+      if (isArray) {
+        arg = (arg || []).map(argItem => {
+          return components ? getInputsWithArgs(components, argItem || []) : argItem.toString()
+        })
+      }
+
+      if (!isArray) arg = components ? getInputsWithArgs(components, arg || []) : arg
+
+      if (typeof arg === 'string' || arg._isBigNumber || input.type === 'bool') arg = arg.toString()
+
+      return {
+        name: input.name,
+        type: input.type,
+        value: arg,
+        isArray
+      }
+    })
+  }
+
+  try {
+    const decoded = encodeInterface.parseTransaction({ data: encodedData })
+
+    const { name, signature, args, functionFragment: { inputs } } = decoded
+
+    const inputsWithArgs = getInputsWithArgs(inputs, args)
+
+    return { name, signature, inputs: inputsWithArgs }
+  } catch (error) {
+    console.log('Error in decoding data', { encodedData, error })
+    onError(`${error.code}: ${error.reason}`, error)
+  }
+}
+
 export {
   calculateGasMargin,
   encodeData,
   GAS_MARGIN_MULTIPLIER,
-  getErrorMessage
+  getErrorMessage,
+  decodeData,
+  parseEncoded
 }

@@ -1,16 +1,19 @@
 import { VanillaButton } from './_base'
 
-const PrimaryButton = (props) => {
-  const { classname, children } = props
+import React, { forwardRef } from 'react'
+
+const PrimaryButton = forwardRef((props, ref) => {
+  const { classname, children, ...rest } = props
   return (
     <VanillaButton
+      ref={ref}
       type='button'
       className={`${classname || ''} primary`.trim()}
-      {...props}
+      {...rest}
     >
       {children}
     </VanillaButton>
   )
-}
+})
 
 export { PrimaryButton }

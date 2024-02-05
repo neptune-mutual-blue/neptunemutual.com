@@ -30,11 +30,17 @@
     }
   }
 
-  label {
-    @include styles.text-sm;
-    @include weights.medium;
-    flex: 1;
+  div.label {
+    max-width: 100%;
+    
+    label {
+      @include styles.text-sm;
+      @include weights.medium;
+      flex: 1;
+      word-wrap: break-word;
+    }
   }
+
 
   select {
     -moz-appearance: none; 

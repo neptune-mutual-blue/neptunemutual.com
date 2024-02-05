@@ -53,9 +53,14 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
 
         {
           selectedOption === 'custom' && (
-            <input type='number' min={0} onChange={
-              (e) => setValue(e.target.value)
-            } value={value}
+            <input
+              type='number'
+              min={0}
+              autoFocus
+              onChange={
+                (e) => setValue(e.target.value)
+              }
+              value={value}
             />
           )
         }
