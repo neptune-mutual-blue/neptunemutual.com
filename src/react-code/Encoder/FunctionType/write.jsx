@@ -1,6 +1,7 @@
 import './write.scss'
 
 import {
+  useCallback,
   useId,
   useMemo,
   useState
@@ -11,7 +12,8 @@ import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import {
   checkEmptyInputs,
   checkInputErrors,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
 import { useWeb3React } from '@web3-react/core'
@@ -30,13 +32,15 @@ const WriteContract = (props) => {
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
   const { inputs, name, stateMutability } = func
 
-  async function handleWrite () {
+  console.log
+
+  const handleWrite = useCallback(async () => {
     setError('')
     setHash('')
     setMakingCall(true)
 
     const methodName = name
-    const methodArgs = getWriteArguments(func, inputData)
+    const methodArgs = getWriteArguments(inputData)
 
     const hasPayableStateMutability = func?.stateMutability === 'payable'
     const value = inputData[name]
@@ -48,10 +52,11 @@ const WriteContract = (props) => {
     if (_error) setError(_error)
 
     setMakingCall(false)
-  }
+  }, [call, name, inputData, func, iface])
 
-  const handleInputChange = (name, value = '') => {
-    setInputData(_prev => ({ ..._prev, [name]: value }))
+  const handleInputChange = (value = '', keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
     if (error) setError('')
   }
 
@@ -70,8 +75,8 @@ const WriteContract = (props) => {
           size='sm'
           onClick={handleWrite}
           disabled={!isReady ||
-            checkEmptyInputs(inputs, inputData, name, stateMutability) ||
-            checkInputErrors(joiSchema, inputData) ||
+            // checkEmptyInputs(inputs, inputData, name, stateMutability) ||
+            // checkInputErrors(joiSchema, inputData) ||
             makingCall
           }
         >

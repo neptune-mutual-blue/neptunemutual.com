@@ -14,9 +14,11 @@ import {
 } from '../helpers/solidity/methods'
 import {
   getFunctionSignature,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
+import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 
 const EncodeData = (props) => {
   const id = useId()
@@ -24,7 +26,7 @@ const EncodeData = (props) => {
   const [outputData, setOutputData] = useState('')
   const [outputError, setOutputError] = useState('')
 
-  const { encodeInterface, func, joiSchema } = props
+  const { encodeInterface, func, joiSchema, itemIndex } = props
   const { inputs, name } = func
 
   useEffect(() => {
@@ -34,25 +36,16 @@ const EncodeData = (props) => {
     }
   }, [name, encodeInterface, inputs])
 
-  const checkNonEmptyInputs = (_inputData) => {
-    const nonEmptyInput = Object.values(_inputData).find(Boolean)
-
-    return Boolean(nonEmptyInput)
-  }
-
-  const handleChange = (name, value) => {
-    const _inputData = ({ ...inputData, [name]: value })
-
-    setInputData(_prev => ({ ..._prev, [name]: value }))
+  const handleChange = (value, keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
 
     const encodeSignature = getFunctionSignature(func)
-    const encodeArgs = getWriteArguments(func, _inputData)
+    const encodeArgs = getWriteArguments(updatedObject)
 
     const encoded = encodeData(encodeInterface, encodeSignature, encodeArgs, (error) => {
+      if (error) setOutputError(error)
       setOutputData('')
-
-      if (checkNonEmptyInputs({ ..._inputData })) setOutputError(error)
-      else setOutputError('')
     })
 
     if (encoded) {

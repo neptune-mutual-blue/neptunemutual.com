@@ -146,28 +146,48 @@ const getJoiType = (type) => {
     : joiType
 }
 
-const createJoiSchema = func => {
+const createJoiSchema = (func, arrayLengths) => {
   const { inputs, stateMutability, name } = func
 
   if (!inputs?.length) return
+
+  arrayLengths = arrayLengths || Array(inputs.length).fill(1)
 
   const joiSchema = {}
 
   if (stateMutability === 'payable') joiSchema[name] = getJoiType('uint')
 
   function getSchemaObject (_inputs, prevIdx = null) {
-    const schemObject = {}
+    const schemaObject = {}
 
     _inputs.map((_input, i) => {
-      if (_input.type === 'tuple' && Array.isArray(_input.components)) {
-        Object.assign(schemObject, getSchemaObject(_input.components, getIndex(i, prevIdx)))
+      const { isArray, actualType } = getTypeInfo(_input.type)
+      const arrayLength = arrayLengths[i]
+
+      if (isArray) {
+        Array.from({ length: arrayLength }).map((_, arrIdx) => {
+          const index = getIndex(getIndex(arrIdx, i), prevIdx)
+
+          if (actualType === 'tuple' && Array.isArray(_input.components)) {
+            Object.assign(schemaObject, getSchemaObject(_input.components, index))
+            return null
+          }
+          schemaObject[index] = getJoiType(actualType)
+          return null
+        })
+
         return null
       }
-      schemObject[getIndex(i, prevIdx)] = getJoiType(_input.type)
+
+      if (_input.type === 'tuple' && Array.isArray(_input.components)) {
+        Object.assign(schemaObject, getSchemaObject(_input.components, getIndex(i, prevIdx)))
+        return null
+      }
+      schemaObject[getIndex(i, prevIdx)] = getJoiType(_input.type)
       return null
     })
 
-    return schemObject
+    return schemaObject
   }
 
   Object.assign(joiSchema, getSchemaObject(inputs))
@@ -213,6 +233,15 @@ const isInputError = (schema, inputData, _field) => {
   return false
 }
 
+const checkInputError = (type, value) => {
+  if (!value) return false
+
+  const schema = Joi.object({ key: getJoiType(type) })
+  const { error } = schema.validate({ key: value })
+
+  return Boolean(error)
+}
+
 const defaultData = type => {
   const { actualType, isArray, argCount } = getTypeInfo(type)
 
@@ -254,7 +283,7 @@ function getDefaultEncodeData (_function) {
     const data = inps.map(input => {
       const { isArray } = getTypeInfo(input.type)
 
-      if (['tuple', 'tuple[]'].includes(input.type) && Array.isArray(input.components)) {
+      if (Array.isArray(input.components)) {
         const _data = getEncodedDataArray(input.components)
         return isArray ? [_data] : _data
       }
@@ -268,29 +297,18 @@ function getDefaultEncodeData (_function) {
   return getEncodedDataArray(_function.inputs)
 }
 
-function getWriteArguments (_function, inputData) {
-  function getInputs (inputs, prevIdx) {
-    const data = inputs.map((input, i) => {
-      const { isArray } = getTypeInfo(input.type)
-      const val = inputData[getIndex(i, prevIdx)]
-
-      if (input.type === 'tuple' && Array.isArray(input.components)) return getInputs(input.components, getIndex(i, prevIdx))
-
-      if (input.type === 'tuple[]' || isArray) {
-        try {
-          const parsed = JSON.parse(val)
-          if (parsed && Array.isArray(parsed)) return parsed
-        } catch {}
-        return null
-      }
-
-      return val
+function getWriteArguments (inputData) {
+  function getInputs (inputs) {
+    let data = Object.values(inputs)
+    data = data.map(item => {
+      if (typeof item === 'object') return getInputs(item)
+      return item
     })
 
     return data.filter(Boolean)
   }
 
-  return getInputs(_function.inputs)
+  return getInputs(inputData)
 }
 
 function getOutputResponse (func, outputResponse) {
@@ -315,6 +333,36 @@ function getIndex (idx, prevIndex) {
   return ['number', 'string'].includes(typeof prevIndex) ? `${prevIndex}-${idx}` : idx
 }
 
+function updateObjectByArrayOfKeys (obj, keys, value) {
+  let newObj = { ...obj }
+
+  const key = keys.shift()
+  if (keys.length) {
+    newObj[key] = updateObjectByArrayOfKeys(newObj[key], keys, value)
+  } else {
+    newObj[key] = value
+  }
+
+  const isArray = Object.keys(newObj).every(k => !isNaN(Number(k)))
+  if (isArray) newObj = Object.values(newObj)
+  return newObj
+}
+
+function getObjectValue (_obj, _keys = []) {
+  const obj = { ..._obj }
+  const keys = [..._keys]
+
+  let key = keys.shift()
+  let value = { ...obj }
+
+  while (key && value) {
+    value = value[key]
+    key = keys.shift()
+  }
+
+  return value
+}
+
 export {
   getTypeInfo,
   checkInputErrors,
@@ -326,5 +374,8 @@ export {
   getWriteArguments,
   getOutputResponse,
   getIndex,
-  checkEmptyInputs
+  checkEmptyInputs,
+  updateObjectByArrayOfKeys,
+  checkInputError,
+  getObjectValue
 }

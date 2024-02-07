@@ -11,7 +11,8 @@ import { Icon } from '../../components/Icon'
 import {
   checkInputErrors,
   getOutputResponse,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
 
@@ -39,7 +40,7 @@ const ReadContract = (props) => {
     setMakingCall(true)
 
     const methodName = name
-    const args = getWriteArguments(func, inputData)
+    const args = getWriteArguments(inputData)
     const { data, error: _error } = await call(methodName, args, undefined, iface)
 
     if (!_error && !data.length) {
@@ -57,9 +58,10 @@ const ReadContract = (props) => {
     setMakingCall(false)
   }
 
-  const handleInputChange = (name, value = '') => {
-    setInputData(_prev => ({ ..._prev, [name]: value }))
-    if (error) setError('')
+  const handleInputChange = (value = '', keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
+    setError('')
     setSuccessfulResponse('')
   }
 
@@ -76,7 +78,8 @@ const ReadContract = (props) => {
         <Button
           variant='secondary-gray'
           onClick={handleQuery}
-          disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
+          // disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
+          disabled={!isReady || makingCall}
         >
           Query
         </Button>

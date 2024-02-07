@@ -73,6 +73,7 @@ const Func = (props) => {
           isReady={isReady}
           encodeInterface={encodeInterface}
           joiSchema={createJoiSchema(func)}
+          itemIndex={count}
         />}
     </div>
   )
