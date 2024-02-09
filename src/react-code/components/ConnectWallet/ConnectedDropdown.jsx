@@ -59,7 +59,7 @@ const ConnectedDropdown = () => {
         {chains[chainId] && (
           <div className='info'>
             <div className='key'>Network</div>
-            <div>{chains[chainId]}</div>
+            <div>{chains[chainId]?.name || 'Unknown Network'}</div>
           </div>
         )}
 

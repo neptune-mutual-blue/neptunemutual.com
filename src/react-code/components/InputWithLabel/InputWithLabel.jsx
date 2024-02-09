@@ -36,7 +36,6 @@ const InputWithLabel = forwardRef(
       }
 
       props.onChange({ target: { value: newValue } })
-      inputRef.current.value = newValue
       inputRef.current.focus()
     }
 

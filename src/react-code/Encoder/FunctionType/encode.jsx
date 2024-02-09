@@ -1,6 +1,7 @@
 import './encode.scss'
 
 import {
+  useCallback,
   useEffect,
   useId,
   useState
@@ -26,7 +27,9 @@ const EncodeData = (props) => {
   const [outputData, setOutputData] = useState('')
   const [outputError, setOutputError] = useState('')
 
-  const { encodeInterface, func, joiSchema, itemIndex } = props
+  const [parsedJSON, setParsedJSON] = useState(null)
+
+  const { encodeInterface, func, joiSchema } = props
   const { inputs, name } = func
 
   useEffect(() => {
@@ -36,12 +39,10 @@ const EncodeData = (props) => {
     }
   }, [name, encodeInterface, inputs])
 
-  const handleChange = (value, keyArray) => {
-    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
-    setInputData({ ...updatedObject })
-
+  const handleEncode = useCallback((_inputData) => {
     const encodeSignature = getFunctionSignature(func)
-    const encodeArgs = getWriteArguments(updatedObject)
+    const encodeArgs = getWriteArguments(_inputData, inputs)
+    console.log({ encodeArgs })
 
     const encoded = encodeData(encodeInterface, encodeSignature, encodeArgs, (error) => {
       if (error) setOutputError(error)
@@ -52,10 +53,37 @@ const EncodeData = (props) => {
       setOutputData(encoded)
       setOutputError('')
     }
+  }, [encodeInterface, func, inputs])
+
+  const handleChange = (value, keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
+
+    handleEncode(updatedObject)
+  }
+
+  useEffect(() => {
+    if (!parsedJSON) handleEncode(inputData)
+  }, [parsedJSON])
+
+  const handleJSON = (json) => {
+    handleEncode(json)
   }
 
   return (
     <div className='encode container'>
+      {
+        inputs.length > 0 && (
+          <JSONPopup
+            handleJSON={handleJSON}
+            parsedJSON={parsedJSON}
+            setParsedJSON={setParsedJSON}
+            label={`Enter JSON for encoding ${name} function`}
+            btnProps={{ label: 'Encode' }}
+          />
+        )
+      }
+
       <InputFields
         func={func}
         inputData={inputData}

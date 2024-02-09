@@ -1,0 +1,19 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+
+.DialogContent.json.popup {
+  min-width: 400px;
+
+  .textarea.container {
+    margin-top: 24px;
+
+    textarea {
+      height: 300px;
+    }
+  }
+
+  button.gray {
+    margin-top: 24px;
+  }
+}

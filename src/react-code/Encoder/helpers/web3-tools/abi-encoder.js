@@ -355,7 +355,7 @@ function getObjectValue (_obj, _keys = []) {
   let key = keys.shift()
   let value = { ...obj }
 
-  while (key && value) {
+  while ((typeof key !== 'undefined') && value) {
     value = value[key]
     key = keys.shift()
   }

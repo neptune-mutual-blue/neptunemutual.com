@@ -15,6 +15,7 @@ import {
   updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
+import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 
 const ReadContract = (props) => {
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
@@ -26,6 +27,8 @@ const ReadContract = (props) => {
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
+  const [parsedJSON, setParsedJSON] = useState(null)
+
   function getFunctionSignature () {
     return `${name}(${inputs.map(_inp => _inp.type).join(', ')})`
   }
@@ -34,13 +37,13 @@ const ReadContract = (props) => {
     return `${outputs.map(_inp => _inp.type).join(', ')}`
   }
 
-  async function handleQuery () {
+  async function handleQuery (_inputData) {
     if (error) setError('')
     setSuccessfulResponse('')
     setMakingCall(true)
 
     const methodName = name
-    const args = getWriteArguments(inputData)
+    const args = getWriteArguments(_inputData)
     const { data, error: _error } = await call(methodName, args, undefined, iface)
 
     if (!_error && !data.length) {
@@ -65,8 +68,24 @@ const ReadContract = (props) => {
     setSuccessfulResponse('')
   }
 
+  const handleJSON = (json) => {
+    handleQuery(json)
+  }
+
   return (
     <div className='read container'>
+      {
+        inputs.length > 0 && (
+          <JSONPopup
+            handleJSON={handleJSON}
+            parsedJSON={parsedJSON}
+            setParsedJSON={setParsedJSON}
+            label={`Enter JSON for querying ${name} function`}
+            btnProps={{ label: 'Query', disabled: !isReady || makingCall }}
+          />
+        )
+      }
+
       <InputFields
         func={func}
         inputData={inputData}
@@ -77,7 +96,7 @@ const ReadContract = (props) => {
       <div className='btn wrapper'>
         <Button
           variant='secondary-gray'
-          onClick={handleQuery}
+          onClick={() => handleQuery(inputData)}
           // disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
           disabled={!isReady || makingCall}
         >
