@@ -90,19 +90,33 @@
       }
     }
 
-    .item.address {
-      display: inline-block;
+    .item.details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
       padding: 10px;
       margin-bottom: 8px;
       width: 100%;
       word-wrap: break-word;
+
+      @include styles.text-sm;
+      @include weights.medium;
     
       background-color: colors.$primary-25;
       border-bottom: 1px solid colors.$gray-200;
-    
+
+      i {
+        color: colors.$gray-600;
+      }
+      
       .dark & {
         background-color: colors.$gray-900;
         border-bottom: 1px solid colors.$gray-700;
+        
+        i {
+          color: colors.$gray-400;
+        }
       }
     }
   }

@@ -14,7 +14,7 @@ import { Icon } from '../Icon'
 import { Modal } from '../Modal/Modal'
 import { ConnectedDropdown } from './ConnectedDropdown'
 
-const ConnectWallet = () => {
+const ConnectWallet = ({ networkId }) => {
   const [popupOpen, setPopupOpen] = useState(false)
 
   const { login, logout } = useAuth()
@@ -22,6 +22,10 @@ const ConnectWallet = () => {
   const [isConnecting, setIsConnecting] = useState(false)
 
   const { active } = useWeb3React()
+
+  useEffect(() => {
+    logout()
+  }, [networkId])
 
   const handleWalletButtonClick = () => {
     logout()
@@ -40,7 +44,7 @@ const ConnectWallet = () => {
     setIsConnecting(true)
     const wallet = wallets.find((x) => x.id === id)
     const connectorName = wallet.connectorName
-    login(connectorName)
+    login(connectorName, networkId)
   }
 
   return active

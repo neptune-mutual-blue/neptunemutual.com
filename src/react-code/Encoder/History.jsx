@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { Button } from '../components/Button/Button'
 import { Icon } from '../components/Icon'
+import { chains } from './helpers/wallet/chains'
 
 const STORAGE_KEY = 'abis'
 
@@ -12,8 +13,8 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
 
   const restoreSpecificContract = (e) => {
     const { key } = e.target.dataset
-    const { abi, contract_name: contractName, address } = contracts[key]
-    restoreSpecificCallback({ abi, contractName, address })
+    const { abi, contract_name: contractName, address, network } = contracts[key]
+    restoreSpecificCallback({ abi, contractName, address, network })
   }
 
   const selected = (e) => {
@@ -55,7 +56,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
   const toggleItemAddress = (key) => {
     const _contracts = [...contracts]
 
-    _contracts[key].showAddress = !(_contracts[key]?.showAddress || false)
+    _contracts[key].showDetails = !(_contracts[key]?.showDetails || false)
     setContracts(_contracts)
   }
 
@@ -100,13 +101,20 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
                 <div className='item' data-key={i} onClick={restoreSpecificContract}>{contract.contract_name || 'Untitled'}</div>
 
                 <button onClick={() => toggleItemAddress(i)}>
-                  <Icon variant={contract.showAddress ? 'chevron-up' : 'chevron-down'} size='sm' />
+                  <Icon variant={contract.showDetails ? 'chevron-up' : 'chevron-down'} size='sm' />
                 </button>
               </div>
               {
-                contract.showAddress && (
-                  <div className='item address'>
-                    {contract.address}
+                contract.showDetails && (
+                  <div className='item details'>
+                    <p>{contract.address || <i>No address provided</i>}</p>
+                    {contract.network
+                      ? (
+                      <p>{contract.network}
+                        ({chains[contract.network]?.name || 'Unknown Network'})
+                      </p>
+                        )
+                      : <i>No network provided</i>}
                   </div>
                 )
               }

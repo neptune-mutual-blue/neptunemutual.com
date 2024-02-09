@@ -22,6 +22,8 @@ import {
 import { History } from './History'
 import { Result } from './Result'
 
+import { createContractKey } from '../../../util/string'
+
 const STORAGE_KEY = 'abis'
 
 const POSSIBLE_ABIS = [
@@ -75,6 +77,7 @@ const Encoder = () => {
   const [contractName, setContractName] = useState('')
   const [address, setAddress] = useState('')
   const [abi, setAbi] = useState('[]')
+  const [networkId, setNetworkId] = useState('')
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
@@ -94,13 +97,16 @@ const Encoder = () => {
   }, [contractNameExist])
 
   const restoreSpecificCallback = (data) => {
-    const { abi, contractName, address } = data
+    const { abi, contractName, address, network } = data
     const form = formRef.current
-    form.abi.value = abi
-    form.contract_name.value = contractName
-    form.address.value = address
+    form.abi.value = abi || ''
+    form.contract_name.value = contractName || ''
+    form.address.value = address || ''
+    form.network.value = network || ''
+
     setContractName(contractName)
     setAddress(address)
+    setNetworkId(network)
     setAbi(abi)
     setIsSaveable(true)
     setForUpdate(true)
@@ -118,6 +124,12 @@ const Encoder = () => {
       return true
     }
 
+    const newContractKey = createContractKey(
+      form.contract_name.value,
+      form.address.value,
+      form.network.value
+    )
+
     const storageData = window.localStorage.getItem(STORAGE_KEY)
 
     if (isJSON(storageData)) {
@@ -125,7 +137,7 @@ const Encoder = () => {
     }
 
     const existingContractKey = abis.findIndex(abi => {
-      return abi.contract_name.toLowerCase() === form.contract_name.value.toLowerCase()
+      return abi.key === newContractKey
     })
 
     if (!forUpdate && existingContractKey >= 0) {
@@ -134,9 +146,11 @@ const Encoder = () => {
     }
 
     const data = {
+      key: newContractKey,
       abi: form.abi.value,
       contract_name: form.contract_name.value,
-      address: form.address.value
+      address: form.address.value,
+      network: form.network.value
     }
 
     if (existingContractKey >= 0) {
@@ -290,23 +304,33 @@ const Encoder = () => {
 
             <InputWithLabel
               required
-              label='How would you want to remember your contract name in the future?'
+              label='Enter the name of the contract:'
               placeholder='Contract or interface name'
               id='contract_name'
               onChange={(e) => { return setContractName(e.target.value) }}
               error={contractNameExist ? 'Contract name already exist!' : ''}
             >
-                Enter the contract name or an easy way to remember name for this contract
+                Give a name to the contract. This will be used to identify the contract in the history.
             </InputWithLabel>
 
             <InputWithLabel
               required
-              label='Have you deployed this contract on a blockchain network?'
+              label='Enter the deployment address of the contract:'
               placeholder='0x'
               id='address'
               onChange={(e) => { return setAddress(e.target.value) }}
             >
-                If you’d like to perform read and write operations on this contract, paste its address.
+                If you’d like to perform read and write operations on this contract, paste it's address.
+            </InputWithLabel>
+
+            <InputWithLabel
+              required
+              label='Enter the network of the deployed contract'
+              placeholder='1'
+              id='network'
+              onChange={(e) => { return setNetworkId(e.target.value) }}
+            >
+                Give the chain id of the network where the contract is deployed.
             </InputWithLabel>
 
             <div className='form action'>
@@ -360,6 +384,7 @@ const Encoder = () => {
           title={contractName}
           address={address}
           abi={JSON.parse(abi)}
+          networkId={networkId}
         />
       </Web3ReactProvider>
 

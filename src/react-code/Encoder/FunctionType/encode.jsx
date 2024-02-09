@@ -42,7 +42,6 @@ const EncodeData = (props) => {
   const handleEncode = useCallback((_inputData) => {
     const encodeSignature = getFunctionSignature(func)
     const encodeArgs = getWriteArguments(_inputData, inputs)
-    console.log({ encodeArgs })
 
     const encoded = encodeData(encodeInterface, encodeSignature, encodeArgs, (error) => {
       if (error) setOutputError(error)
@@ -61,10 +60,6 @@ const EncodeData = (props) => {
 
     handleEncode(updatedObject)
   }
-
-  useEffect(() => {
-    if (!parsedJSON) handleEncode(inputData)
-  }, [parsedJSON])
 
   const handleJSON = (json) => {
     handleEncode(json)

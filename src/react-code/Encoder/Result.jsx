@@ -28,7 +28,7 @@ const filter = {
 const Result = (props) => {
   const [type, setType] = useState('encode_data')
 
-  const { abi, address, title } = props
+  const { abi, address, title, networkId } = props
 
   const { callMethod, isReady } = useContractCall({
     abi,
@@ -98,7 +98,7 @@ const Result = (props) => {
           <div className='right group'>
             {
               type !== 'encode_data' && (
-                <ConnectWallet />
+                <ConnectWallet networkId={networkId} />
               )
             }
           </div>
