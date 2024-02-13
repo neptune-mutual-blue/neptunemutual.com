@@ -9,35 +9,73 @@
   padding: 24px;
   border: 1px solid colors.$gray-300;
   border-radius: 8px;
-  height: 302px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  height: max-content;
+  width: 100%;
 
-  @media (min-width: 1024px) { 
-    height: 516px;
-  }
+  & > div.title {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
 
-  .dark & {
-    background-color: colors.$black-800;
-    border: 1px solid colors.$gray-800;
-  }
+    .history.title {
+      color: colors.$gray-900;
+      @include styles.text-lg;
+      @include weights.bold;
+    }
 
-  .history.title {
-    color: colors.$gray-900;
-    @include styles.text-lg;
-    @include weights.bold;
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-grow: 1;
+      flex-shrink: 0;
+      justify-content: flex-end;
 
-    .dark & {
-      color: colors.$base-white;
+      @media (min-width: 1024px) {
+      }
+    
+      button {
+        @include styles.text-sm;
+        @include weights.semibold;
+        padding: 4px;
+        border-radius: 4px;
+        color: colors.$primary-600;
+    
+        &:not(:disabled) {
+          &[data-state="hover"], &:hover {
+            background-color: colors.$gray-100;
+          }
+        }
+      }
     }
   }
 
-  .delete.section {
+  .action.section {
     border-bottom: 1px solid colors.$gray-300;
     margin-top: 16px;
-    padding: 4px 0 12px 0;
+    padding: 0 0 8px 4px;
     display: flex;
+    align-items: center;
     gap: 14px;
+
+    button {
+      padding: 4px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: colors.$gray-100;
+      }
+      
+      i {
+        color: colors.$primary-700;
+      }
+      
+      &.new {
+        margin-left: auto;
+      }
+    }
+
 
     input {
       height: 15px;
@@ -45,79 +83,89 @@
     }
   }
 
-  .delete.btn {
-    i {
-      color: colors.$primary-700;
-  
-      .dark & {
-        color: colors.$base-white;
-      }
-    }
-  }
 
   .history.list {
-    width: 342px;
+    width: max(200px,100%);
+    // max-width: 100%;
     padding: 0;
     margin-top: 8px;
+
+    height: 302px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   
     @media (min-width: 768px) {
       width: 100%;
     }
 
-    .history.list.item {
-      word-wrap: break-word;
-      color: colors.$gray-900;
-      cursor: pointer;
-      list-style-type: none;
-      display: flex;
-      margin-bottom: 8px;
-      gap: 8px;
-      @include styles.text-sm;
-      @include weights.medium;
+    display: flex;
+    flex-direction: column;
 
-      .dark & {
-        color: colors.$base-white;
+    .item.wrapper {
+      &:hover {
+        background-color: colors.$gray-50;
       }
 
-      .item {
-        width: 100%;
+      &.selected {
+        background-color: colors.$primary-50;
+
+        .item.title .item {
+          @include weights.semibold;
+        }
+      }
+
+      .item.title {
+        padding: 4px;
+        word-wrap: break-word;
         color: colors.$gray-900;
+        cursor: pointer;
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        @include styles.text-sm;
+        @include weights.medium;
+        height: max-content;
+
+  
+        .item {
+          width: 100%;
+          color: colors.$gray-900;
+          @include weights.regular;
+          text-align: left;
+        }
+      }
+  
+      .item.details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+  
+        padding: 10px;
+
+        @include styles.text-sm;
         @include weights.regular;
 
-        .dark & {
-          color: colors.$base-white;
+        p {
+          word-break: break-all;  
+        }
+        
+        i {
+          color: colors.$gray-600;
+        }
+        
+        span {
+          @include weights.medium;
         }
       }
     }
 
-    .item.details {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-
-      padding: 10px;
-      margin-bottom: 8px;
+    hr {
+      margin: 4px 0;
       width: 100%;
-      word-wrap: break-word;
-
-      @include styles.text-sm;
-      @include weights.medium;
-    
-      background-color: colors.$primary-25;
-      border-bottom: 1px solid colors.$gray-200;
-
-      i {
-        color: colors.$gray-600;
-      }
-      
-      .dark & {
-        background-color: colors.$gray-900;
-        border-bottom: 1px solid colors.$gray-700;
-        
-        i {
-          color: colors.$gray-400;
-        }
-      }
+      height: 1px;
+      background-color: colors.$gray-100;
+      flex-shrink: 0;
     }
   }
 
@@ -130,45 +178,76 @@
     margin-top: 6px;
     @include styles.text-sm;
     @include weights.regular;
-
-    .dark & {
-      color: colors.$error-600;
-    }
   }
+}
 
-  .cta {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 16px;
-    gap: 8px;
-  
-    button {
-      color: colors.$primary-600;
-      @include styles.text-sm;
-      @include weights.semibold;
-      background-color: colors.$base-white;
-      border-radius: 8px;
-      padding: 4px 12px;
+.dark .history.container {
+  border: 1px solid colors.$gray-800;
+  background-color: colors.$black-800;
+
+  & > div.title {
+    .history.title {
+      color: colors.$base-white;
+    }
+
+    .cta button {
+      color: colors.$gray-300;
   
       &:not(:disabled) {
         &[data-state="hover"], &:hover {
-        color: colors.$primary-600 !important;
+          background-color: colors.$gray-700;
         }
       }
     }
-  
-    .dark & {
-      button {
+  }
+
+
+  .action.section {
+    border-bottom: 1px solid colors.$gray-700;
+    
+    button {
+      i {
         color: colors.$gray-300;
-        background: colors.$gray-900;
-        border-color: colors.$gray-700;
-  
-        &:not(:disabled) {
-          &[data-state="hover"], &:hover {
-            color: colors.$gray-100 !important;
-          }
+      }
+
+      &:hover {
+        background-color: colors.$gray-700;
+      }
+    }
+  }
+
+
+  .history.list {
+    .item.wrapper {
+      &:hover {
+        background-color: colors.$gray-800;
+      }
+
+      &.selected {
+        background-color: colors.$gray-900;
+      }
+
+      .item.title {
+        color: colors.$base-white;
+    
+        .item {
+          color: colors.$base-white;
+        }
+      }
+      
+      .item.details {        
+        i {
+          color: colors.$gray-400;
         }
       }
     }
+
+    hr {
+      background-color: colors.$gray-800;
+    }
+  }
+
+  .error {
+    color: colors.$error-300;
   }
 }

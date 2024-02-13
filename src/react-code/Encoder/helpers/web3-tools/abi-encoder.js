@@ -297,18 +297,50 @@ function getDefaultEncodeData (_function) {
   return getEncodedDataArray(_function.inputs)
 }
 
-function getWriteArguments (inputData) {
-  function getInputs (inputs) {
-    let data = Object.values(inputs)
-    data = data.map(item => {
-      if (typeof item === 'object') return getInputs(item)
-      return item
+function safeParseJson (json) {
+  try {
+    return JSON.parse(json)
+  } catch {
+    return null
+  }
+}
+
+function getWriteArguments (inputData, inputs) {
+  function getInputs (_inputData, inputs) {
+    let data = Object.values(_inputData)
+
+    data = inputs.map((input, i) => {
+      const name = input.name || `input-${i}`
+      return _inputData[name]
     })
 
-    return data.filter(Boolean)
+    data = data.map((item, i) => {
+      if (!item) return null
+
+      const input = inputs[i]
+      const components = input.components
+      const { actualType, isArray } = getTypeInfo(input.type)
+
+      const isItemArray = Array.isArray(item)
+
+      function parseItem (_item) {
+        if (typeof _item === 'object') return getInputs(_item, components)
+        if (isArray) return safeParseJson(_item)
+        if (actualType === 'bool') return ['true', 'false'].includes(_item.toLowerCase()) ? JSON.parse(_item) : null
+        return _item
+      }
+
+      if (isItemArray) {
+        return item.map(it => parseItem(it))
+      }
+
+      return parseItem(item)
+    })
+
+    return data.filter(item => item !== null)
   }
 
-  return getInputs(inputData)
+  return getInputs(inputData, inputs)
 }
 
 function getOutputResponse (func, outputResponse) {

@@ -43,6 +43,15 @@ export const getConnectorByName = async (name, networkId = undefined) => {
   }
 }
 
+function handleUserRejected(error) {
+  if (error.code === 4001) {
+    return {
+      success: false,
+      message: 'User rejected the request'
+    }
+  }
+}
+
 export const addNetwork = async (network) => {
   try {
     const provider = window.ethereum
@@ -61,8 +70,17 @@ export const addNetwork = async (network) => {
           blockExplorerUrls: [explorer]}
       ]
     })
+
+    return { success: true }
   } catch (error) {
     console.error(error)
+    
+    if(handleUserRejected(error)) return handleUserRejected(error)
+
+    return {
+      success: false,
+      message: 'Failed to add network. Please add it manually.'
+    }
   }
 }
 
@@ -75,17 +93,20 @@ export const switchNetwork = async (networkId) => {
       params: [{ chainId: `0x${networkId.toString(16)}` }]
     })
 
-    return true
+    return { success: true}
   } catch (error) {
     console.error(error)
 
+    if(handleUserRejected(error)) return handleUserRejected(error)
+
     if (error.code === 4902) {
-      try {
-        await addNetwork(networkId)
-        return true
-      } catch (error) {
-        console.error(error)
-      }
+      const response = await addNetwork(networkId)
+      return response
+    }
+
+    return {
+      success: false,
+      message: 'Failed to switch network. Please switch it manually.'
     }
   }
 }

@@ -6,7 +6,8 @@ const activateConnector = async (
   connectorName,
   activate,
   networkId = undefined,
-  notify
+  notify,
+  cb = () => {}
 ) => {
   const connector = await getConnectorByName(connectorName, Number(networkId))
 
@@ -21,9 +22,10 @@ const activateConnector = async (
     if (error instanceof UnsupportedChainIdError) {
       try {
         const switched = await switchNetwork(Number(networkId))
-        if (switched) {
-          activate(connector)
-        }
+
+        if (switched.success) await activate(connector)
+
+        cb(switched)
       } catch (error) {
         notify(error)
       }
@@ -46,8 +48,8 @@ const useAuth = (notify = console.log) => {
   }, [connector])
 
   const login = useCallback(
-    (connectorName, networkId) =>
-      activateConnector(connectorName, activate, networkId, notify),
+    (connectorName, networkId, cb) =>
+      activateConnector(connectorName, activate, networkId, notify, cb),
     [activate, notify]
   )
 

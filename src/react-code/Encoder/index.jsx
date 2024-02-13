@@ -72,12 +72,13 @@ const Encoder = () => {
   const [isSaveable, setIsSaveable] = useState(false)
   const [restorationFailed, setRestorationFailed] = useState(false)
   const [contractNameExist, setContractNameExist] = useState(false)
-  const [forUpdate, setForUpdate] = useState(false)
 
   const [contractName, setContractName] = useState('')
   const [address, setAddress] = useState('')
   const [abi, setAbi] = useState('[]')
   const [networkId, setNetworkId] = useState('')
+
+  const [updateIndex, setUpdateIndex] = useState(null)
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
@@ -97,7 +98,7 @@ const Encoder = () => {
   }, [contractNameExist])
 
   const restoreSpecificCallback = (data) => {
-    const { abi, contractName, address, network } = data
+    const { abi, contractName, address, network, index } = data
     const form = formRef.current
     form.abi.value = abi || ''
     form.contract_name.value = contractName || ''
@@ -109,8 +110,8 @@ const Encoder = () => {
     setNetworkId(network)
     setAbi(abi)
     setIsSaveable(true)
-    setForUpdate(true)
     validateABI({ target: { value: abi } })
+    setUpdateIndex(index)
   }
 
   const saveToStorage = (e) => {
@@ -124,26 +125,17 @@ const Encoder = () => {
       return true
     }
 
-    const newContractKey = createContractKey(
-      form.contract_name.value,
-      form.address.value,
-      form.network.value
-    )
-
     const storageData = window.localStorage.getItem(STORAGE_KEY)
 
     if (isJSON(storageData)) {
       abis = JSON.parse(storageData) || []
     }
 
-    const existingContractKey = abis.findIndex(abi => {
-      return abi.key === newContractKey
-    })
-
-    if (!forUpdate && existingContractKey >= 0) {
-      setContractNameExist(true)
-      return true
-    }
+    const newContractKey = createContractKey(
+      form.contract_name.value,
+      form.address.value,
+      form.network.value
+    )
 
     const data = {
       key: newContractKey,
@@ -153,8 +145,8 @@ const Encoder = () => {
       network: form.network.value
     }
 
-    if (existingContractKey >= 0) {
-      abis[existingContractKey] = { ...abis[existingContractKey], ...data }
+    if (updateIndex) {
+      abis[updateIndex] = { ...abis[updateIndex], ...data }
     } else {
       abis.push(data)
     }
@@ -196,9 +188,10 @@ const Encoder = () => {
     const reader = new window.FileReader()
     reader.onload = (evt) => {
       try {
-        const contracts = JSON.parse(evt.target.result)
-        setContracts(contracts)
-        window.localStorage.setItem(STORAGE_KEY, evt.target.result)
+        const newContracts = JSON.parse(evt.target.result)
+        const updatedContracts = [...contracts, ...newContracts]
+        setContracts(updatedContracts)
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedContracts))
       } catch (error) {
         // Show an error
         setRestorationFailed(true)
@@ -277,6 +270,20 @@ const Encoder = () => {
         console.error('Query params not provided in valid format')
       }
     }
+  }
+
+  const handleNew = () => {
+    setContractName('')
+    setAddress('')
+    setAbi('[]')
+    setNetworkId('')
+    setUpdateIndex(null)
+
+    const form = formRef.current
+    form.abi.value = ''
+    form.contract_name.value = ''
+    form.address.value = ''
+    form.network.value = ''
   }
 
   return (
@@ -376,6 +383,7 @@ const Encoder = () => {
           restore={restore}
           restorationFailed={restorationFailed}
           restoreSpecificCallback={restoreSpecificCallback}
+          handleNew={handleNew}
         />
       </div>
 

@@ -1,0 +1,76 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/utils";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
+
+
+$unchecked-background-image: "data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='5.5' fill='white'/%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='5.5' stroke='%23D0D5DD'/%3E%3C/svg%3E%0A";
+
+$checked-background-image: "data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='5.5' fill='%23EEF4FF'/%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='5.5' stroke='%23444CE7'/%3E%3Cpath d='M14.6666 6.5L8.24998 12.9167L5.33331 10' stroke='%23444CE7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A";
+
+$checked-minus-image: "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='%23EEF4FF'/%3E%3Crect x='0.5' y='0.5' width='15' height='15' rx='3.5' stroke='%23444CE7'/%3E%3Cpath d='M4.5 8H11.5' stroke='%23444CE7' stroke-width='1.66666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A";
+
+.custom.checkbox.component {
+  label {
+    @include styles.text-md;
+    @include weights.regular;
+    color: colors.$base-white;
+    
+    a {
+      color: colors.$base-white;
+      text-decoration: underline;
+    }
+
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    /* Hide the browser's default checkbox */
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    input:is(:focus-visible, :focus, :focus-within)+.checkmark {
+      box-shadow: 0px 0px 0px 4px colors.$primary-100;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      display: block;
+      height: 16px;
+      width: 16px;
+      border-radius: 5px;
+      background-image: url($unchecked-background-image);
+
+      background-size: 100%;
+    }
+
+    /* Checkmark style when checked */
+    input {
+      &:checked+.checkmark {
+        background-image: url($checked-background-image);
+      }
+
+      &[data-variant="minus"]:checked+.checkmark {
+        background-image: url($checked-minus-image);
+      }
+    }
+  }
+}
+
+.dark .custom.checkbox.component {
+  label input:is(:focus-visible, :focus, :focus-within)+.checkmark {
+      box-shadow: 0px 0px 0px 4px colors.$primary-800;
+    }
+}

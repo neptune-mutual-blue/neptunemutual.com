@@ -21,6 +21,8 @@ const ConnectWallet = ({ networkId }) => {
 
   const [isConnecting, setIsConnecting] = useState(false)
 
+  const [error, setError] = useState('')
+
   const { active } = useWeb3React()
 
   useEffect(() => {
@@ -38,14 +40,34 @@ const ConnectWallet = ({ networkId }) => {
       setIsConnecting(false)
       setPopupOpen(false)
     }
-  }, [popupOpen, active, setPopupOpen])
 
-  const onConnect = (id) => {
+    setError('')
+  }, [popupOpen, active])
+
+  const onConnect = async (id) => {
     setIsConnecting(true)
+    setError('')
+
     const wallet = wallets.find((x) => x.id === id)
     const connectorName = wallet.connectorName
-    login(connectorName, networkId)
+    await login(connectorName, networkId, (switched) => {
+      if (!switched.success) setError(switched.message)
+      setIsConnecting(false)
+    })
   }
+
+  const ErrorComponent = ({ title, description }) => (
+    <div className='error'>
+      <div className='icon'>
+        <Icon variant='alert-circle' size='lg' />
+      </div>
+
+        <div className='content'>
+          <div className='title'>{title}</div>
+          <div className='description'>{description}</div>
+        </div>
+    </div>
+  )
 
   return active
     ? <ConnectedDropdown />
@@ -90,6 +112,13 @@ const ConnectWallet = ({ networkId }) => {
               </Button>
             </a>
             ))}
+
+        {error && (
+          <ErrorComponent
+            title={'Error'}
+            description={error}
+          />
+        )}
       </Modal>
 
       )

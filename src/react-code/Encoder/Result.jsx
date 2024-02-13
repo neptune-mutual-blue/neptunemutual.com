@@ -97,7 +97,7 @@ const Result = (props) => {
           </div>
           <div className='right group'>
             {
-              type !== 'encode_data' && (
+              !['encode_data', 'decode_data'].includes(type) && (
                 <ConnectWallet networkId={networkId} />
               )
             }

@@ -2,6 +2,7 @@ import './read.scss'
 
 import {
   Fragment,
+  useCallback,
   useId,
   useState
 } from 'react'
@@ -37,13 +38,13 @@ const ReadContract = (props) => {
     return `${outputs.map(_inp => _inp.type).join(', ')}`
   }
 
-  async function handleQuery (_inputData) {
-    if (error) setError('')
+  const handleQuery = useCallback(async (_inputData) => {
+    setError('')
     setSuccessfulResponse('')
     setMakingCall(true)
 
     const methodName = name
-    const args = getWriteArguments(_inputData)
+    const args = getWriteArguments(_inputData, inputs)
     const { data, error: _error } = await call(methodName, args, undefined, iface)
 
     if (!_error && !data.length) {
@@ -59,7 +60,7 @@ const ReadContract = (props) => {
     else setError('')
 
     setMakingCall(false)
-  }
+  }, [name, call, iface, func, inputs])
 
   const handleInputChange = (value = '', keyArray) => {
     const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)

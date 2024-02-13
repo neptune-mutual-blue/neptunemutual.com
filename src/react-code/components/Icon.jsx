@@ -22,6 +22,10 @@ import { TrashIcon } from './icons/TrashIcon'
 import { WalletIcon } from './icons/WalletIcon'
 import { PlusIcon } from './icons/PlusIcon'
 import { SwitchHorizontalIcon } from './icons/SwitchHorizontal'
+import { AlertCircleIcon } from './icons/AlertCircleIcon'
+import { FilePlusIcon } from './icons/FilePlusIcon'
+import { FolderDownloadIcon } from './icons/FolderDownloadIcon'
+import { RefreshCCWIcon } from './icons/RefreshCCWIcon'
 
 const icons = {
   'chevron-right': <ChevronRight />,
@@ -47,7 +51,11 @@ const icons = {
   coinbase: <CoinbaseIcon />,
   'coinbase-dark': <CoinbaseDarkIcon />,
   plus: <PlusIcon />,
-  'switch-horizontal-01': <SwitchHorizontalIcon />
+  'switch-horizontal-01': <SwitchHorizontalIcon />,
+  'alert-circle': <AlertCircleIcon />,
+  'file-plus': <FilePlusIcon />,
+  'folder-download': <FolderDownloadIcon />,
+  'refresh-ccw-01': <RefreshCCWIcon />
 }
 
 export const Icon = ({ variant, size }) => {

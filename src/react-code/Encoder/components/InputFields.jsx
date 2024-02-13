@@ -25,16 +25,18 @@ const Inputs = ({ inputs, handleChange, inputData, parentKeys = [] }) => {
       {
         inputs.map((input, i) => {
           const { isArray, actualType } = getTypeInfo(input.type)
-          const type = isArray ? actualType : input.type
+          const _isArray = isArray && actualType === 'tuple'
+
+          const type = _isArray ? actualType : input.type
           const name = input.name || `input-${i}`
-          const label = isArray ? `(${type})` : `${name} (${type})`
+          const label = _isArray ? `(${type})` : `${name} (${type})`
 
           return (
             <div key={`${parentKeys.join('-')}-${i}`} className='input group'>
               {
-                isArray && (
+                _isArray && (
                   <div className='array label'>
-                    <p className='label'>{name} ({type})</p>
+                    <p className='label'>{name} ({input.type})</p>
                   </div>
                 )
               }
@@ -45,12 +47,12 @@ const Inputs = ({ inputs, handleChange, inputData, parentKeys = [] }) => {
 
                   const _parentKeys = [...parentKeys]
                   _parentKeys.push(name)
-                  if (isArray) _parentKeys.push(arrIdx)
+                  if (_isArray) _parentKeys.push(arrIdx)
 
                   return (
-                    <div className={isArray ? 'array item' : ''} key={index}>
+                    <div className={_isArray ? 'array item' : ''} key={index}>
                       {
-                        isArray && (
+                        _isArray && (
                           <div className='buttons'>
                             {
                               arrIdx === 0 && (
@@ -96,7 +98,7 @@ const Inputs = ({ inputs, handleChange, inputData, parentKeys = [] }) => {
                                 id={`input-${index}`}
                                 onChange={e => handleChange(e.target.value, _parentKeys)}
                                 value={getObjectValue(inputData, _parentKeys) || ''}
-                                error={checkInputError(actualType, getObjectValue(inputData, _parentKeys))}
+                                error={checkInputError(type, getObjectValue(inputData, _parentKeys))}
                               />
                             )
                       }

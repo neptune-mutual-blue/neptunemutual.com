@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import { decodeData, parseEncoded } from '../helpers/solidity/methods'
 import { TextArea } from '../../components/TextArea'
 import { Button } from '../../components/Button/Button'
@@ -12,22 +12,22 @@ const DecodeData = ({ encodeInterface }) => {
 
   const [decodedData, setDecodedData] = useState(null)
 
-  const handleQuery = async () => {
+  const handleQuery = useCallback(async () => {
     setError('')
     setDecodedData(null)
 
-    const { parsed, error } = parseEncoded(encodedData)
+    const { parsed, _error } = parseEncoded(encodedData)
 
-    if (error) {
-      setError(error)
+    if (_error) {
+      setError(_error)
       return
     }
 
-    const decodedData = decodeData(encodeInterface, parsed, (errorMessage) => {
+    const _decodedData = decodeData(encodeInterface, parsed, (errorMessage) => {
       setError(errorMessage)
     })
-    if (decodedData) setDecodedData(decodedData)
-  }
+    if (_decodedData) setDecodedData(_decodedData)
+  }, [encodedData])
 
   const ArgList = ({ args, firstParent = true }) => {
     return (

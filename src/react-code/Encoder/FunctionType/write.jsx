@@ -2,13 +2,11 @@ import './write.scss'
 
 import {
   useCallback,
-  useId,
   useMemo,
   useState
 } from 'react'
 
 import { Button } from '../../components/Button/Button'
-import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import {
   checkEmptyInputs,
   checkInputErrors,
@@ -18,7 +16,6 @@ import {
 import { InputFields } from '../components/InputFields'
 import { useWeb3React } from '@web3-react/core'
 
-import { config } from '../../../data/protocol'
 import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 import { chains } from '../helpers/wallet/chains'
 
@@ -33,11 +30,11 @@ const WriteContract = (props) => {
   const { chainId } = useWeb3React()
   const explorerUrl = useMemo(() => {
     const explorer = chains[chainId]?.explorer
-    return explorer ? explorer.replace('address/', '') + '/tx/' : ''
+    return explorer ? explorer + '/tx/' : ''
   }, [chainId])
 
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
-  const { inputs, name, stateMutability } = func
+  const { inputs, name } = func
 
   const handleWrite = useCallback(async (_inputData) => {
     setError('')
@@ -45,7 +42,7 @@ const WriteContract = (props) => {
     setMakingCall(true)
 
     const methodName = name
-    const methodArgs = getWriteArguments(_inputData)
+    const methodArgs = getWriteArguments(_inputData, inputs)
 
     const hasPayableStateMutability = func?.stateMutability === 'payable'
     const value = _inputData[name]
@@ -57,7 +54,7 @@ const WriteContract = (props) => {
     if (_error) setError(_error)
 
     setMakingCall(false)
-  }, [call, name, func, iface])
+  }, [call, name, func, iface, inputs])
 
   const handleInputChange = (value = '', keyArray) => {
     const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)

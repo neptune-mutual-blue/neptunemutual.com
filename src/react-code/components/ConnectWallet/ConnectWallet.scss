@@ -1,7 +1,11 @@
 @use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
 
 .connect.wallet.modal {
   width: 397px;
+  overflow-y: visible;
 
   .wallet.icon {
     display: flex;
@@ -19,12 +23,6 @@
       height: 24px;
       width: 24px;
     }
-
-    .dark & {
-      color: colors.$white;
-      background-color: colors.$gray-600;
-      box-shadow: 0 0 0 8px colors.$gray-700;
-    }
   }
 
   .DialogDescription {
@@ -32,17 +30,9 @@
     margin-bottom: 24px;
     color: colors.$gray-600;
 
-    .dark & {
-      color: colors.$gray-25;
-    }
-
     a {
       color: colors.$gray-600;
       text-decoration: underline;
-
-      .dark & {
-        color: colors.$gray-25;
-      }
     }
   }
 
@@ -53,12 +43,6 @@
 
     &:disabled {
       opacity: 0.5;
-    }
-
-    .dark & {
-      background-color: colors.$black-800;
-      border-color: colors.$gray-800;
-      color: colors.$base-white;
     }
 
     .content {
@@ -81,6 +65,77 @@
       .dark & {
         display: inline-block;
       }
+    }
+  }
+
+  div.error {
+    padding: 16px;
+    border: 1px solid colors.$error-300;
+    border-radius: 12px;
+    background: colors.$error-25;
+    color: white;
+    
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 16px);
+    left: 0;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    .icon {
+      color: colors.$error-600;
+    }
+
+    .content {
+      color: colors.$error-700;
+
+      .title {
+        @include styles.text-md;
+        @include weights.semibold;
+        margin-bottom: 4px;
+      }
+      
+      .description {
+        @include styles.text-sm;
+        @include weights.regular;
+      }
+    }
+  }
+}
+
+.dark .connect.wallet.modal {
+  .wallet.icon {
+    color: colors.$white;
+    background-color: colors.$gray-600;
+    box-shadow: 0 0 0 8px colors.$gray-700;
+  }
+
+  .DialogDescription {
+    color: colors.$gray-25;
+
+    a {
+      color: colors.$gray-25;
+    }
+  }
+
+  .ui.secondary.gray.button {
+    background-color: colors.$black-800;
+    border-color: colors.$gray-800;
+    color: colors.$base-white;
+  }
+
+  div.error {
+    border-color: colors.$error-300;
+    background: colors.$black-800;
+
+    div.icon {
+      color: colors.$error-300;
+    }
+
+    div.content {
+      color: colors.$base-white;
     }
   }
 }
