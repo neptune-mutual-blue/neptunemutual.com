@@ -13,19 +13,19 @@ const resources: ApiResource[] = [
   [Api.ContractArbitrum, 'https://api.neptunemutual.net/protocol/contracts/arbitrum', true],
   [Api.ContractMumbai, 'https://api.neptunemutual.net/protocol/contracts/mumbai', true],
   [Api.ContractBSC, 'https://api.neptunemutual.net/protocol/contracts/bsc', true],
-  [Api.Media, 'api/media?limit=1000'],
-  [Api.Blog, 'api/articles?limit=1000'],
-  [Api.Doc, 'api/docs?limit=1000'],
-  [Api.Pressroom, 'api/pressroom?limit=1000'],
-  [Api.Ecosystem, 'api/ecosystems?limit=1000'],
-  [Api.Policy, 'api/pages?limit=1000'],
-  [Api.Roadmap, 'api/roadmap?limit=1000'],
-  [Api.Vacancy, 'api/vacancies?limit=1000'],
-  [Api.Audit, 'api/audits?limit=1000'],
-  [Api.News, 'api/news?limit=1000'],
-  [Api.Program, 'api/programs?limit=1000'],
-  [Api.Video, 'api/videos?limit=1000'],
-  [Api.Hack, 'api/hacks?limit=10000']
+  [Api.Media, 'api/media?limit=2000'],
+  [Api.Blog, 'api/articles?limit=2000'],
+  [Api.Doc, 'api/docs?limit=2000'],
+  [Api.Pressroom, 'api/pressroom?limit=2000'],
+  [Api.Ecosystem, 'api/ecosystems?limit=2000'],
+  [Api.Policy, 'api/pages?limit=2000'],
+  [Api.Roadmap, 'api/roadmap?limit=2000'],
+  [Api.Vacancy, 'api/vacancies?limit=2000'],
+  [Api.Audit, 'api/audits?limit=2000'],
+  [Api.News, 'api/news?limit=2000'],
+  [Api.Program, 'api/programs?limit=2000'],
+  [Api.Video, 'api/videos?limit=2000'],
+  [Api.Hack, 'api/hacks?limit=20000']
 ]
 
 const build = (): Array<Promise<{ url: string, identifier: string, string: string }>> => {

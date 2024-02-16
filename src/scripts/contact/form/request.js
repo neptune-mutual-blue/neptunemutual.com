@@ -32,8 +32,8 @@ const post = async (payload) => {
     const result = await response.json()
 
     if (!response.ok) {
-      const { code, data } = result
-      displayError([code, data].join(': '))
+      const { code, data, message } = result
+      displayError([code, data, message].join(': '))
       return
     }
 
