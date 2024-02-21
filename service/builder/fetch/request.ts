@@ -53,6 +53,7 @@ const get = async (url: string, identifier: string, headers = getApiHeaders()): 
 
       res.on('error', (error) => {
         console.error(error)
+        reject(error)
       })
     })
 
