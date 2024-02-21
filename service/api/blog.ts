@@ -6,47 +6,47 @@ import { Api } from '../../types/enum'
 import { getApi } from './'
 
 const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Array<PaginatedByTagsResult<Article>>> => {
-  try {
-    const { docs } = await getApi<Article>(api)
+  const { docs } = await getApi<Article>(api)
 
-    const allTags = docs.map((doc: Article) => doc.tags).flat()
-    const uniqueTags = [...new Map(allTags?.map((tag: any) => [tag.id, tag])).values()]
+  const allTags = docs.map((doc: Article) => doc.tags).flat().filter((tag) => tag !== undefined)
+  const uniqueTags = [...new Map(allTags?.map((tag: any) => [tag.id, tag])).values()]
 
-    const result = uniqueTags.map((tag: any) => {
-      const filteredDocs = docs?.filter((doc: any) => {
-        const matchedTag = doc.tags.find((x: any) => x.slug === tag.slug)
-        return matchedTag
-      })
+  const result = uniqueTags.map((tag: any) => {
+    const filteredDocs = docs?.filter((doc: any) => {
+      if (doc.tags === undefined || doc.tags === null) {
+        console.log('No tags found for doc:', doc.id)
 
-      const records = filteredDocs.length
-      const totalPages = Math.ceil(records / pageSize)
-
-      const _result: PaginatedByTagsResult<Article> = {
-        tag,
-        records,
-        totalPages,
-        pageSize,
-        pages: {
-        }
+        return false
       }
 
-      for (let i = 0; i < totalPages; i++) {
-        const prop = (i + 1).toString()
-        const start = i * pageSize
-        const end = start + pageSize <= records ? start + pageSize : records
-
-        _result.pages[prop as keyof PaginatedByTagsResult<Article>] = filteredDocs.slice(start, end)
-      }
-
-      return _result
+      const matchedTag = doc.tags.find((x: any) => x.slug === tag.slug)
+      return matchedTag
     })
 
-    return result
-  } catch (error) {
-    console.error(error)
-  }
+    const records = filteredDocs.length
+    const totalPages = Math.ceil(records / pageSize)
 
-  return []
+    const _result: PaginatedByTagsResult<Article> = {
+      tag,
+      records,
+      totalPages,
+      pageSize,
+      pages: {
+      }
+    }
+
+    for (let i = 0; i < totalPages; i++) {
+      const prop = (i + 1).toString()
+      const start = i * pageSize
+      const end = start + pageSize <= records ? start + pageSize : records
+
+      _result.pages[prop as keyof PaginatedByTagsResult<Article>] = filteredDocs.slice(start, end)
+    }
+
+    return _result
+  })
+
+  return result
 }
 
 export { getPaginatedByTags }

@@ -16,30 +16,26 @@ const write = async (file: string, content: string): Promise<void> => {
 }
 
 const build = async (slug: Api): Promise<void> => {
-  try {
-    console.time(`Generating Feed For "${slug}"`)
-    const result = await content.get(slug)
-    const updated = new Date(Math.max.apply(null, result.map(x => new Date(x.publishedAt as Date).getTime())))
+  console.time(`Generating Feed For "${slug}"`)
+  const result = await content.get(slug)
+  const updated = new Date(Math.max.apply(null, result.map(x => new Date(x.publishedAt as Date).getTime())))
 
-    const rss = new Feed(options.get(slug, updated))
-    const atom = new Feed(options.get(slug, updated))
+  const rss = new Feed(options.get(slug, updated))
+  const atom = new Feed(options.get(slug, updated))
 
-    for (const page of result) {
-      const item = toFeedItem(slug, page)
+  for (const page of result) {
+    const item = toFeedItem(slug, page)
 
-      if (item !== undefined) {
-        rss.addItem(item)
-        atom.addItem(item)
-      }
+    if (item !== undefined) {
+      rss.addItem(item)
+      atom.addItem(item)
     }
-
-    await write(path.join(process.cwd(), config.root, slug, 'rss.xml'), rss.rss2())
-    await write(path.join(process.cwd(), config.root, slug, 'atom.xml'), atom.atom1())
-
-    console.timeEnd(`Generating Feed For "${slug}"`)
-  } catch (error) {
-    console.error(error)
   }
+
+  await write(path.join(process.cwd(), config.root, slug, 'rss.xml'), rss.rss2())
+  await write(path.join(process.cwd(), config.root, slug, 'atom.xml'), atom.atom1())
+
+  console.timeEnd(`Generating Feed For "${slug}"`)
 }
 
 export { build }
