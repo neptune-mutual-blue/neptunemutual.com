@@ -85,6 +85,7 @@ const setupPagination = (totalPages: number, currentPage: number): void => {
     page.addEventListener('click', (e) => {
       e.preventDefault()
       e.stopPropagation()
+
       if (
         !page.classList.contains('next') &&
         !page.classList.contains('previous')

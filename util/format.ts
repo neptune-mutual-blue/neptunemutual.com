@@ -38,8 +38,14 @@ const getFormattedDate = (x: string): string => {
     day: '2-digit'
   })
 }
+
 const formatDate = (date: Date, locale: string, options: Intl.DateTimeFormatOptions): string => {
   return Intl.DateTimeFormat(locale, options).format(date)
 }
 
-export { convertSecondsToWords, convertWordsToMinutes, getFormattedDate, formatDate }
+export {
+  convertSecondsToWords,
+  convertWordsToMinutes,
+  formatDate,
+  getFormattedDate
+}

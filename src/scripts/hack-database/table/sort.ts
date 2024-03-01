@@ -3,7 +3,7 @@ import { filterHackData } from './filter'
 const setupSorting = (): void => {
   const buttons = document.querySelectorAll('button[data-sorting-key]')
   buttons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const sortingKey = (btn as HTMLButtonElement).dataset.sortingKey ?? ''
 
       const table = document.querySelector('table')
@@ -22,7 +22,7 @@ const setupSorting = (): void => {
         }
       } else {
         newSortKey = '-' + sortingKey
-        buttons.forEach((b) => b.classList.remove('desc', 'active'))
+        buttons.forEach(b => b.classList.remove('desc', 'active'))
         btn.classList.add('desc', 'active')
       }
 

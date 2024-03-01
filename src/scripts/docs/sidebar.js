@@ -12,6 +12,7 @@
       sidebarOverlay.classList.add('hidden')
       return
     }
+
     sidebarOverlay.classList.toggle('hidden')
   }
 

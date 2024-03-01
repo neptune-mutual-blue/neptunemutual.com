@@ -7,7 +7,7 @@ const careersFilterButton = document.querySelector('#CareersFilterButton')
 const menu = document.querySelector('.ui.dropdown.filter.container .menu')
 const listItems = document.querySelectorAll('.ui.dropdown.filter.container .menu > ul > li')
 
-function keydown (e) {
+const keydown = (e) => {
   const key = e.which || e.keyCode || e.charCode
 
   if (key !== 13) {
@@ -23,7 +23,7 @@ careersFilterButton.addEventListener('click', (e) => {
 })
 
 listItems.forEach((listItem) => {
-  listItem.addEventListener('click', (e) => onclick(e.currentTarget))
+  listItem.addEventListener('click', e => onclick(e.currentTarget))
   listItem.addEventListener('keydown', keydown)
 })
 

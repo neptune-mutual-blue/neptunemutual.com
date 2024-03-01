@@ -1,4 +1,6 @@
-import { abbreviateHackDatabaseAmount } from '../../../../util/abbreviate-hack-database-amount'
+import {
+  abbreviateHackDatabaseAmount
+} from '../../../../util/abbreviate-hack-database-amount'
 import { formatDate } from '../../../../util/format'
 import { stripTags } from '../../../../util/strip-tags'
 import { chainIconMapping } from '../../../data/chain-icon-mapping'
@@ -16,7 +18,7 @@ const renderers: Record<string, (hack: Hack) => string> = {
   Chains: (hack: Hack) => `
   <div class="chain icon group">
     ${(hack.chains ?? []).length === 0 ? '-' : ''}
-    ${(hack.chains ?? []).map((chain) =>
+    ${(hack.chains ?? []).map(chain =>
     availableChainIcons.includes(chain.shortName.toLowerCase())
       ? (
         `<i class="${chain.shortName.toLowerCase() + ' chain icon'}" title="${chain.title}"></i>`
@@ -67,7 +69,7 @@ const getTableCell = (column: string, index: number, hack: Hack): string => {
 const getTableRow = (hack: Hack, index: number): string => `
   <tr>
     ${columns
-    .map((column) => getTableCell(column, index, hack))
+    .map(column => getTableCell(column, index, hack))
     .join('\n')}
   </tr>
 

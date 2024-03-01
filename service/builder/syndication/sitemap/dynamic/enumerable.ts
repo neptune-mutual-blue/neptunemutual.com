@@ -18,7 +18,7 @@ const resolve = async (): Promise<SitemapEnumerable[]> => {
   const promises = make()
   const result = await Promise.allSettled(promises)
 
-  return result.filter(({ status }) => status === 'fulfilled').map((p) => (p as PromiseFulfilledResult<SitemapEnumerable>).value)
+  return result.filter(({ status }) => status === 'fulfilled').map(p => (p as PromiseFulfilledResult<SitemapEnumerable>).value)
 }
 
 export { resolve }

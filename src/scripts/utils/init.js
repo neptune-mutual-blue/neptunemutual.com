@@ -1,7 +1,8 @@
 import hljs from 'highlight.js'
+
 import { registerLanguages } from '../../../lib/hljs-languages'
 
-async function init () {
+const init = async () => {
   registerLanguages(hljs)
   hljs.highlightAll()
 

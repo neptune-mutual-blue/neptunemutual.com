@@ -32,7 +32,7 @@ const get = async (url: string, identifier: string, headers = getApiHeaders()): 
       }
 
       // cumulate data
-      const chunks: any[] = []
+      const chunks: Buffer[] = []
 
       res.on('data', (chunk) => {
         chunks.push(chunk)

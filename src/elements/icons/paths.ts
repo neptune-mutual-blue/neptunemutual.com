@@ -1,4 +1,4 @@
-const paths: Record<string, any> = {
+const paths: Record<string, Promise<typeof import('*?raw')>> = {
   'arrow-left': import('./variants/Arrows/arrow-left.svg?raw'),
   'arrow-down': import('./variants/Arrows/arrow-down.svg?raw'),
   'arrow-right': import('./variants/Arrows/arrow-right.svg?raw'),

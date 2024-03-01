@@ -88,6 +88,7 @@ const setupSearchPagination = (totalPages, currentPage) => {
     page.addEventListener('click', (e) => {
       e.preventDefault()
       e.stopPropagation()
+
       if (
         !page.classList.contains('next') &&
         !page.classList.contains('previous')

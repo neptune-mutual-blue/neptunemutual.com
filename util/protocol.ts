@@ -2,6 +2,16 @@ import { parseBytes32String } from '@ethersproject/strings'
 
 import { getMonthName } from './date'
 
+const bytes32ToString = (bytes32Str: string): string => {
+  try {
+    return parseBytes32String(bytes32Str)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return ''
+}
+
 const getKeyValuePairFrom = (cxTokens: CxToken[], status: 'active' | 'expired'): Array<KeyValuePair<string>> => {
   const items = (cxTokens ?? [])
     .filter(x => status === 'active'
@@ -16,15 +26,6 @@ const getKeyValuePairFrom = (cxTokens: CxToken[], status: 'active' | 'expired'):
         .join(':'),
       value: x.value
     }))
-}
-
-const bytes32ToString = (bytes32Str: string): string => {
-  try {
-    return parseBytes32String(bytes32Str)
-  } catch (error) {
-    console.error(error)
-  }
-  return ''
 }
 
 export { bytes32ToString, getKeyValuePairFrom }

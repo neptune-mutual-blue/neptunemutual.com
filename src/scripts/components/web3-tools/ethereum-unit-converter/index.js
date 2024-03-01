@@ -18,6 +18,7 @@ import {
         type.value = ''
         return
       }
+
       type.value = (type === type.dataset.type) ? value : (convertFromWei(type.dataset.type, _wei))
     })
   }
@@ -42,6 +43,7 @@ import {
       const formConverterClassList = formConverter.classList
       formConverterClassList.remove('simple', 'extended')
       formConverterClassList.add(selected)
+
       if (inputtedData?.value > 0) {
         convert(inputtedData.type, inputtedData.value, selected)
       }

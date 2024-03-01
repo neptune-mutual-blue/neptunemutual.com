@@ -1,7 +1,7 @@
 {
   const body = document.querySelector('body')
 
-  function click (event) {
+  const click = (event) => {
     event.stopPropagation()
 
     const mobileMenu = document.getElementById('MobileMenu')
@@ -19,7 +19,10 @@
     const button = document.querySelector(
       '.hamburger.button.container[data-open]'
     )
-    if (!mobileMenu) return
+
+    if (!mobileMenu) {
+      return
+    }
 
     if (!e.target.closest('#MobileMenu')) {
       mobileMenu.setAttribute('data-open', 'false')
@@ -30,7 +33,7 @@
 
   document.querySelector('button.hamburger.button.container').addEventListener('click', click)
 
-  function keydown (e) {
+  const keydown = (e) => {
     const mobileMenu = document.querySelector('#MobileMenu[data-open="true"]')
     const button = document.querySelector(
       '.hamburger.button.container[data-open]'

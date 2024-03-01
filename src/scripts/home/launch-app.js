@@ -20,7 +20,7 @@
   // Close button
   const closeModal = document.getElementById('launch-modal-close')
 
-  function closeModalHandle () {
+  const closeModalHandle = () => {
     launchAppModal.setAttribute('data-open', 'false')
   }
 
@@ -48,7 +48,7 @@
     })
   })
 
-  function keydown (e) {
+  const keydown = (e) => {
     const key = e.which || e.keyCode || e.charCode
 
     if (key === 27) {

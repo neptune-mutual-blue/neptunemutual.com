@@ -23,16 +23,22 @@ const parseError = (iface, errorData) => {
 const getErrorMessage = (_error, iface = null) => {
   try {
     const error = _error.error || _error
+
     if (!error || !error.message) {
       return 'Unexpected Error Occurred'
     }
 
     if (iface && error?.data?.data) {
       const parsedError = parseError(iface, error.data.data)
-      if (parsedError) return `Error: ${parsedError.name}`
+
+      if (parsedError) {
+        return `Error: ${parsedError.name}`
+      }
     }
 
-    if (error?.reason) return error.reason
+    if (error?.reason) {
+      return error.reason
+    }
 
     if (error?.data?.message) {
       return error.data.message.trim().replace('execution reverted: ', '')
@@ -55,8 +61,10 @@ const calculateGasMargin = (value) => {
     .toString()
 }
 
-const encodeData = (encodeInterface, methodName, methodArgs = [], onError = (err) => console.error(err)) => {
-  if (!encodeInterface || !methodName) return
+const encodeData = (encodeInterface, methodName, methodArgs = [], onError = err => console.error(err)) => {
+  if (!encodeInterface || !methodName) {
+    return
+  }
 
   try {
     const encoded = encodeInterface.encodeFunctionData(methodName, methodArgs)
@@ -83,11 +91,13 @@ const parseEncoded = (data) => {
   }
 }
 
-const decodeData = (encodeInterface, encodedData, onError = (message, error) => {}) => {
-  if (!encodeInterface) return
+const decodeData = (encodeInterface, encodedData, onError) => {
+  if (!encodeInterface) {
+    return
+  }
 
-  function getInputsWithArgs (inputs, args) {
-    return inputs.map(input => {
+  const getInputsWithArgs = (inputs, args) => {
+    return inputs.map((input) => {
       const components = input.components
 
       const isArray = input.baseType === 'array'
@@ -95,14 +105,18 @@ const decodeData = (encodeInterface, encodedData, onError = (message, error) => 
       let arg = args[input.name]
 
       if (isArray) {
-        arg = (arg || []).map(argItem => {
+        arg = (arg || []).map((argItem) => {
           return components ? getInputsWithArgs(components, argItem || []) : argItem.toString()
         })
       }
 
-      if (!isArray) arg = components ? getInputsWithArgs(components, arg || []) : arg
+      if (!isArray) {
+        arg = components ? getInputsWithArgs(components, arg || []) : arg
+      }
 
-      if (typeof arg === 'string' || arg._isBigNumber || input.type === 'bool') arg = arg.toString()
+      if (typeof arg === 'string' || arg._isBigNumber || input.type === 'bool') {
+        arg = arg.toString()
+      }
 
       return {
         name: input.name,
@@ -123,15 +137,18 @@ const decodeData = (encodeInterface, encodedData, onError = (message, error) => 
     return { name, signature, inputs: inputsWithArgs }
   } catch (error) {
     console.log('Error in decoding data', { encodedData, error })
-    onError(`${error.code}: ${error.reason}`, error)
+
+    if (onError) {
+      onError(`${error.code}: ${error.reason}`, error)
+    }
   }
 }
 
 export {
   calculateGasMargin,
+  decodeData,
   encodeData,
   GAS_MARGIN_MULTIPLIER,
   getErrorMessage,
-  decodeData,
   parseEncoded
 }

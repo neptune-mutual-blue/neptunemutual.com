@@ -1,11 +1,8 @@
-const setupTogglers = (): void => {
-  const togglers = document.querySelectorAll('td[data-index]')
-  // Add event listeners to fire confetti when a button is clicked.
-  togglers.forEach((toggler) => {
-    toggler.addEventListener('click', () => {
-      toggleDescription((toggler as HTMLElement).dataset.index ?? '', toggler)
-    }, { passive: true })
-  })
+const getTextNodeHeight = (textNode: Node): number => {
+  const range = document.createRange()
+  range.selectNodeContents(textNode)
+  const rect = range.getBoundingClientRect()
+  return rect.bottom - rect.top
 }
 
 const toggleDescription = (index: string, toggler: Element): void => {
@@ -47,13 +44,14 @@ const toggleDescription = (index: string, toggler: Element): void => {
   (descriptionWrapper as HTMLElement).style.height = `${getTextNodeHeight(descriptionContent?.firstChild as Node)}px`
 }
 
-const getTextNodeHeight = (textNode: Node): number => {
-  const range = document.createRange()
-  range.selectNodeContents(textNode)
-  const rect = range.getBoundingClientRect()
-  return rect.bottom - rect.top
+const setupTogglers = (): void => {
+  const togglers = document.querySelectorAll('td[data-index]')
+  // Add event listeners to fire confetti when a button is clicked.
+  togglers.forEach((toggler) => {
+    toggler.addEventListener('click', () => {
+      toggleDescription((toggler as HTMLElement).dataset.index ?? '', toggler)
+    }, { passive: true })
+  })
 }
 
-export {
-  setupTogglers
-}
+export { setupTogglers }

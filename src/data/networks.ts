@@ -1,7 +1,7 @@
 interface NetworkOption {
   name: string
-  src: any
-  srcDark: any
+  src: Promise<string>
+  srcDark: Promise<string>
   text: string
   link: string
 }
@@ -11,10 +11,10 @@ const networks: NetworkOption[] = [
     name: 'Ethereum',
     src: import(
       '../elements/icons/custom/Brands/default/SvgEthereum.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     srcDark: import(
       '../elements/icons/custom/Brands/dark/SvgEthereumDark.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     text: 'ethereum.neptunemutual.net',
     link: 'https://ethereum.neptunemutual.net'
   },
@@ -22,10 +22,10 @@ const networks: NetworkOption[] = [
     name: 'Arbitrum',
     src: import(
       '../elements/icons/custom/Brands/default/SvgArbitrum.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     srcDark: import(
       '../elements/icons/custom/Brands/dark/SvgArbitrumDark.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     text: 'arbitrum.neptunemutual.net',
     link: 'https://arbitrum.neptunemutual.net'
   },
@@ -33,10 +33,10 @@ const networks: NetworkOption[] = [
     name: 'BNB Smart Chain',
     src: import(
       '../elements/icons/custom/Brands/default/SvgBNBChain.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     srcDark: import(
       '../elements/icons/custom/Brands/dark/SvgBNBChainDark.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     text: 'bsc.neptunemutual.net',
     link: 'https://bsc.neptunemutual.net'
   },
@@ -44,10 +44,10 @@ const networks: NetworkOption[] = [
     name: 'Polygon',
     src: import(
       '../elements/icons/custom/Brands/default/SvgPolygon.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     srcDark: import(
       '../elements/icons/custom/Brands/dark/SvgPolygonDark.svg?raw'
-    ).then((x: any) => x.default),
+    ).then(x => x.default),
     text: 'polygon.neptunemutual.net',
     link: 'https://polygon.neptunemutual.net'
   }
@@ -73,35 +73,36 @@ const tokens = {
 }
 
 const swaps: Array<{
-  src: any
-  srcDark: any
+  src: Promise<string>
+  srcDark: Promise<string>
   title: string
   href: string
-}> = [
-  {
-    src: import('../elements/icons/custom/sushi-arb.svg?raw').then((x: any) => x.default),
-    srcDark: import('../elements/icons/custom/sushi-arb-dark.svg?raw').then((x: any) => x.default),
-    title: 'Sushiswap (Arbitrum)',
-    href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
-  },
-  {
-    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
-    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
-    title: 'Sushiswap (BNB Chain)',
-    href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
-  },
-  {
-    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
-    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
-    title: 'Sushiswap (Polygon)',
-    href: `https://www.sushi.com/swap?token0=${tokens.polygon.usdc}&token1=${tokens.polygon.npm}&chainId=137`
-  },
-  {
-    src: import('../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),
-    srcDark: import('../elements/icons/custom/uniswap-eth-dark.svg?raw').then((x: any) => x.default),
-    title: 'Uniswap (Ethereum)',
-    href: `https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=${tokens.eth.npm}&chain=mainnet`
-  }
-]
+}> =
+  [
+    {
+      src: import('../elements/icons/custom/sushi-arb.svg?raw').then(x => x.default),
+      srcDark: import('../elements/icons/custom/sushi-arb-dark.svg?raw').then(x => x.default),
+      title: 'Sushiswap (Arbitrum)',
+      href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
+    },
+    {
+      src: import('../elements/icons/custom/sushi-bsc.svg?raw').then(x => x.default),
+      srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then(x => x.default),
+      title: 'Sushiswap (BNB Chain)',
+      href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
+    },
+    {
+      src: import('../elements/icons/custom/sushi-bsc.svg?raw').then(x => x.default),
+      srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then(x => x.default),
+      title: 'Sushiswap (Polygon)',
+      href: `https://www.sushi.com/swap?token0=${tokens.polygon.usdc}&token1=${tokens.polygon.npm}&chainId=137`
+    },
+    {
+      src: import('../elements/icons/custom/uniswap-eth.svg?raw').then(x => x.default),
+      srcDark: import('../elements/icons/custom/uniswap-eth-dark.svg?raw').then(x => x.default),
+      title: 'Uniswap (Ethereum)',
+      href: `https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=${tokens.eth.npm}&chain=mainnet`
+    }
+  ]
 
 export { networks, swaps }

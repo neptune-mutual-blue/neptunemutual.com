@@ -38,7 +38,7 @@
 
     socialShareContainer.querySelector('.copy.link').addEventListener('click', function (e) {
       e.preventDefault()
-      const button = this
+      const button = e.currentTarget
 
       const target = button.querySelector('span[data-toggled-text]')
       const { toggledText } = target.dataset

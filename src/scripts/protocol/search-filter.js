@@ -14,8 +14,9 @@
       .querySelectorAll('.contracts.list.view[data-scope="expired"] .item:not(.hidden)')
       .length
 
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       const buttonScope = button.getAttribute('data-scope')
+
       if (buttonScope === 'regular') {
         button.querySelector('span.badge').textContent = activeCount
       }
@@ -37,7 +38,7 @@
 
     hideAll()
 
-    items.forEach(x => {
+    items.forEach((x) => {
       const text = x.textContent.toLowerCase()
 
       if (text.includes(search)) {

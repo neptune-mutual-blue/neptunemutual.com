@@ -1,9 +1,9 @@
-function addClarityAnalytics () {
+const addClarityAnalytics = () => {
   window.clarity =
     window.clarity ||
-    function () {
-      (window.clarity.q = window.clarity.q || []).push(arguments)
-    }
+    ((...args) => {
+      (window.clarity.q = window.clarity.q || []).push(args)
+    })
 
   const element = document.createElement('script')
   element.async = 1

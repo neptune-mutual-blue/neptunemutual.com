@@ -16,5 +16,5 @@
     }
   }
 
-  fields.forEach((x) => x.addEventListener('blur', blur, { passive: true }))
+  fields.forEach(x => x.addEventListener('blur', blur, { passive: true }))
 }

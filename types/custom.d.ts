@@ -50,7 +50,7 @@ interface PaginatedResult<T> {
 }
 
 interface PaginatedByTagsResult<T> {
-  tag: any
+  tag: Tag | undefined
   records?: number
   totalPages?: number
   pageSize?: number
@@ -66,8 +66,6 @@ interface ApiResult<T> {
   pagingCounter: number
   hasPrevPage: boolean
   hasNextPage: boolean
-  prevPage: any
-  nextPage: any
 }
 
 interface TableOfContentEntry {
@@ -98,7 +96,7 @@ interface DetailedListViewItem {
 
 interface NamedIcon {
   name: string
-  icon: any
+  icon: Promise<typeof import('*?raw')>
 }
 
 interface ConversionField {
@@ -113,12 +111,12 @@ type EthereumUnit = 'kWei' | 'mWei' | 'gWei' | 'szabo' | 'finney' | 'ether' | 'k
 interface CatchAllRedirectPageProps {
   redirect: true
   dest: string
-  [key: string]: any
+  [key: string]: any //eslint-disable-line
 }
 
 interface CatchAllStandalonePageProps {
   redirect: false
-  [key: string]: any
+  [key: string]: any //eslint-disable-line
 }
 
 interface CatchAllPageData {
@@ -186,7 +184,7 @@ interface TabItem {
   text: string
   href: string
   active?: boolean
-  icon?: any
+  icon?: string
   id?: string
 }
 

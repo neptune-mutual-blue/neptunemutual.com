@@ -5,8 +5,8 @@ import { onSuccess } from './success'
 {
   const buttons = document.querySelectorAll('.ui.newsletter.subscription.primary.button')
 
-  async function click () {
-    const el = this
+  const click = async (e) => {
+    const el = e.currentTarget
     const container = el.closest('.email.subscription.container')
     const input = container.querySelector('input[type=email]')
 

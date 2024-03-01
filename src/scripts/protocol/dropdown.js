@@ -9,8 +9,9 @@
     const newState = currentState === 'true' ? 'false' : 'true'
     menu.setAttribute('data-open', newState)
 
-    document.addEventListener('click', ev => {
+    document.addEventListener('click', (ev) => {
       const isClickOutside = !ev.target.closest('#NetworkSelectButton + .menu[data-open]')
+
       if (isClickOutside) {
         menu.setAttribute('data-open', 'false')
       }

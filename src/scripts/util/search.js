@@ -1,10 +1,17 @@
-import { DOCS_IDBVALIDKEY, BLOG_IDBVALIDKEY, TEXT_OFFSET } from '../global/search/constant'
+import {
+  BLOG_IDBVALIDKEY,
+  DOCS_IDBVALIDKEY,
+  TEXT_OFFSET
+} from '../global/search/constant'
 
 function debounce (func, timeout = 300) {
   let timer
+
   return (...args) => {
     clearTimeout(timer)
-    timer = setTimeout(() => { func.apply(this, args) }, timeout)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, timeout)
   }
 }
 
@@ -33,8 +40,13 @@ const getCacheUrl = () => {
 }
 
 const getRootPath = () => {
-  if (isDocsPage) return '/docs'
-  if (isBlogPage) return '/blog'
+  if (isDocsPage) {
+    return '/docs'
+  }
+
+  if (isBlogPage) {
+    return '/blog'
+  }
 }
 
 const getUpdatedHtml = (texts = [], searchTerm = '') => {
@@ -60,4 +72,4 @@ const getUpdatedHtml = (texts = [], searchTerm = '') => {
   return html
 }
 
-export { debounce, getIDBValidKey, getCacheUrl, getRootPath, getUpdatedHtml }
+export { debounce, getCacheUrl, getIDBValidKey, getRootPath, getUpdatedHtml }

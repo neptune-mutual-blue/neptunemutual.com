@@ -95,7 +95,9 @@ selectSlide(currentTimelineSlide.getAttribute('data-slide-index'))
 // Add event listeners to all items
 allTimelineItems.forEach((el) => {
   el.addEventListener('click', function (ev) {
-    if (!ev.target) return
+    if (!ev.target) {
+      return
+    }
 
     const clickedIndex = this.getAttribute('data-slide-index')
 

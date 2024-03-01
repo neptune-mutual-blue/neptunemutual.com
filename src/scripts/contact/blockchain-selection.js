@@ -14,8 +14,8 @@
     target.value = chains.join(', ')
   }
 
-  function click () {
-    const button = this
+  const click = (event) => {
+    const button = event.currentTarget
     const selected = !button.classList.contains('selected')
 
     selected
@@ -25,5 +25,5 @@
     displaySelection()
   }
 
-  buttons.forEach((x) => x.addEventListener('click', click, { passive: true }))
+  buttons.forEach(x => x.addEventListener('click', click, { passive: true }))
 }

@@ -8,18 +8,18 @@ import { getApi } from './'
 const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Array<PaginatedByTagsResult<Article>>> => {
   const { docs } = await getApi<Article>(api)
 
-  const allTags = docs.map((doc: Article) => doc.tags).flat().filter((tag) => tag !== undefined)
-  const uniqueTags = [...new Map(allTags?.map((tag: any) => [tag.id, tag])).values()]
+  const allTags = docs.map((doc: Article) => doc.tags).flat().filter(tag => tag !== undefined)
+  const uniqueTags = [...new Map(allTags?.map(tag => [tag!.id, tag])).values()]
 
-  const result = uniqueTags.map((tag: any) => {
-    const filteredDocs = docs?.filter((doc: any) => {
+  const result = uniqueTags.map((tag) => {
+    const filteredDocs = docs?.filter((doc) => {
       if (doc.tags === undefined || doc.tags === null) {
         console.log('No tags found for doc:', doc.id)
 
         return false
       }
 
-      const matchedTag = doc.tags.find((x: any) => x.slug === tag.slug)
+      const matchedTag = doc.tags.find(x => x.slug === tag!.slug)
       return matchedTag
     })
 

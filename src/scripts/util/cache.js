@@ -13,6 +13,10 @@ const cache = async (data, key, expires) => {
   await set(key, JSON.stringify(value))
 }
 
+const emptyCache = async (key) => {
+  await del(key)
+}
+
 const fromCache = async (key) => {
   const content = await get(key)
 
@@ -28,10 +32,6 @@ const fromCache = async (key) => {
   }
 
   return null
-}
-
-const emptyCache = async (key) => {
-  await del(key)
 }
 
 export { cache, emptyCache, fromCache }

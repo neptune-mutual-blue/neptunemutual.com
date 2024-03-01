@@ -7,11 +7,23 @@ const searchOverlay = document.querySelector('.search.dimmer')
 const searchInputField = document.getElementById('ModalSearchInputSearch')
 const inputClearButton = document.querySelector('#ModalSearchInputSearch + button.clear')
 
-function handleKeyDown (e) {
+const handleKeyDown = (e) => {
   if ((e.key === 'Escape' || e.which === 27) && !searchInputField.value) {
     searchOverlay.classList.add('hidden')
     document.querySelector('html body').classList.remove('no', 'vertical', 'scroll')
     document.removeEventListener('keydown', handleKeyDown)
+  }
+}
+
+const handleClick = (e) => {
+  const clickedOutside = !e.target.closest('.ui.search.modal')
+
+  if (clickedOutside) {
+    searchOverlay.classList.add('hidden')
+    searchOverlay.removeEventListener('click', handleClick)
+
+    // enable page scrolling
+    document.querySelector('html body').classList.remove('no', 'vertical', 'scroll')
   }
 }
 
@@ -28,16 +40,25 @@ const onActivate = async () => {
   document.addEventListener('keydown', handleKeyDown)
 }
 
-function handleClick (e) {
-  const clickedOutside = !e.target.closest('.ui.search.modal')
+const updateCopyButtons = () => {
+  const copyButtons = document.querySelectorAll('.search.result .item > .footer button.copy')
 
-  if (clickedOutside) {
-    searchOverlay.classList.add('hidden')
-    searchOverlay.removeEventListener('click', handleClick)
+  const handleCopy = (e) => {
+    const href = `${window.location.origin}${e.currentTarget.getAttribute('data-link')}`
+    const btn = e.currentTarget
+    copyToClipboard(href, () => {
+      const initialAttr = btn.getAttribute('data-tooltip')
+      btn.setAttribute('data-tooltip', 'Copied')
 
-    // enable page scrolling
-    document.querySelector('html body').classList.remove('no', 'vertical', 'scroll')
+      setTimeout(() => {
+        btn.setAttribute('data-tooltip', initialAttr)
+      }, 1500)
+    })
   }
+
+  copyButtons.forEach((copyButton) => {
+    copyButton.addEventListener('click', handleCopy)
+  })
 }
 
 const onSearch = async (e) => {
@@ -59,26 +80,5 @@ const onClear = () => {
 document.getElementById('SearchInputSearch').addEventListener('focus', onActivate, { passive: true })
 searchInputField.addEventListener('input', debouncedOnSearch, { passive: true })
 inputClearButton.addEventListener('click', onClear, { passive: true })
-
-function updateCopyButtons () {
-  const copyButtons = document.querySelectorAll('.search.result .item > .footer button.copy')
-
-  const handleCopy = e => {
-    const href = `${window.location.origin}${e.currentTarget.getAttribute('data-link')}`
-    const btn = e.currentTarget
-    copyToClipboard(href, () => {
-      const initialAttr = btn.getAttribute('data-tooltip')
-      btn.setAttribute('data-tooltip', 'Copied')
-
-      setTimeout(() => {
-        btn.setAttribute('data-tooltip', initialAttr)
-      }, 1500)
-    })
-  }
-
-  copyButtons.forEach(copyButton => {
-    copyButton.addEventListener('click', handleCopy)
-  })
-}
 
 setupSearchPagination(1, 1)

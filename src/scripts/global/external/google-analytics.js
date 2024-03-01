@@ -1,5 +1,4 @@
-function addGoogleAnalytics () {
-  // Global site tag (gtag.js) - Google Analytics
+const addGoogleAnalytics = () => {
   const gtagSource = `https://www.googletagmanager.com/gtag/js?id=${window.googleAnalyticsId}`
   const globalScript = document.createElement('script')
   globalScript.async = true
@@ -7,9 +6,11 @@ function addGoogleAnalytics () {
   document.head.appendChild(globalScript)
 
   window.dataLayer = window.dataLayer || []
-  window.gtag = function () {
-    window.dataLayer.push(arguments)
+
+  window.gtag = (...args) => {
+    window.dataLayer.push(...args)
   }
+
   window.gtag('js', new Date())
   window.gtag('config', window.googleAnalyticsId)
 }

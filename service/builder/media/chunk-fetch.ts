@@ -21,7 +21,7 @@ const chunkFetch = async (files: FileDownloadArgs[]): Promise<void> => {
   for (let i = 0; i < chunks.length; i++) {
     console.log('Downloading batch #%d', i)
 
-    const promises = chunks[i].map((x: any) => x.fn(x.file))
+    const promises = chunks[i].map(x => x.fn(x.file))
     await Promise.allSettled(promises)
   }
 }

@@ -14,7 +14,9 @@
   // Add click event listener to tabs
   tabs.forEach((tab) => {
     tab.addEventListener('click', function (ev) {
-      if (!ev.target) return
+      if (!ev.target) {
+        return
+      }
 
       const selectedId = this.getAttribute('data-tab-id')
 

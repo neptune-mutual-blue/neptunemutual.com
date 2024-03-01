@@ -24,7 +24,7 @@ const sync = async (): Promise<void> => {
 
   const host = env('FILE_URL_PREFIX')
 
-  const files = all.map(x => {
+  const files = all.map((x) => {
     const arg: FileDownloadArgs = {
       remote: new URL(x.filename, host).href,
       local: path.join(root, x.filename)

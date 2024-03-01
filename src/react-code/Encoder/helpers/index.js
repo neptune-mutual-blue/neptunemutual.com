@@ -21,11 +21,16 @@ const isArray = (string) => {
 const isValidAbi = (string) => {
   try {
     const res = JSON.parse(string)
+
     if (Array.isArray(res)) {
       const _iface = new ethers.utils.Interface(res)
-      if (_iface) return true
+
+      if (_iface) {
+        return true
+      }
     }
   } catch {}
+
   return false
 }
 

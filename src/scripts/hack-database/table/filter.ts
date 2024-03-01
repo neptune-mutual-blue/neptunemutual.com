@@ -17,7 +17,7 @@ const filterHackData = async (
 
     const searchQuery = (document.querySelector('.hack.search.input input') as HTMLInputElement).value.trim()
 
-    const PUBLIC_HACKS_API_ORIGIN: string = (import.meta as any).env.PUBLIC_HACKS_API_ORIGIN
+    const PUBLIC_HACKS_API_ORIGIN: string = import.meta.env.PUBLIC_HACKS_API_ORIGIN
 
     const parameters = {
       limit: '20',
@@ -27,7 +27,7 @@ const filterHackData = async (
       'where[or][1][name][like]': searchQuery
     }
 
-    const params = Object.entries(parameters).map(([key, value]) => value.length > 0 ? key + '=' + value : undefined).filter((item) => item).join('&')
+    const params = Object.entries(parameters).map(([key, value]) => value.length > 0 ? key + '=' + value : undefined).filter(item => item).join('&')
 
     const response = await (
       await fetch(`${PUBLIC_HACKS_API_ORIGIN}?${params}`)

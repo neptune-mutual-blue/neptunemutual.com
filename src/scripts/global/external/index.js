@@ -1,7 +1,7 @@
 import { addClarityAnalytics } from './clarity'
 import { addGoogleAnalytics } from './google-analytics'
 
-function addAnalytics () {
+const addAnalytics = () => {
   addClarityAnalytics()
   addGoogleAnalytics()
 }

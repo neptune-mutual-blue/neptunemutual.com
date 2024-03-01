@@ -5,19 +5,23 @@ const cookieDeclineButton = document.querySelector('.cookie.popup .decline.butto
 const cookieCloseButton = document.querySelector('.cookie.popup .close.button')
 const popup = document.querySelector('.cookie.popup.container')
 
-function showPopup () {
-  if (!popup) return
+const showPopup = () => {
+  if (!popup) {
+    return
+  }
 
   popup.classList.remove('initially', 'hidden')
 }
 
-function hidePopup () {
-  if (!popup) return
+const hidePopup = () => {
+  if (!popup) {
+    return
+  }
 
   popup.classList.add('initially', 'hidden')
 }
 
-function checkConsentOnLoad () {
+const checkConsentOnLoad = () => {
   const cookiesAccepted = window.localStorage.getItem('npm-cookies-accepted')
 
   if (cookiesAccepted === 'true') {
@@ -34,8 +38,10 @@ function checkConsentOnLoad () {
 
 checkConsentOnLoad()
 
-function setNpmCookie (value) {
-  if (value !== 'true' && value !== 'false') return
+const setNpmCookie = (value) => {
+  if (value !== 'true' && value !== 'false') {
+    return
+  }
 
   if (value === 'true') {
     addAnalytics()

@@ -1,10 +1,13 @@
+import { AstroGlobal } from 'astro'
+
 import { env } from './env'
 import { normalizeUrl } from './url'
 
 const getDns = (): string => new URL(env('DOMAIN_NAME')).origin
 
-const getCanonical = (Astro: any): string | undefined => {
+const getCanonical = (Astro: AstroGlobal): string | undefined => {
   const domain = getDns()
+
   const { pathname, origin } = new URL(Astro.url.pathname, domain)
   const url = new URL(pathname, origin)
 

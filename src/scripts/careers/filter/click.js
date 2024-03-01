@@ -5,6 +5,7 @@ const icon = document.querySelector(".ui.dropdown.filter.container li[data-selec
 const careersFilterButton = document.querySelector('#CareersFilterButton')
 
 const ROWS_PER_PAGE = 10
+
 const updateCardVisibility = (selected, persistPage) => {
   const { department } = selected.dataset
 
@@ -27,14 +28,17 @@ const updateCardVisibility = (selected, persistPage) => {
   })
 
   const totalPages = Math.ceil(listings.length / ROWS_PER_PAGE)
-  if (table) table.dataset.total = totalPages
+
+  if (table) {
+    table.dataset.total = totalPages
+  }
 
   setupPagination(totalPages, pageNumber)
 }
 
-function onclick (el) {
+const onclick = (el) => {
   const options = document.querySelectorAll('.ui.dropdown.filter.container .menu > ul > li')
-  options.forEach(option => {
+  options.forEach((option) => {
     option.dataset.selected = 'false'
   })
 

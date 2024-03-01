@@ -1,4 +1,3 @@
-
 const extendedFields: ConversionField[] = [
   {
     name: 'Enter Wei Value',

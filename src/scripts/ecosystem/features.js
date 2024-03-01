@@ -2,23 +2,23 @@
   const buttons = document.querySelectorAll('.ecosystem .ui.buttons .button')
   const divs = document.querySelectorAll('.ecosystem div[data-scope]')
 
-  function updateFeatureList (scope) {
+  const updateFeatureList = (scope) => {
     if (!scope) {
-      divs.forEach((x) => x.classList.remove('initially', 'hidden'))
+      divs.forEach(x => x.classList.remove('initially', 'hidden'))
       return
     }
 
-    divs.forEach((x) => x.classList.add('initially', 'hidden'))
+    divs.forEach(x => x.classList.add('initially', 'hidden'))
 
     document
       .querySelectorAll(`.ecosystem div[data-scope="${scope}"]`)
-      .forEach((x) => x.classList.remove('initially', 'hidden'))
+      .forEach(x => x.classList.remove('initially', 'hidden'))
   }
 
   buttons.forEach((el) => {
-    el.addEventListener('click', function () {
-      const el = this
-      buttons.forEach((x) => x.classList.remove('active'))
+    el.addEventListener('click', (e) => {
+      const el = e.currentTarget
+      buttons.forEach(x => x.classList.remove('active'))
 
       el.classList.add('active')
 
@@ -43,7 +43,7 @@
   )
 
   // function to toggle the dropdown menu
-  function toggleMenu () {
+  const toggleMenu = () => {
     const state = dropdownMenu.getAttribute('data-open')
     const newState = state === 'true' ? 'false' : 'true'
 
@@ -54,7 +54,7 @@
   dropdownButton.addEventListener('click', toggleMenu)
 
   // function to update dropdown menu
-  function updateDropdownList (e) {
+  const updateDropdownList = (e) => {
     dropdownLists.forEach((item) => {
       item.setAttribute('data-selected', 'false')
     })
@@ -64,7 +64,7 @@
   }
 
   // function to update the toggle button
-  function updateToggleButton (e) {
+  const updateToggleButton = (e) => {
     const selectedTag = e.currentTarget.getAttribute('data-tag')
     buttonSpans.forEach((span) => {
       const tag = span.getAttribute('data-tag')

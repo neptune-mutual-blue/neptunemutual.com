@@ -42,7 +42,7 @@ if (paddingContainer) {
   })
 }
 
-copyButton.addEventListener('click', async (e) => {
+copyButton.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(result.value)
     copyButton.style.display = 'none'

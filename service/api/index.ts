@@ -23,6 +23,7 @@ const getApi = async <T>(api: Api): Promise<ApiResult<T>> => {
 
 const getContracts = async (api: (Api.Contract | Api.ContractArbitrum | Api.ContractMumbai | Api.ContractBSC)): Promise<ApiResponse<ProtocolContracts>> => {
   const contracts = [Api.Contract, Api.ContractArbitrum, Api.ContractMumbai, Api.ContractBSC]
+
   if (!contracts.includes(api)) {
     throw new Error(`Invalid type ${api} for contract`)
   }
@@ -80,18 +81,18 @@ const getPaginated = async<T>(api: Api, pageSize: number = 12): Promise<Paginate
 const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Array<PaginatedByTagsResult<Article>>> => {
   const { docs } = await getApi<Article>(api)
 
-  const allTags = docs.map((doc) => doc.tags).flat().filter((tag) => tag !== undefined)
-  const uniqueTags = [...new Map(allTags.map((tag: any) => [tag.id, tag])).values()]
+  const allTags = docs.map(doc => doc.tags).flat().filter(tag => tag !== undefined)
+  const uniqueTags = [...new Map(allTags.map(tag => [tag!.id, tag])).values()]
 
-  const result = uniqueTags.map((tag: any) => {
-    const filteredDocs = docs.filter((doc: any) => {
+  const result = uniqueTags.map((tag) => {
+    const filteredDocs = docs.filter((doc) => {
       if (doc.tags === undefined || doc.tags === null) {
         console.log('No tags found for doc:', doc.id)
 
         return false
       }
 
-      const matchedTag = doc.tags.find((x: any) => x.slug === tag.slug)
+      const matchedTag = doc.tags.find(x => x.slug === tag!.slug)
       return matchedTag
     })
 

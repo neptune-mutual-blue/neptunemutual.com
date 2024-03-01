@@ -1,15 +1,15 @@
 {
   const subMenu = document.querySelector('.sub.menu.container')
 
-  function enablePageScroll () {
+  const enablePageScroll = () => {
     document.querySelector('html').style.overflow = 'auto'
   }
 
-  function disablePageScroll () {
+  const disablePageScroll = () => {
     document.querySelector('html').style.overflow = 'hidden'
   }
 
-  function click (event) {
+  const click = (event) => {
     event.stopPropagation()
 
     const openState = subMenu.getAttribute('data-open')
@@ -18,15 +18,22 @@
     subMenu.setAttribute('data-open', newState)
     event.currentTarget.setAttribute('data-open', newState)
 
-    if (newState === 'true') disablePageScroll()
-    else enablePageScroll()
+    if (newState === 'true') {
+      disablePageScroll()
+      return
+    }
+
+    enablePageScroll()
   }
 
   document.querySelector('.display.resources.mega.menu').addEventListener('click', click)
 
   document.addEventListener('click', (e) => {
     const button = document.querySelector('nav button[data-open="true"]')
-    if (!button) return
+
+    if (!button) {
+      return
+    }
 
     const width = window.innerWidth
 
@@ -36,6 +43,7 @@
         button.setAttribute('data-open', 'false')
         enablePageScroll()
       }
+
       return
     }
 

@@ -1,6 +1,6 @@
 import { Api } from '../../../../types/enum'
 
-const getMeta = (api: Api): Object => {
+const getMeta = (api: Api): Meta => {
   if (api === Api.Blog) {
     return {
       title: 'Neptune Mutual Blog Feed',

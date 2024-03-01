@@ -24,7 +24,10 @@ const search = async (searchTerm, page = 1) => {
   for (const result of results) {
     const text = result.text
     const subtitle = result.subtitle
-    if (!text && !subtitle) return
+
+    if (!text && !subtitle) {
+      return
+    }
 
     const rootPath = getRootPath()
     const url = [rootPath, result.parent, result.slug].filter(x => x !== undefined).join('/')

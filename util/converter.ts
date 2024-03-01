@@ -14,6 +14,7 @@ const definition: Record<EthereumUnit, number> = {
   gEther: 27,
   tEther: 30
 }
+
 const getPowerValue = (unit: EthereumUnit): number => {
   const power = definition[unit]
 

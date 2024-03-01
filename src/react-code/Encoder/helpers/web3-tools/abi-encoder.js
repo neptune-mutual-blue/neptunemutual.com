@@ -4,9 +4,13 @@ import Joi from 'joi'
 
 const ARGS_TYPE_PATTERN = /([a-zA-Z0-9]+)(\[(\d*)\])?/
 
+const getIndex = (idx, prevIndex) => {
+  return ['number', 'string'].includes(typeof prevIndex) ? `${prevIndex}-${idx}` : idx
+}
+
 const getTypeInfo = (type) => {
   // eslint-disable-next-line no-unused-vars
-  const [_, _type, isArray, argCount] = Array.from(
+  const [, _type, isArray, argCount] = Array.from(
     type.match(ARGS_TYPE_PATTERN)
   )
 
@@ -20,6 +24,7 @@ const getTypeInfo = (type) => {
 const getPlaceholder = (type) => {
   const _getPlaceholder = (_type) => {
     let _val = ''
+
     switch (_type) {
       case 'uint':
       case 'uint8':
@@ -73,6 +78,7 @@ const getPlaceholder = (type) => {
 const getJoiType = (type) => {
   const _getType = (_type) => {
     let _joiType = Joi.string()
+
     switch (_type) {
       case 'address':
         _joiType = Joi.string()
@@ -92,14 +98,20 @@ const getJoiType = (type) => {
       case 'bytes':
       case 'bytes32':
         _joiType = Joi.string().custom((val, helper) => {
-          if (val.startsWith('0x')) return val
+          if (val.startsWith('0x')) {
+            return val
+          }
+
           return helper.message('Invalid value for bytes type')
         })
         break
 
       case 'bytes4':
         _joiType = Joi.string().custom((val, helper) => {
-          if (val.startsWith('0x') && val.length === 10) return val
+          if (val.startsWith('0x') && val.length === 10) {
+            return val
+          }
+
           return helper.message('Invalid value for bytes4 type')
         })
         break
@@ -113,6 +125,7 @@ const getJoiType = (type) => {
             const bn = BigNumber(_val).isPositive()
             return bn || helper.message('invalid value provided')
           } catch { }
+
           return helper.message('invalid value provided')
         })
         break
@@ -135,12 +148,14 @@ const getJoiType = (type) => {
     ? Joi.string().custom((_val, helper) => {
       try {
         const _parsed = JSON.parse(_val)
+
         if (_parsed) {
           return argCount
             ? Joi.array().items(joiType).length(argCount).validate(_parsed)
             : Joi.array().items(joiType).validate(_parsed)
         }
       } catch { }
+
       return helper.message('must be valid json')
     })
     : joiType
@@ -149,15 +164,19 @@ const getJoiType = (type) => {
 const createJoiSchema = (func, arrayLengths) => {
   const { inputs, stateMutability, name } = func
 
-  if (!inputs?.length) return
+  if (!inputs?.length) {
+    return
+  }
 
   arrayLengths = arrayLengths || Array(inputs.length).fill(1)
 
   const joiSchema = {}
 
-  if (stateMutability === 'payable') joiSchema[name] = getJoiType('uint')
+  if (stateMutability === 'payable') {
+    joiSchema[name] = getJoiType('uint')
+  }
 
-  function getSchemaObject (_inputs, prevIdx = null) {
+  const getSchemaObject = (_inputs, prevIdx = null) => {
     const schemaObject = {}
 
     _inputs.map((_input, i) => {
@@ -172,6 +191,7 @@ const createJoiSchema = (func, arrayLengths) => {
             Object.assign(schemaObject, getSchemaObject(_input.components, index))
             return null
           }
+
           schemaObject[index] = getJoiType(actualType)
           return null
         })
@@ -183,6 +203,7 @@ const createJoiSchema = (func, arrayLengths) => {
         Object.assign(schemaObject, getSchemaObject(_input.components, getIndex(i, prevIdx)))
         return null
       }
+
       schemaObject[getIndex(i, prevIdx)] = getJoiType(_input.type)
       return null
     })
@@ -198,22 +219,33 @@ const createJoiSchema = (func, arrayLengths) => {
 const checkInputErrors = (schema, inputData) => {
   if (schema && inputData) {
     const { error: _error } = schema.validate(inputData)
-    if (_error) return true
+
+    if (_error) {
+      return true
+    }
   }
 
   return false
 }
 
 const checkEmptyInputs = (inputs, inputData, name, stateMutability) => {
-  if (stateMutability === 'payable' && !inputData[name]) return true
+  if (stateMutability === 'payable' && !inputData[name]) {
+    return true
+  }
 
-  if (Array.from(Object.values(inputData)).find(i => !i)) return true
+  if (Array.from(Object.values(inputData)).find(i => !i)) {
+    return true
+  }
 
-  function getF (_inputs, prevIdx) {
+  const getF = (_inputs, prevIdx) => {
     const empty = _inputs.find((input, i) => {
-      if (input.type === 'tuple' && Array.isArray(input.components)) return getF(input.components, getIndex(i, prevIdx))
+      if (input.type === 'tuple' && Array.isArray(input.components)) {
+        return getF(input.components, getIndex(i, prevIdx))
+      }
 
-      if (!inputData[getIndex(i, prevIdx)]) return true
+      if (!inputData[getIndex(i, prevIdx)]) {
+        return true
+      }
 
       return false
     })
@@ -228,13 +260,18 @@ const isInputError = (schema, inputData, _field) => {
   if (schema && inputData[_field]) {
     const { error: _error } = schema.validate(inputData, { abortEarly: false })
 
-    if (_error && _error.details.find(d => d.path.includes(_field.toString()))) return true
+    if (_error && _error.details.find(d => d.path.includes(_field.toString()))) {
+      return true
+    }
   }
+
   return false
 }
 
 const checkInputError = (type, value) => {
-  if (!value) return false
+  if (!value) {
+    return false
+  }
 
   const schema = Joi.object({ key: getJoiType(type) })
   const { error } = schema.validate({ key: value })
@@ -242,15 +279,26 @@ const checkInputError = (type, value) => {
   return Boolean(error)
 }
 
-const defaultData = type => {
+const defaultData = (type) => {
   const { actualType, isArray, argCount } = getTypeInfo(type)
 
   let _value = '0x7465737400000000000000000000000000000000000000000000000000000000'
 
-  if (actualType.startsWith('uint')) _value = 1
-  if (actualType.startsWith('address')) _value = '0x0000000000000000000000000000000000000000'
-  if (actualType.startsWith('bool')) _value = 'true'
-  if (actualType === 'bytes4') _value = '0x12345678'
+  if (actualType.startsWith('uint')) {
+    _value = 1
+  }
+
+  if (actualType.startsWith('address')) {
+    _value = '0x0000000000000000000000000000000000000000'
+  }
+
+  if (actualType.startsWith('bool')) {
+    _value = 'true'
+  }
+
+  if (actualType === 'bytes4') {
+    _value = '0x12345678'
+  }
 
   const returnValue = isArray
     ? Array(argCount || 1).fill(0).map(() => _value)
@@ -259,9 +307,9 @@ const defaultData = type => {
   return returnValue
 }
 
-function getFunctionSignature (_function) {
-  function getArgsSignature (inps) {
-    const args = inps.map(input => {
+const getFunctionSignature = (_function) => {
+  const getArgsSignature = (inps) => {
+    const args = inps.map((input) => {
       const { isArray } = getTypeInfo(input.type)
 
       if (['tuple', 'tuple[]'].includes(input.type) && Array.isArray(input.components)) {
@@ -278,9 +326,9 @@ function getFunctionSignature (_function) {
   return `${_function.name}${getArgsSignature(_function.inputs)}`
 }
 
-function getDefaultEncodeData (_function) {
-  function getEncodedDataArray (inps) {
-    const data = inps.map(input => {
+const getDefaultEncodeData = (_function) => {
+  const getEncodedDataArray = (inps) => {
+    const data = inps.map((input) => {
       const { isArray } = getTypeInfo(input.type)
 
       if (Array.isArray(input.components)) {
@@ -297,7 +345,7 @@ function getDefaultEncodeData (_function) {
   return getEncodedDataArray(_function.inputs)
 }
 
-function safeParseJson (json) {
+const safeParseJson = (json) => {
   try {
     return JSON.parse(json)
   } catch {
@@ -305,8 +353,8 @@ function safeParseJson (json) {
   }
 }
 
-function getWriteArguments (inputData, inputs) {
-  function getInputs (_inputData, inputs) {
+const getWriteArguments = (inputData, inputs) => {
+  const getInputs = (_inputData, inputs) => {
     let data = Object.values(_inputData)
 
     data = inputs.map((input, i) => {
@@ -315,7 +363,9 @@ function getWriteArguments (inputData, inputs) {
     })
 
     data = data.map((item, i) => {
-      if (!item) return null
+      if (!item) {
+        return null
+      }
 
       const input = inputs[i]
       const components = input.components
@@ -323,10 +373,19 @@ function getWriteArguments (inputData, inputs) {
 
       const isItemArray = Array.isArray(item)
 
-      function parseItem (_item) {
-        if (typeof _item === 'object') return getInputs(_item, components)
-        if (isArray) return safeParseJson(_item)
-        if (actualType === 'bool') return ['true', 'false'].includes(_item.toLowerCase()) ? JSON.parse(_item) : null
+      const parseItem = (_item) => {
+        if (typeof _item === 'object') {
+          return getInputs(_item, components)
+        }
+
+        if (isArray) {
+          return safeParseJson(_item)
+        }
+
+        if (actualType === 'bool') {
+          return ['true', 'false'].includes(_item.toLowerCase()) ? JSON.parse(_item) : null
+        }
+
         return _item
       }
 
@@ -343,11 +402,14 @@ function getWriteArguments (inputData, inputs) {
   return getInputs(inputData, inputs)
 }
 
-function getOutputResponse (func, outputResponse) {
+const getOutputResponse = (func, outputResponse) => {
   let outputArray = func.outputs
 
   const tupleOutput = func.outputs.find(o => o.type === 'tuple')
-  if (tupleOutput) outputArray = tupleOutput.components
+
+  if (tupleOutput) {
+    outputArray = tupleOutput.components
+  }
 
   const outputs = outputArray.map((output, idx) => {
     const value = outputResponse[idx]?.toString()
@@ -361,14 +423,11 @@ function getOutputResponse (func, outputResponse) {
   return outputs.filter(Boolean)
 }
 
-function getIndex (idx, prevIndex) {
-  return ['number', 'string'].includes(typeof prevIndex) ? `${prevIndex}-${idx}` : idx
-}
-
-function updateObjectByArrayOfKeys (obj, keys, value) {
+const updateObjectByArrayOfKeys = (obj, keys, value) => {
   let newObj = { ...obj }
 
   const key = keys.shift()
+
   if (keys.length) {
     newObj[key] = updateObjectByArrayOfKeys(newObj[key], keys, value)
   } else {
@@ -376,11 +435,15 @@ function updateObjectByArrayOfKeys (obj, keys, value) {
   }
 
   const isArray = Object.keys(newObj).every(k => !isNaN(Number(k)))
-  if (isArray) newObj = Object.values(newObj)
+
+  if (isArray) {
+    newObj = Object.values(newObj)
+  }
+
   return newObj
 }
 
-function getObjectValue (_obj, _keys = []) {
+const getObjectValue = (_obj, _keys = []) => {
   const obj = { ..._obj }
   const keys = [..._keys]
 
@@ -396,18 +459,18 @@ function getObjectValue (_obj, _keys = []) {
 }
 
 export {
-  getTypeInfo,
+  checkEmptyInputs,
+  checkInputError,
   checkInputErrors,
   createJoiSchema,
-  getPlaceholder,
-  isInputError,
-  getFunctionSignature,
   getDefaultEncodeData,
-  getWriteArguments,
-  getOutputResponse,
+  getFunctionSignature,
   getIndex,
-  checkEmptyInputs,
-  updateObjectByArrayOfKeys,
-  checkInputError,
-  getObjectValue
+  getObjectValue,
+  getOutputResponse,
+  getPlaceholder,
+  getTypeInfo,
+  getWriteArguments,
+  isInputError,
+  updateObjectByArrayOfKeys
 }
