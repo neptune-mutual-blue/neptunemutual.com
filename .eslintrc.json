@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "neptune-core",
+    "neptune-typescript"
+  ],
+  "rules": {
+    
+  }
+}
