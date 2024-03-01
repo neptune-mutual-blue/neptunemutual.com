@@ -7,4 +7,17 @@ function createContractKey (name: string, address: string, network: string | num
   return joined
 }
 
-export { createContractKey }
+const generateRandomString = (length: number): string => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-'
+  let result = ''
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length))
+  }
+
+  // append timestamp to make it unique
+  result += '_' + Date.now().toString()
+
+  return result
+}
+
+export { createContractKey, generateRandomString }

@@ -1,0 +1,51 @@
+/ja / 200
+/ja/ / 200
+
+/fr / 200
+/fr/ / 200
+
+/en / 200
+/en/ / 200
+
+/ru / 200
+/ru/ / 200
+
+/zh / 200
+/zh/ / 200
+
+/files/lightpaper.v1.pdf /docs 301
+
+/docs/npm-token-design /docs/npm-token/ 302
+/docs/npm-token-design/ /docs/npm-token/ 200
+
+/blog/atom.xml /feeds/blog/atom.xml 200
+/blog/rss.xml /feeds/blog/rss.xml 200
+
+/pressroom/atom.xml /feeds/pressroom/atom.xml 200
+/pressroom/rss.xml /feeds/pressroom/rss.xml 200
+
+/blog/tag/crypto.com /blog/tag/crypto-com/#crypto-com 301
+/blog/tag/crypto.com/ /blog/tag/crypto-com/#crypto-com 301
+
+/blog/tag/xt.com /blog/tag/xt-com/#xt-com 301
+/blog/tag/xt.com/ /blog/tag/xt-com/#xt-com 301
+
+/blog/identity-theft-in-metaverse.-what-if-your-avatar-is-hacked /blog/identity-theft-in-metaverse-what-if-your-avatar-is-hacked/ 301
+/blog/identity-theft-in-metaverse.-what-if-your-avatar-is-hacked/ /blog/identity-theft-in-metaverse-what-if-your-avatar-is-hacked/ 301
+
+/blog/web-3.0-how-is-it-different-and-why-does-it-matter /blog/web-3-0-how-is-it-different-and-why-does-it-matter/ 301
+/blog/web-3.0-how-is-it-different-and-why-does-it-matter/ /blog/web-3-0-how-is-it-different-and-why-does-it-matter/ 301
+
+/pressroom/tag/crypto.com /pressroom/tag/crypto-com/#crypto-com 301
+/pressroom/tag/crypto.com/ /pressroom/tag/crypto-com/#crypto-com 301
+
+/pressroom/tag/xt.com /pressroom/tag/xt-com/#xt-com 301
+/pressroom/tag/xt.com/ /pressroom/tag/xt-com/#xt-com 301
+
+/pressroom/neptune-mutual-protocol-raises-5.3m-in-a-private-funding-round /pressroom/neptune-mutual-protocol-raises-5-3m-in-a-private-funding-round/ 301
+/pressroom/neptune-mutual-protocol-raises-5.3m-in-a-private-funding-round/ /pressroom/neptune-mutual-protocol-raises-5-3m-in-a-private-funding-round/ 301
+
+/pressroom/partnership-announcement-between-xt.com-and-neptune-mutual /pressroom/partnership-announcement-between-xt-com-and-neptune-mutual/ 301
+/pressroom/partnership-announcement-between-xt.com-and-neptune-mutual/ /pressroom/partnership-announcement-between-xt-com-and-neptune-mutual/ 301
+
+/cdn/images/* /cdn/:splat 200

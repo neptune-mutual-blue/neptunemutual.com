@@ -5,24 +5,44 @@ import { Fragment, useEffect, useState } from 'react'
 import { Icon } from '../components/Icon'
 import { chains } from './helpers/wallet/chains'
 import { CustomCheckbox } from '../components/Checkbox/Checkbox'
-import { createContractKey } from '../../../util/string'
+import { generateRandomString } from '../../../util/string'
 
 const STORAGE_KEY = 'abis'
 
-const History = ({ contracts, setContracts, download, restore, restorationFailed, restoreSpecificCallback, handleNew }) => {
-  const [selected, setSelected] = useState([])
+const History = ({
+  contracts,
+  setContracts,
+  download,
+  restore,
+  restorationFailed,
+  handleNew,
+  currentKey,
+  setCurrentKey,
+  selected,
+  setSelected
+}) => {
+  const [showOptionsDropdown, setShowOptionsDropdown] = useState(false)
+  const [showSelectDropdown, setShowSelectDropdown] = useState(false)
 
-  const [currentSelected, setCurrentSelected] = useState(null)
+  const [selectionMode, setSelectionMode] = useState(false)
 
   useEffect(() => {
     setSelected([])
   }, [contracts?.length])
 
   const restoreSpecificContract = (e) => {
-    const { key } = e.target.dataset
-    const { abi, contract_name: contractName, address, network } = contracts[key]
-    restoreSpecificCallback({ abi, contractName, address, network, index: key })
-    setCurrentSelected(Number(key))
+    const { key } = e.currentTarget.dataset
+
+    if (selectionMode) {
+      return handleSelect({ target: { dataset: { key } } })
+    }
+
+    if (currentKey === key) {
+      handleNew()
+      return
+    }
+
+    setCurrentKey(key)
   }
 
   const handleSelect = (e) => {
@@ -33,147 +53,250 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
     index === -1 ? cKeys.push(key) : cKeys.splice(index, 1)
 
     setSelected(cKeys)
+
+    if (cKeys.length === 0) setSelectionMode(false)
   }
 
   const deleteContracts = () => {
-    const leftOverContracts = contracts.filter((_, i) => !selected.includes(`${i}`))
+    const _selected = selectionMode ? [...selected] : [currentKey]
+    const leftOverContracts = contracts.filter(c => !_selected.includes(c.key))
     setContracts(leftOverContracts)
-    setSelected([])
+
+    if (_selected.includes(currentKey)) setCurrentKey('')
+
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
   }
 
   const duplicateContracts = () => {
-    const newContracts = [...contracts]
+    const duplicates = []
 
-    selected.forEach((key) => {
-      const contract = newContracts[key]
-      const duplicateContract = { ...contract, contract_name: `${contract.contract_name} - Copy` }
-      const duplicateKey = createContractKey(
-        duplicateContract.contract_name,
-        duplicateContract.address,
-        duplicateContract.network
-      )
+    const _selected = selectionMode ? selected : [currentKey]
+    _selected.forEach((key) => {
+      const contract = contracts.find(c => c.key === key)
 
-      newContracts.push({ ...duplicateContract, key: duplicateKey })
+      const duplicateContract = {
+        ...contract,
+        contract_name: `${contract.contract_name} - Copy`,
+        showDetails: false
+      }
+      const duplicateKey = generateRandomString(6)
+
+      duplicates.unshift({ ...duplicateContract, key: duplicateKey })
     })
 
-    setContracts(newContracts)
-    setSelected([])
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newContracts))
+    setContracts([...duplicates, ...contracts])
+
+    handleNew()
+    if (!selectionMode) setCurrentKey(duplicates[0].key)
+
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify([...duplicates, ...contracts]))
   }
 
   const handleSelectAll = (e) => {
-    const keysForDeletions = []
-
-    contracts.map((contract, i) => {
-      if (e.target.checked) {
-        keysForDeletions.push(`${i}`)
-      }
-
-      return { ...contract, isSelected: e.target.checked }
-    })
+    const checked = e.target.checked
+    const keysForDeletions = checked ? contracts.map((contract) => contract.key) : []
 
     setSelected(keysForDeletions)
+    setSelectionMode(e.target.checked)
+
+    if (e.type === 'click') {
+      setSelectionMode(true)
+      const _selected = contracts.map((contract) => contract.key)
+      setSelected(_selected)
+    }
+    setShowSelectDropdown(false)
   }
 
-  const toggleItemAddress = (key) => {
+  const handleSelectMultiple = () => {
+    setSelectionMode(true)
+    setShowSelectDropdown(false)
+  }
+
+  const handleClear = () => {
+    setSelectionMode(false)
+    setShowSelectDropdown(false)
+    setSelected([])
+  }
+
+  const toggleItemDetails = (key) => {
     const _contracts = [...contracts]
 
     _contracts[key].showDetails = !(_contracts[key]?.showDetails || false)
     setContracts(_contracts)
   }
 
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (!e.target.closest('.cta')) {
+        setShowOptionsDropdown(false)
+      }
+
+      if (!e.target.closest('.select.all')) {
+        setShowSelectDropdown(false)
+      }
+    }
+
+    document.addEventListener('click', closeDropdown)
+
+    return () => {
+      document.removeEventListener('click', closeDropdown)
+    }
+  }, [])
+
+  const CtaDropdown = () => {
+    return (
+      <div className='cta'>
+        <button className='dots trigger' onClick={() => setShowOptionsDropdown(!showOptionsDropdown)}>
+          <Icon variant='dots-vertical' />
+        </button>
+
+        {
+          showOptionsDropdown && (
+            <div className='dropdown'>
+              <button onClick={download}>
+                <span>Download Backup</span>
+                <Icon variant='download-02' />
+              </button>
+
+              <button onClick={restore}>
+                <span>Restore</span>
+                <Icon variant='clock-rewind' />
+              </button>
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+
+  const SelectDropdown = () => {
+    return (
+      <div className='select all'>
+        <CustomCheckbox
+          onChange={handleSelectAll}
+          checked={selected.length > 0}
+          data-variant='minus'
+        />
+
+        <button
+          className='trigger'
+          onClick={() => setShowSelectDropdown(prev => !prev)}
+        >
+          <Icon variant={'chevron-down'} size='sm' />
+        </button>
+
+        {
+          showSelectDropdown && (
+            <div className='dropdown'>
+              {
+                selectionMode
+                  ? (
+                    <button onClick={handleClear}>
+                      Clear Selection
+                    </button>
+                    )
+                  : (
+                    <>
+                      <button onClick={handleSelectAll}>
+                        Select All
+                      </button>
+
+                      <button onClick={handleSelectMultiple}>
+                        Select Multiple
+                      </button>
+                    </>
+                    )
+              }
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+
   return (
     <div className='history container'>
       <div className='title'>
         <div className='history title'>Previous Contracts</div>
-        <div className='cta'>
           <button
-            variant='secondary-gray'
-            disabled={contracts.length === 0}
-            size='sm'
-            onClick={download}
-            data-tooltip='Download all contracts'
+            className='new'
+            onClick={() => {
+              setSelected([])
+              handleNew()
+            }}
+            data-tooltip='Add new contract'
+            data-flow="left"
           >
-            <Icon variant='folder-download' size='md' />
+            <Icon variant='plus' size='md' />
           </button>
-          <button
-            variant='secondary-gray'
-            size='sm'
-            onClick={restore}
-            data-tooltip='Restore contracts from file'
-          >
-            <Icon variant='refresh-ccw-01' size='md' />
-          </button>
-        </div>
       </div>
 
       <div className='action section'>
         {
           contracts.length > 0 && (
             <>
-              <CustomCheckbox
-                onChange={handleSelectAll}
-                checked={selected.length === contracts.length}
-                data-variant='minus'
-              />
+              <SelectDropdown />
 
-              {selected.length > 0 && (
-                <>
-                  <button
-                    className="duplicate btn"
-                    onClick={duplicateContracts}
-                    data-tooltip='Duplicate selected contracts'
-                  >
-                    <Icon variant='file-plus' size='md' />
-                  </button>
+              <div className='buttons'>
+                {(selected.length > 0 || currentKey) && (
+                  <>
+                    <button
+                      className="duplicate btn"
+                      onClick={duplicateContracts}
+                      data-tooltip='Duplicate selected contract(s)'
+                    >
+                      <Icon variant='file-plus' />
+                    </button>
 
-                  <button
-                    className="delete btn"
-                    onClick={deleteContracts}
-                    data-tooltip='Delete selected contracts'
-                  >
-                    <Icon variant='trash-01' size='md' />
-                  </button>
-                </>
-              )}
+                    <button
+                      className="delete btn"
+                      onClick={deleteContracts}
+                      data-tooltip='Delete selected contract(s)'
+                    >
+                      <Icon variant='trash-01' />
+                    </button>
+                  </>
+                )}
+
+                <CtaDropdown />
+              </div>
             </>
           )
         }
-
-        <button
-          className='new'
-          onClick={() => {
-            setCurrentSelected(null)
-            handleNew()
-          }}
-          data-tooltip='Add new contract'
-        >
-          <Icon variant='plus' size='md' />
-        </button>
       </div>
 
       <div className='history list'>
         {contracts.length > 0 && contracts.map((contract, i) => {
+          const key = contract.key
           return (
-            <Fragment key={`contract-${i}`}>
-              <div className={`item wrapper ${currentSelected === i ? 'selected' : ''}`}>
+            <Fragment key={`contract-${key}`}>
+              <div
+                className={`item wrapper ${
+                  selectionMode ? (selected.includes(key) ? 'selected' : '') : (currentKey === key ? 'selected' : '')
+                }`}
+                data-key={key}
+                >
                 <div className='item title'>
-                  <CustomCheckbox
-                    checked={selected.includes(`${i}`)}
-                    onChange={handleSelect}
-                    data-key={i}
-                  />
+                  {
+                    selectionMode && (
+                      <CustomCheckbox
+                        checked={selected.includes(key)}
+                        onChange={handleSelect}
+                        data-key={key}
+                      />
+                    )
+                  }
 
                   <button
                     className='item'
-                    data-key={i}
+                    data-key={key}
                     onClick={restoreSpecificContract}
                   >
-                    {contract.contract_name || 'Untitled'}
+                    <span>{contract.contract_name || 'Untitled'}</span>
+                    {/* {contract.network && <span>[{contract.network}]</span>} */}
                   </button>
 
-                  <button onClick={() => toggleItemAddress(i)}>
+                  <button className='toggle' onClick={() => toggleItemDetails(i)}>
                     <Icon variant={contract.showDetails ? 'chevron-up' : 'chevron-down'} size='sm' />
                   </button>
                 </div>
@@ -185,8 +308,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
                       {contract.network
                         ? (
                           <p>
-                            <span>Network: </span>{contract.network}
-                            ({chains[contract.network]?.name || 'Unknown Network'})
+                            <span>Network: </span>{chains[contract.network]?.name || 'Unknown Network'}{' '}({contract.network})
                           </p>
                           )
                         : <i>No network provided</i>}

@@ -26,6 +26,9 @@ import { AlertCircleIcon } from './icons/AlertCircleIcon'
 import { FilePlusIcon } from './icons/FilePlusIcon'
 import { FolderDownloadIcon } from './icons/FolderDownloadIcon'
 import { RefreshCCWIcon } from './icons/RefreshCCWIcon'
+import { ClockRewind } from './icons/ClockRewind'
+import { Download02 } from './icons/Download02'
+import { DotsVertical } from './icons/DotsVertical'
 
 const icons = {
   'chevron-right': <ChevronRight />,
@@ -55,7 +58,10 @@ const icons = {
   'alert-circle': <AlertCircleIcon />,
   'file-plus': <FilePlusIcon />,
   'folder-download': <FolderDownloadIcon />,
-  'refresh-ccw-01': <RefreshCCWIcon />
+  'refresh-ccw-01': <RefreshCCWIcon />,
+  'clock-rewind': <ClockRewind />,
+  'download-02': <Download02 />,
+  'dots-vertical': <DotsVertical />
 }
 
 export const Icon = ({ variant, size }) => {

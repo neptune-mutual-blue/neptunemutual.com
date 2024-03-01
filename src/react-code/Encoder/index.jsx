@@ -2,6 +2,7 @@ import './index.scss'
 
 import {
   useEffect,
+  useMemo,
   useRef,
   useState
 } from 'react'
@@ -22,7 +23,7 @@ import {
 import { History } from './History'
 import { Result } from './Result'
 
-import { createContractKey } from '../../../util/string'
+import { generateRandomString } from '../../../util/string'
 
 const STORAGE_KEY = 'abis'
 
@@ -78,12 +79,16 @@ const Encoder = () => {
   const [abi, setAbi] = useState('[]')
   const [networkId, setNetworkId] = useState('')
 
-  const [updateIndex, setUpdateIndex] = useState(null)
+  const [currentKey, setCurrentKey] = useState('')
+  const [selected, setSelected] = useState([])
+
+  const consumeFromUrlRef = useRef(false)
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
     if (isJSON(storageData)) {
-      setContracts(JSON.parse(storageData) || [])
+      const parsed = JSON.parse(storageData) || []
+      setContracts(parsed.map(c => ({ ...c, key: generateRandomString(6) })))
     } else {
       window.localStorage.removeItem(STORAGE_KEY)
     }
@@ -97,8 +102,12 @@ const Encoder = () => {
     }
   }, [contractNameExist])
 
-  const restoreSpecificCallback = (data) => {
-    const { abi, contractName, address, network, index } = data
+  const restoreSpecificCallback = (key) => {
+    const data = contracts.find(c => c.key === key)
+    if (!data) return
+
+    const { abi, contract_name: contractName, address, network } = data
+
     const form = formRef.current
     form.abi.value = abi || ''
     form.contract_name.value = contractName || ''
@@ -111,7 +120,6 @@ const Encoder = () => {
     setAbi(abi)
     setIsSaveable(true)
     validateABI({ target: { value: abi } })
-    setUpdateIndex(index)
   }
 
   const saveToStorage = (e) => {
@@ -131,11 +139,7 @@ const Encoder = () => {
       abis = JSON.parse(storageData) || []
     }
 
-    const newContractKey = createContractKey(
-      form.contract_name.value,
-      form.address.value,
-      form.network.value
-    )
+    const newContractKey = currentKey || generateRandomString(6)
 
     const data = {
       key: newContractKey,
@@ -145,13 +149,20 @@ const Encoder = () => {
       network: form.network.value
     }
 
-    if (updateIndex) {
-      abis[updateIndex] = { ...abis[updateIndex], ...data }
+    const _contracts = [...contracts]
+    if (currentKey) {
+      const index = contracts.findIndex(c => c.key === currentKey)
+      _contracts[index] = { ..._contracts[index], ...data }
+
+      abis[index] = { ...abis[index], ...data }
     } else {
-      abis.push(data)
+      _contracts.unshift(data)
+
+      abis.unshift(data)
     }
 
-    setContracts(abis)
+    setCurrentKey(newContractKey)
+    setContracts(_contracts)
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(abis))
   }
@@ -223,6 +234,54 @@ const Encoder = () => {
     consumeAndFill()
   }, [])
 
+  // restore when currentKey is changed
+  useEffect(() => {
+    if (!currentKey) return
+
+    restoreSpecificCallback(currentKey)
+  }, [currentKey, contracts])
+
+  useEffect(() => {
+    if (!consumeFromUrlRef.current) return
+
+    if (!contracts.length) return
+
+    const form = formRef.current
+
+    const { contract_name: contractName, address, network, abi } = form
+
+    if (!abi.value) return
+
+    const alreadyExists = contracts.find(c => {
+      return c.contract_name === contractName.value && c.address === address.value && c.network?.toString() === network.value?.toString() && c?.abi === abi.value
+    })
+
+    if (alreadyExists) {
+      setCurrentKey(alreadyExists.key)
+      const element = document.querySelector(
+        `.history.container .history.list > .item.wrapper[data-key="${alreadyExists.key}"]`
+      )
+
+      element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+    }
+
+    consumeFromUrlRef.current = false
+  }, [contracts, address])
+
+  const isUpdateDisabled = useMemo(() => {
+    const _contract = contracts.find(c => c.key === currentKey)
+    if (!_contract) return false
+
+    if (
+      _contract.abi === abi &&
+      _contract.contract_name === contractName &&
+      _contract.address === address &&
+      _contract.network === networkId
+    ) {
+      return true
+    }
+  }, [currentKey, JSON.stringify(contracts), abi, contractName, address, networkId])
+
   const consumeAndFill = async () => {
     const search = window.location.search
 
@@ -230,9 +289,12 @@ const Encoder = () => {
       const params = new URLSearchParams(search.slice(1))
 
       if (params.has('name') && params.has('address') && params.has('abi')) {
+        consumeFromUrlRef.current = true
+
         const name = params.get('name')
         const address = params.get('address')
         const abi = params.get('abi')
+        const network = params.get('network')
 
         if (!isAddress(address)) {
           return console.error('Address is invalid')
@@ -247,17 +309,21 @@ const Encoder = () => {
         }
 
         try {
-          document.querySelector('#address').value = address
-          document.querySelector('#contract_name').value = name
+          const form = formRef.current
+          form.address.value = address
+          form.contract_name.value = name
+
+          if (!isNaN(network)) {
+            form.network.value = network
+            setNetworkId(network)
+          }
 
           const response = await fetch(`/abis/${abi}.json`).then(res => res.text())
 
           if (isJSON(response) && isArray(response) && isValidAbi(response)) {
-            const abiTextField = document.querySelector('#abi')
+            form.abi.value = response
 
-            abiTextField.value = response
-
-            validateABI({ target: abiTextField })
+            validateABI({ target: { value: response } })
             setContractName(name)
             setAddress(address)
           } else {
@@ -269,6 +335,9 @@ const Encoder = () => {
       } else {
         console.error('Query params not provided in valid format')
       }
+
+      // remove url params
+      window.history.pushState({}, document.title, window.location.pathname)
     }
   }
 
@@ -277,7 +346,9 @@ const Encoder = () => {
     setAddress('')
     setAbi('[]')
     setNetworkId('')
-    setUpdateIndex(null)
+    setCurrentKey('')
+    setIsSaveable(false)
+    setRestorationFailed(false)
 
     const form = formRef.current
     form.abi.value = ''
@@ -344,13 +415,15 @@ const Encoder = () => {
               <Button
                 variant="secondary-gray"
                 hierarchy='secondary'
-                disabled={!isSaveable}
+                disabled={!isSaveable || isUpdateDisabled}
                 size='sm'
                 iconLeading
                 iconVariant='folder'
                 onClick={saveToStorage}
               >
-                Save to Local Storage
+                {
+                  currentKey ? 'Update Contract' : 'Save to Local Storage'
+                }
               </Button>
               <Button
                 variant="secondary-gray"
@@ -382,8 +455,12 @@ const Encoder = () => {
           download={download}
           restore={restore}
           restorationFailed={restorationFailed}
-          restoreSpecificCallback={restoreSpecificCallback}
+          // restoreSpecificCallback={restoreSpecificCallback}
           handleNew={handleNew}
+          currentKey={currentKey}
+          setCurrentKey={setCurrentKey}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
 

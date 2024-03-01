@@ -1,0 +1,56 @@
+# This is a comment
+/*
+  Pragma: no-cache
+  Access-Control-Allow-Origin: *
+  Content-Security-Policy: worker-src 'none'; script-src 'self' 'nonce-j+h4QPo2G1leKJxLFUVrGw==' 'nonce-rB42p7Q3aSWYNZnxB12Ztw==' 'unsafe-inline' 'nonce-j+h4QPo2G1leKJxLFUVrGw==' 'nonce-rB42p7Q3aSWYNZnxB12Ztw==' https://www.googletagmanager.com/ https://www.clarity.ms/ https://www.google.com/recaptcha/api.js https://www.gstatic.com/recaptcha/ https://platform.twitter.com/ https://gist.github.com/; connect-src 'self' https://api.neptunemutual.net https://cms.neptunemutual.net https://*.clarity.ms https://www.google-analytics.com https://youtube.com/; style-src 'self' 'unsafe-inline' https://github.githubassets.com/; upgrade-insecure-requests; frame-src 'self' https://docs.google.com https://platform.twitter.com/ https://www.youtube.com/ https://www.google.com/; frame-ancestors 'self'; default-src 'none'; prefetch-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'self'; img-src 'self' data: https://*.neptunemutual.net https://*.clarity.ms https://*.bing.com; font-src 'self'
+  X-DNS-Prefetch-Control: on
+  X-XSS-Protection: 1; mode=block
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Expect-CT: enforce, max-age=31536000
+  Feature-Policy: microphone 'none'; camera 'none'; fullscreen 'none'; geolocation 'none'
+  Permissions-Policy: fullscreen=(), geolocation=()
+  X-Permitted-Cross-Domain-Policies: none
+  Access-Control-Allow-Credentials: false
+  Access-Control-Allow-Headers: *
+  Access-Control-Allow-Methods: GET
+  Access-Control-Max-Age: 600
+
+/web3-tools/*
+  # Override Content-Security-Policy
+  ! Content-Security-Policy
+  Content-Security-Policy: worker-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com/ https://www.clarity.ms/ https://www.google.com/recaptcha/api.js https://www.gstatic.com/recaptcha/ https://platform.twitter.com/ https://gist.github.com/; connect-src 'self' https://api.neptunemutual.net https://*.clarity.ms https://www.google-analytics.com https://youtube.com/; style-src 'self' 'unsafe-inline' https://github.githubassets.com/; upgrade-insecure-requests; frame-src 'self' https://platform.twitter.com/ https://www.youtube.com/ https://www.google.com/; frame-ancestors 'self'; default-src 'none'; prefetch-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'self'; img-src 'self' data: https://*.clarity.ms https://*.bing.com; font-src 'self'
+
+/cdn/*
+  Cache-Control: s-maxage=86400
+/assets/*
+  Cache-Control: s-maxage=86400
+/brand-assets/*
+  Cache-Control: s-maxage=86400
+/*.json
+  Cache-Control: s-maxage=86400
+/*.xml
+  Cache-Control: s-maxage=86400
+/*.js
+  Cache-Control: s-maxage=21600
+/*.css
+  Cache-Control: s-maxage=21600
+/*.html
+  Cache-Control: s-maxage=3600
+
+/manifest.json
+  # Override Access-Control-Allow-Origin
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+
+https://neptunemutual.com/*
+  # Override Access-Control-Allow-Origin
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: https://neptunemutual.com
+
+https://neptunemutual.com/manifest.json
+  # Override Access-Control-Allow-Origin
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
