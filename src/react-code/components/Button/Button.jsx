@@ -5,7 +5,7 @@ import { LinkGrayButton } from './LinkGrayButton'
 import { PrimaryButton } from './PrimaryButton'
 import SecondaryGrayButton from './SecondaryGrayButton'
 
-const Button = forwardRef((props, forwardedRef) => {
+const Button = forwardRef((props, ref) => {
   const { variant, children } = props
 
   let BtnComponent = PrimaryButton
@@ -22,7 +22,7 @@ const Button = forwardRef((props, forwardedRef) => {
   }
 
   return (
-    <BtnComponent ref={forwardedRef} {...props}>
+    <BtnComponent ref={ref} {...props}>
       {children}
     </BtnComponent>
   )

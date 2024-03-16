@@ -6,6 +6,11 @@ import { Icon } from '../Icon'
 
 const Modal = (props) => {
   const { cross, children, visible, setVisible, title, description, trigger, className } = props
+
+  if (!Dialog.Root) {
+    return null
+  }
+
   return (
     <Dialog.Root open={visible} onOpenChange={setVisible}>
       <Dialog.Trigger asChild>

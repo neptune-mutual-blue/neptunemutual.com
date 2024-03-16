@@ -26,20 +26,20 @@ interface Props {
 }
 
 const { variant } = Astro.props;
-let Button = Primary;
+let ButtonComponent = Primary;
 
 switch (variant) {
   case "link-color":
-    Button = LinkColor;
+    ButtonComponent = LinkColor;
     break;
   case "link-gray":
-    Button = LinkGray;
+    ButtonComponent = LinkGray;
     break;
   case "secondary-gray":
-    Button = SecondaryGray;
+    ButtonComponent = SecondaryGray;
 }
 ---
 
-<Button {...Astro.props}>
+<ButtonComponent {...Astro.props}>
   <slot />
-</Button>
+</ButtonComponent>
