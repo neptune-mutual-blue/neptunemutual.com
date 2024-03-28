@@ -50,7 +50,9 @@ const LogsTable = ({ logs }) => {
         {
           sortedLogs.map((log, i) => (
             <tr key={i}>
-              <td className='when'>{fromNow(log.timestamp)}</td>
+              <td className='when'
+                title={new Date(Number(log.timestamp) * 1000).toLocaleString()}
+              >{fromNow(log.timestamp)}</td>
               <td className='block number'>
                 {
                   explorerUrl ? <a href = {`${explorerUrl}/block/${log.blockNumber}`} target="_blank" rel="noreferrer">{log.blockNumber}</a> : log.blockNumber
