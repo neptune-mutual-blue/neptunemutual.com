@@ -8,7 +8,7 @@
 .write.container {
   display: flex;
   flex-direction: column;
-  background-color: colors.$primary-25;
+  background-color: colors.$blue-dark-25;
   padding: 32px 24px;
   gap: 24px;
 
@@ -21,7 +21,7 @@
   }
 
   .dark & {
-    background-color: colors.$gray-900;
+    background-color: colors.$black-800;
   }
 
   button {

@@ -97,6 +97,7 @@
     .array.item {
       position: relative;
       padding-left: 16px;
+      overflow: visible !important;
 
       button.close, button.plus {
         position: absolute;

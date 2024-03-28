@@ -17,7 +17,7 @@
     border: 1px solid colors.$gray-200;
   }
 
-  &:not(:disabled):not(&[data-disabled]) {
+  &:not(:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$gray-800;
@@ -44,7 +44,7 @@
     border: 1px solid colors.$error-200;
   }
 
-  &:not(&:disabled):not(&[data-disabled]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$error-800;
@@ -71,7 +71,7 @@
     color: colors.$gray-700;
   }
 
-  &:not(&:disabled):not(&[data-disabled]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$gray-100;
@@ -98,7 +98,7 @@
     color: colors.$error-900;
   }
 
-  &:not(&:disabled):not(&[data-disabled]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$error-300;

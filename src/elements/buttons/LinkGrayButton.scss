@@ -12,7 +12,7 @@
     color: colors.$gray-300;
   }
 
-  &:not(:disabled):not(&[data-disabled]):not(&[data-destructive]) {
+  &:not(:disabled):not(&[data-disabled]):not(&[data-active="true"]):not(&[data-destructive]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$gray-700;
@@ -44,7 +44,7 @@
     color: colors.$gray-600;
   }
 
-  &:not(&:disabled):not(&[data-disabled]):not(&[data-destructive]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]):not(&[data-destructive]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$gray-300;

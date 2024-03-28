@@ -35,7 +35,7 @@
     border-color: colors.$primary-200;
   }
 
-  &:not(&:disabled):not(&[data-disabled]):not([data-destructive]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]):not([data-destructive]) {
     &[data-state="hover"],
     &:hover {
       color: colors.$white;
@@ -63,7 +63,7 @@
     border: 1px solid colors.$error-200;
   }
 
-  &:not(&:disabled):not(&[data-disabled]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="hover"],
     &:hover {
       background-color: colors.$error-700;
@@ -81,7 +81,7 @@
 }
 
 .dark .button.primary[data-destructive] {
-  &:not(&:disabled):not(&[data-disabled]) {
+  &:not(&:disabled):not(&[data-disabled]):not(&[data-active="true"]) {
     &[data-state="focused"],
     &:focus,
     &:active,

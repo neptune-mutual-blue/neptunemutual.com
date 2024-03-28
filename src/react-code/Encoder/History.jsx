@@ -30,6 +30,20 @@ const History = ({
     setSelected([])
   }, [contracts?.length])
 
+  const handleSelect = (e) => {
+    const { key } = e.target.dataset
+    const cKeys = [...selected]
+
+    const index = cKeys.indexOf(key)
+    index === -1 ? cKeys.push(key) : cKeys.splice(index, 1)
+
+    setSelected(cKeys)
+
+    if (cKeys.length === 0) {
+      setSelectionMode(false)
+    }
+  }
+
   const restoreSpecificContract = (e) => {
     const { key } = e.currentTarget.dataset
 
@@ -45,24 +59,14 @@ const History = ({
     setCurrentKey(key)
   }
 
-  const handleSelect = (e) => {
-    const { key } = e.target.dataset
-    const cKeys = [...selected]
-
-    const index = cKeys.indexOf(key)
-    index === -1 ? cKeys.push(key) : cKeys.splice(index, 1)
-
-    setSelected(cKeys)
-
-    if (cKeys.length === 0) setSelectionMode(false)
-  }
-
   const deleteContracts = () => {
     const _selected = selectionMode ? [...selected] : [currentKey]
     const leftOverContracts = contracts.filter(c => !_selected.includes(c.key))
     setContracts(leftOverContracts)
 
-    if (_selected.includes(currentKey)) setCurrentKey('')
+    if (_selected.includes(currentKey)) {
+      setCurrentKey('')
+    }
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
   }
@@ -87,23 +91,27 @@ const History = ({
     setContracts([...duplicates, ...contracts])
 
     handleNew()
-    if (!selectionMode) setCurrentKey(duplicates[0].key)
+
+    if (!selectionMode) {
+      setCurrentKey(duplicates[0].key)
+    }
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify([...duplicates, ...contracts]))
   }
 
   const handleSelectAll = (e) => {
     const checked = e.target.checked
-    const keysForDeletions = checked ? contracts.map((contract) => contract.key) : []
+    const keysForDeletions = checked ? contracts.map(contract => contract.key) : []
 
     setSelected(keysForDeletions)
     setSelectionMode(e.target.checked)
 
     if (e.type === 'click') {
       setSelectionMode(true)
-      const _selected = contracts.map((contract) => contract.key)
+      const _selected = contracts.map(contract => contract.key)
       setSelected(_selected)
     }
+
     setShowSelectDropdown(false)
   }
 
@@ -304,14 +312,12 @@ const History = ({
                   contract.showDetails && (
                     <div className='item details'>
                       <p>
-                        <span>Address: </span>{contract.address || <i>No address provided</i>}</p>
-                      {contract.network
-                        ? (
-                          <p>
-                            <span>Network: </span>{chains[contract.network]?.name || 'Unknown Network'}{' '}({contract.network})
-                          </p>
-                          )
-                        : <i>No network provided</i>}
+                        <span>Address: </span>{contract.address || <i>No address provided</i>}
+                      </p>
+
+                      <p>
+                        <span>Network: </span>{contract.network ? chains[contract.network]?.name || 'Unknown Network' : <i>No network provided</i>}{' '}{contract.network && <>({contract.network})</>}
+                      </p>
                     </div>
                   )
                 }

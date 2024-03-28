@@ -29,6 +29,7 @@ import { RefreshCCWIcon } from './icons/RefreshCCWIcon'
 import { ClockRewind } from './icons/ClockRewind'
 import { Download02 } from './icons/Download02'
 import { DotsVertical } from './icons/DotsVertical'
+import { ArrowDownIcon } from './icons/ArrowDownIcon'
 
 const icons = {
   'chevron-right': <ChevronRight />,
@@ -61,7 +62,8 @@ const icons = {
   'refresh-ccw-01': <RefreshCCWIcon />,
   'clock-rewind': <ClockRewind />,
   'download-02': <Download02 />,
-  'dots-vertical': <DotsVertical />
+  'dots-vertical': <DotsVertical />,
+  'arrow-down': <ArrowDownIcon />
 }
 
 export const Icon = ({ variant, size }) => {

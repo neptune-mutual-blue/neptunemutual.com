@@ -1,10 +1,9 @@
-import { Fragment, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { decodeData, parseEncoded } from '../helpers/solidity/methods'
 import { TextArea } from '../../components/TextArea'
 import { Button } from '../../components/Button/Button'
 
 import './decode.scss'
-import { getTypeInfo } from '../helpers/web3-tools/abi-encoder'
 
 const DecodeData = ({ encodeInterface }) => {
   const [encodedData, setEncodedData] = useState('')
@@ -26,7 +25,10 @@ const DecodeData = ({ encodeInterface }) => {
     const _decodedData = decodeData(encodeInterface, parsed, (errorMessage) => {
       setError(errorMessage)
     })
-    if (_decodedData) setDecodedData(_decodedData)
+
+    if (_decodedData) {
+      setDecodedData(_decodedData)
+    }
   }, [encodedData])
 
   const ArgList = ({ args, firstParent = true }) => {
@@ -111,7 +113,7 @@ const DecodeData = ({ encodeInterface }) => {
           id={'decode-data-input'}
           rows={5}
           value={encodedData}
-          onChange={(e) => setEncodedData(e.target.value)}
+          onChange={e => setEncodedData(e.target.value)}
           error={error}
         />
 

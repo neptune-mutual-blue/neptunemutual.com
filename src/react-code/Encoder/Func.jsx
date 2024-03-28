@@ -9,6 +9,7 @@ import { Icon } from '../components/Icon'
 import { EncodeData } from './FunctionType/encode'
 import { ReadContract } from './FunctionType/read'
 import { WriteContract } from './FunctionType/write'
+import { Events } from './FunctionType/events'
 import {
   encodeData
 
@@ -18,21 +19,24 @@ import { createJoiSchema, getDefaultEncodeData, getFunctionSignature } from './h
 const TypeComponent = {
   encode_data: EncodeData,
   read_contract: ReadContract,
-  write_contract: WriteContract
+  write_contract: WriteContract,
+  view_events: Events
 }
 
 const Func = (props) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const { type, func, interface: encodeInterface, count, call, isReady, abi } = props
-  const { inputs, name } = func
+  const { type, func, interface: encodeInterface, count, call, isReady, abi, address } = props
+  const { name } = func
 
   const Component = TypeComponent[type]
 
   const [encodedFn, setEncodedFn] = useState('')
 
   useEffect(() => {
-    if (type !== 'write_contract') return
+    if (type !== 'write_contract') {
+      return
+    }
 
     const encodeSignature = getFunctionSignature(func)
     const encodeArgs = getDefaultEncodeData(func)
@@ -40,7 +44,10 @@ const Func = (props) => {
       console.log(`Error in encoding ${name} method with signature: ${encodeSignature} and args:`, encodeArgs)
       console.error(err)
     })
-    if (_encodedFn) setEncodedFn(_encodedFn.slice(0, 10))
+
+    if (_encodedFn) {
+      setEncodedFn(_encodedFn.slice(0, 10))
+    }
   }, [func, encodeInterface, type])
 
   useEffect(() => {
@@ -74,6 +81,7 @@ const Func = (props) => {
           encodeInterface={encodeInterface}
           joiSchema={createJoiSchema(func)}
           itemIndex={count}
+          address={address}
         />}
     </div>
   )
