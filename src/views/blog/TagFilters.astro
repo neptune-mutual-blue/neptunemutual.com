@@ -8,7 +8,7 @@ import { isActive, hrefFromFilter } from "./util/tag-util";
 <div class="tag filter container">
   {
     filters.map((filter) => {
-      const href = hrefFromFilter(Astro, Api.Blog, filter, "recent-posts");
+      const href = hrefFromFilter(Astro, Api.Blog, filter, "all-stories");
 
       return (
         <a data-active={isActive(Astro, filter)} href={normalizeUrl(href)}>
