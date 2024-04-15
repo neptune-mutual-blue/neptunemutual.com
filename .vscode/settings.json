@@ -5,7 +5,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "standard.vscode-standard",
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": "explicit"
     }
   },
   "editor.tabSize": 2,
@@ -13,14 +13,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "standard.vscode-standard",
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": "explicit"
     }
   },
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": "explicit"
     },    
   },
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
@@ -31,7 +31,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "astro-build.astro-vscode",
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": "explicit"
     }
   },
   "[yaml]": {

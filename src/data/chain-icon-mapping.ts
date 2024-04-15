@@ -1,5 +1,7 @@
 const chainIconMapping: Record<string, string> = {
   avax: 'avax chain icon',
+  base: 'base chain icon',
+  blast: 'blast chain icon',
   bnb: 'bnb chain icon',
   eth: 'eth chain icon',
   arb: 'arb chain icon',
