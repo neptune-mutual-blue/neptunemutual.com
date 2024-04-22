@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Modal } from '../Modal/Modal'
+import { Modal } from '../Modal/Modal.jsx'
 
 const options = [
   { label: '10¹⁸', value: '18' },
@@ -74,7 +74,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
           Add
         </button>
       </form>
-      </Modal>
+    </Modal>
   )
 }
 

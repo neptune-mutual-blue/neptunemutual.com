@@ -5,6 +5,12 @@
 @use "../../../design-system/theme/light";
 @use "../../../design-system/theme/dark";
 
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
 .pressroom.announcement {
     a.styled.link {
         max-width: 100%;
@@ -19,6 +25,54 @@
 
         @include styles.text-sm;
         @include weights.medium;
+    }
+
+    .highlighted {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -0.2rem;
+            z-index: -1;
+            opacity: 1;
+            background: conic-gradient(
+                from var(--gradient-angle),
+                violet,
+                violet,
+                violet,
+                indigo,
+                indigo,
+                indigo,
+                indigo,
+                orange,
+                orange,
+                red,
+                red,
+                violet
+            );
+            border-radius: inherit;
+            animation: gradient-rotation 10s linear infinite, gradient-opacity linear 2s alternate infinite;
+        }
+    }
+
+    @keyframes gradient-rotation {
+        0% {
+            --gradient-angle: 0deg;
+        }
+        100% {
+            --gradient-angle: 360deg;
+        }
+    }
+
+    @keyframes gradient-opacity {
+        0% {
+            opacity: 1;
+        }
+
+        20%, 100% {
+            opacity: 0;
+        }
     }
 
     .category {

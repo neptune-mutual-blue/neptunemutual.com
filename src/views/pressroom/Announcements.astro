@@ -19,7 +19,7 @@ const { posts, totalPages, currentPage, tag } = Astro.props;
   <h2>{tag?.name || t("Press Room / Latest Announcements")}</h2>
   <div class="articles">
     {
-      (posts || []).map((post) => {
+      (posts || []).map((post: Content) => {
         return <ArticleCard type={Api.Pressroom} post={post} />;
       })
     }

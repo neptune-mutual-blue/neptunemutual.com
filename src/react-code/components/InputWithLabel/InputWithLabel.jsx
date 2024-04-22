@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState, useRef } from 'react'
-import { Icon } from '../Icon'
-import { AddZeroesModal, StringToBytesModal } from './InputModals'
-import { transformWeb3Types } from '../../../scripts/web3-tools/converter/transform'
+import { Icon } from '../Icon.jsx'
+import { AddZeroesModal, StringToBytesModal } from './InputModals.jsx'
+import { transformWeb3Types } from '../../../scripts/web3-tools/converter/transform.js'
 
 import './InputWithLabel.scss'
 

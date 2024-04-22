@@ -1,12 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../Button/Button'
 import { TextArea } from '../TextArea'
 import { Modal } from '../Modal/Modal'
-import { getIndex, getTypeInfo } from '../../Encoder/helpers/web3-tools/abi-encoder'
-import { set } from 'idb-keyval'
 
 import './JSONPopup.scss'
-import { Icon } from '../Icon'
 
 const JSONPopup = ({ handleJSON, label, parsedJSON, setParsedJSON, btnProps = { disabled: false, label: 'Update' } }) => {
   const [JSONInput, setJSONInput] = useState('')
