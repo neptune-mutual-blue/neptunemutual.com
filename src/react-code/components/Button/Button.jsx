@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 import { LinkColorButton } from './LinkColorButton'
 import { LinkGrayButton } from './LinkGrayButton'
 import { PrimaryButton } from './PrimaryButton'
-import SecondaryGrayButton from './SecondaryGrayButton'
+import { SecondaryGrayButton } from './SecondaryGrayButton'
 
 const Button = forwardRef((props, ref) => {
   const { variant, children } = props

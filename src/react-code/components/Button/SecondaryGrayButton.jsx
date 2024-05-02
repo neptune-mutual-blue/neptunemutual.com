@@ -14,4 +14,4 @@ const SecondaryGrayButton = (props) => {
   )
 }
 
-export default SecondaryGrayButton
+export { SecondaryGrayButton }

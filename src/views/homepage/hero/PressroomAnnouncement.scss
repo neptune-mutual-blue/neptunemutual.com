@@ -35,24 +35,13 @@
             position: absolute;
             inset: -0.2rem;
             z-index: -1;
-            opacity: 1;
+            opacity: 0;
             background: conic-gradient(
                 from var(--gradient-angle),
-                violet,
-                violet,
-                violet,
-                indigo,
-                indigo,
-                indigo,
-                indigo,
-                orange,
-                orange,
-                red,
-                red,
-                violet
+                #4D14FF, #EC14FF, #FFA825, #FFA825, #EC14FF, #4D14FF
             );
             border-radius: inherit;
-            animation: gradient-rotation 10s linear infinite, gradient-opacity linear 2s alternate infinite;
+            animation: gradient-rotation 5s linear infinite, gradient-opacity linear 3s alternate infinite;
         }
     }
 
@@ -66,12 +55,12 @@
     }
 
     @keyframes gradient-opacity {
-        0% {
-            opacity: 1;
+        0%, 70% {
+            opacity: 0;
         }
 
-        20%, 100% {
-            opacity: 0;
+        90%, 100% {
+            opacity: 1;
         }
     }
 

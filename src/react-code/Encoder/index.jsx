@@ -460,7 +460,7 @@ const Encoder = () => {
                 Save All to Your Computer
               </Button>
               <Button
-               variant="secondary-gray"
+                variant="secondary-gray"
                 size='sm'
                 type='file'
                 iconLeading
