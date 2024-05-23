@@ -22,7 +22,7 @@ export const useContractCall = ({ abi, address }) => {
     }
 
     try {
-      const _c = getContract(address, abi, signerOrProvider.provider)
+      const _c = getContract(address, abi, signerOrProvider)
       setContract(_c)
     } catch (error) {
       console.log('Error in creating contract: ', error)
