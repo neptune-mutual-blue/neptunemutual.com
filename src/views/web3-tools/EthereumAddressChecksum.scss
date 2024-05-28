@@ -7,9 +7,10 @@
 @use "../../design-system/theme/dark";
 
 .ethereum.checksum.container {
+  max-width: 768px;
+  
   .inner {
     padding: 56px 0 288px;
-    max-width: 754px;
     margin: 0 auto;
 
     ol.breadcrumb {
