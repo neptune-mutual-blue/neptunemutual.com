@@ -19,6 +19,7 @@ const request = async () => {
         title: x.title,
         subtitle: x.subtitle ?? x.intro,
         text: x.htmlAsText,
+        html: x.html,
         slug: x.slug,
         parent: x.parent?.slug
       }

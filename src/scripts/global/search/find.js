@@ -20,7 +20,9 @@ const find = async (searchTerm, page = 1) => {
         -1 ||
       coalesce(x.subtitle, '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
         -1 ||
-      coalesce(x.text, '').toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+      coalesce(x.text, '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
+        -1 ||
+      coalesce(x.html, '').toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
     )
   })
 
