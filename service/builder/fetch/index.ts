@@ -10,10 +10,10 @@ import { parseResponse } from './parse.js'
 import { get } from './request.js'
 
 const resources: ApiResource[] = [
-  [Api.Contract, 'https://api.neptunemutual.net/protocol/contracts', true],
-  [Api.ContractArbitrum, 'https://api.neptunemutual.net/protocol/contracts/arbitrum', true],
-  [Api.ContractBSC, 'https://api.neptunemutual.net/protocol/contracts/bsc', true],
-  [Api.ContractFuji, 'https://api.neptunemutual.net/protocol/contracts/fuji', true],
+  [Api.Contract, new URL('/protocol/contracts', process.env.NPM_API_SERVER).toString(), true],
+  [Api.ContractArbitrum, new URL('/protocol/contracts/arbitrum', process.env.NPM_API_SERVER).toString(), true],
+  [Api.ContractBSC, new URL('/protocol/contracts/bsc', process.env.NPM_API_SERVER).toString(), true],
+  [Api.ContractFuji, new URL('/protocol/contracts/fuji', process.env.NPM_API_SERVER).toString(), true],
   [Api.Media, 'api/media?limit=2000'],
   [Api.Blog, 'api/articles?limit=2000'],
   [Api.Doc, 'api/docs?limit=2000'],
