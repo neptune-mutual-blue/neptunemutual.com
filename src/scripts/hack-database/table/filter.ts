@@ -24,7 +24,8 @@ const filterHackData = async (
       page: page.toString(),
       sort: currentSortKey,
       'where[or][0][techniques][like]': searchQuery,
-      'where[or][1][name][like]': searchQuery
+      'where[or][1][name][like]': searchQuery,
+      'where[or][2][description][like]': searchQuery
     }
 
     const params = Object.entries(parameters).map(([key, value]) => value.length > 0 ? key + '=' + value : undefined).filter(item => item).join('&')
