@@ -26,7 +26,7 @@ const resources: ApiResource[] = [
   [Api.News, 'api/news?limit=2000'],
   [Api.Program, 'api/programs?limit=2000'],
   [Api.Video, 'api/videos?limit=2000'],
-  [Api.Hack, 'api/hacks?limit=20000'],
+  [Api.Hack, 'api/hacks?limit=20000&sort=-date'],
   [Api.CommunityBlogs, 'https://community.neptunemutual.com/c/general/4.json', true]
 ]
 
