@@ -1,5 +1,9 @@
 import { months } from './date'
 
+const convertNameToId = (str: string) => {
+  return str.toLowerCase().trim().replace(/ /g, '-')
+}
+
 const convertSecondsToWords = (units: number): { formatted: string, text: string } => {
   const hours = Math.floor(units / 60 / 60)
   const minutes = Math.floor(units / 60) - (hours * 60)
@@ -61,5 +65,6 @@ export {
   convertWordsToMinutes,
   formatDate,
   getFormattedDate,
-  formatBlogDate
+  formatBlogDate,
+  convertNameToId
 }
