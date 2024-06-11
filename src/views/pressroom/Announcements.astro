@@ -2,6 +2,7 @@
 import ArticleCard from "../../components/ArticleCard.astro";
 import Pagination from "../../elements/Pagination.astro";
 import { Api } from "../../../types/enum";
+import { convertNameToId } from "../../../util/format";
 
 const t = (x: string): string => x;
 
@@ -13,10 +14,11 @@ interface Props {
 }
 
 const { posts, totalPages, currentPage, tag } = Astro.props;
+const tagName = tag?.name || t("Press Room / Latest Announcements");
 ---
 
 <div class="pressroom announcement full width container">
-  <h2>{tag?.name || t("Press Room / Latest Announcements")}</h2>
+  <h2 id={convertNameToId(tagName)}>{tagName}</h2>
   <div class="articles">
     {
       (posts || []).map((post: Content) => {
