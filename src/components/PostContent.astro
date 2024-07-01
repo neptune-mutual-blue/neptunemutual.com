@@ -41,7 +41,7 @@ const { type, title, intro, html, tags, pageUrl, showSocial } = Astro.props;
   {tags && <h4 class="title tags">Tags</h4>}
   <Tags tags={toTagsWithHref(type, tags)} showAll />
 
-  {showSocial && <SocialShare title={title} intro={intro} pageUrl={pageUrl} />}
+  <!-- {showSocial && <SocialShare title={title} intro={intro} pageUrl={pageUrl} />} -->
 
   <slot name="post" />
 </div>

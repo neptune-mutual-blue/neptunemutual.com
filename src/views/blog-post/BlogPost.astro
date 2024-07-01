@@ -4,17 +4,15 @@ import RelatedPosts from "./RelatedPosts.astro";
 import NewsletterSignupForm from "../../components/NewsletterSignupForm.astro";
 
 import { parseContent } from "../../../util/content-viewer";
-import { BlogOrPressroom } from "../../../types/enum";
+import { Api, BlogOrPressroom } from "../../../types/enum";
 import PostContentContainer from "../../components/PostContentContainer.astro";
 
-interface Props {
-  type: BlogOrPressroom;
-  structured: "BlogPosting" | "NewsArticle";
-  post: Article;
-  related: Article[];
-}
+import blog from "./blog.json";
 
-const { type, post, related, structured } = Astro.props;
+const structured = "BlogPosting";
+const related: any[] = [];
+const post = blog;
+const type = Api.Blog;
 
 const {
   tag,
@@ -28,7 +26,7 @@ const {
   timeToRead,
   featuredImage,
   alt,
-} = await parseContent(type, ["html"], post);
+} = await parseContent("blog", ["html"], post as any);
 
 const publishDate = new Date(createdAt || (publishedAt as Date));
 ---
@@ -55,13 +53,5 @@ const publishDate = new Date(createdAt || (publishedAt as Date));
     showSocial={true}
   />
 
-  <RelatedPosts type={type} tagSlug={tag?.slug} relatedPosts={related} />
-
-  <NewsletterSignupForm
-    heading="Sign up for our newsletter"
-    text="Be the first to know about releases and industry news and insights."
-    showFeedButtons
-    atomLink={`/feeds/${type}/atom.xml`}
-    rssLink={`/feeds/${type}/rss.xml`}
-  />
+  <!-- <RelatedPosts type={type} tagSlug={tag?.slug} relatedPosts={related} /> -->
 </div>

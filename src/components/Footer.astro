@@ -6,7 +6,7 @@ import NpmLightLogo from "../elements/icons/custom/npm-logo-light-mode.svg?raw";
 import { getFooterData } from "../data/footer";
 import { normalizeUrl } from "../../util/url";
 
-const { lists, socials } = await getFooterData();
+const { socials } = await getFooterData();
 ---
 
 <footer>
@@ -17,42 +17,6 @@ const { lists, socials } = await getFooterData();
         <span class="light only" set:html={NpmLightLogo} />
         <span class="dark only" set:html={NpmDarkLogo} />
       </a>
-
-      <nav>
-        {
-          lists.map((list) => {
-            return (
-              <div class="list">
-                <h2>{list.title}</h2>
-                <ul>
-                  {list.links.map((link) => {
-                    return (
-                      <li>
-                        <a
-                          href={normalizeUrl(link.href)}
-                          target={link.isExternal ? "_blank" : undefined}
-                          rel={link.isExternal ? "noreferrer" : undefined}
-                        >
-                          {link.text}
-                        </a>
-
-                        {link.badge && (
-                          <div
-                            data-color={link?.badgeColor || "info"}
-                            class="badge"
-                          >
-                            {link.badge}
-                          </div>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
-          })
-        }
-      </nav>
     </div>
 
     <div class="risk warning">
@@ -72,17 +36,13 @@ const { lists, socials } = await getFooterData();
     </div>
 
     <div class="copyright">
-      <p class="text">Neptune Mutual &copy; 2022</p>
+      <p class="text">Neptune Mutual &copy; {new Date().getFullYear()}</p>
 
       <div class="social">
         {
           socials.map((link) => {
             return (
-              <a
-                href={normalizeUrl(link.href)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
                 <span class="sr-only">{link.text}</span>
                 <Icon size={"xl"} variant={link.icon} />
               </a>
