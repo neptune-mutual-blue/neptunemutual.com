@@ -1,6 +1,3 @@
-import * as api from '../../service/api'
-import { Api } from '../../types/enum'
-
 const socials: FooterData['socials'] = [
   {
     icon: 'twitter',
@@ -47,62 +44,8 @@ const socials: FooterData['socials'] = [
 ]
 
 const getFooterData = async (): Promise<FooterData> => {
-  const policies = await api.getEnumerable<Page>(Api.Policy, 10, 0)
-
-  const lists: NavLinkList[] = [
-    {
-      title: 'Resources',
-      links: [
-        {
-          href: '/marketplace',
-          text: 'Marketplace',
-          isExternal: false,
-          badge: 'New!',
-          badgeColor: 'success'
-        },
-        { href: 'https://community.neptunemutual.com/', text: 'Community Forums', isExternal: true },
-        { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
-        { href: '/docs/', text: 'Documentation', isExternal: false },
-        { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
-        { href: 'https://nft.neptunemutual.com/', text: 'NFT Portal', isExternal: false },
-        { href: 'https://explorer.neptunemutual.net/', text: 'Explorer', isExternal: false }
-      ]
-    },
-    {
-      title: 'Company',
-      links: [
-        { href: '/about/', text: 'About us', isExternal: false },
-        { href: '/blog/', text: 'Blog', isExternal: false },
-        { href: '/pressroom/', text: 'Press Room', isExternal: false },
-        {
-          href: '/grants-and-bounties/',
-          text: 'Grants and Bounties',
-          isExternal: false
-        },
-        {
-          href: '/careers/',
-          text: 'Careers',
-          isExternal: false,
-          badge: "We're Hiring!"
-        },
-        { href: '/security/', text: 'Security', isExternal: false },
-        { href: '/contact/', text: 'Contact', isExternal: false }
-      ]
-    },
-    {
-      title: 'Policies',
-      links: policies.sort((a, b) => a.sort - b.sort).map((page) => {
-        return {
-          href: `/policies/${page.slug}/`,
-          text: page.title,
-          isExternal: false
-        }
-      })
-    }
-  ]
-
   return {
-    lists,
+    lists: [],
     socials
   }
 }

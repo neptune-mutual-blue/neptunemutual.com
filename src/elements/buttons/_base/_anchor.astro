@@ -1,6 +1,4 @@
 ---
-import { normalizeUrl } from "../../../../util/url";
-
 interface Props {
   id?: string;
   classname?: string;
@@ -39,7 +37,7 @@ const {
   data-state={state}
   data-destructive={destructive}
   data-icon-only-mobile={iconOnlyMobile}
-  href={normalizeUrl(href)}
+  href={href}
   target={target}
   rel={rel}
 >

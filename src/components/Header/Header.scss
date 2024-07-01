@@ -36,6 +36,8 @@ header {
     .logo.and.rest {
       gap: 40px;
       width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .language.and.theme.only {

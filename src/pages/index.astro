@@ -4,10 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Seo from "../components/Seo.astro";
 
 import styles from "./index.scss?inline";
+import BlogPost from "../views/blog-post/BlogPost.astro";
 ---
 
 <BaseLayout headerStyle={"default"}>
-  <Seo
+  <!-- <Seo
     slot="seo"
     title="Decentralized Insurance Protocol / Neptune Mutual"
     description="Need Crypto Insurance? You don't need to submit loss proof to receive payouts. No need to wait after creating a claim. Get a free price quote now."
@@ -15,9 +16,10 @@ import styles from "./index.scss?inline";
       image: "/assets/images/meta/og/home.png",
       imageAlt: "Neptune Mutual Open Graph Banner",
     }}
-  />
+  /> -->
   <style slot="header" is:inline set:html={styles}></style>
-  <Homepage />
+
+  <BlogPost />
 
   <Fragment slot="footer">
     <script src="../scripts/home/index.js"></script>
