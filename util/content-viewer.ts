@@ -30,7 +30,7 @@ const parseContent = async (type: string, htmlProperties: string[], content: Con
 
   const pageUrl = content?.slug === undefined ? '' : `/${type}/${content?.slug}`
   const timeToRead = convertWordsToMinutes($.text().trim())
-  const featuredImage = content.cover === undefined || content.cover === null ? '' : 'https://assets.neptunedefi.com/post/' + content.cover.filename
+  const featuredImage = content.cover === undefined || content.cover === null ? '' : '/assets/' + content.cover.filename
   const alt = content.cover === undefined || content.cover === null ? '' : content.cover.alt
 
   const article: ParsedArticle = {
